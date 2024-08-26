@@ -2,11 +2,15 @@
   <div id="app">
     <Sidebar />
     <div class="main-content">
-      <Header />
+      <Header
+          :resetBlocks="resetBlocks"
+          :mark="mark"
+          :rebuild="rebuild"
+      />
       <div class="content-wrapper">
         <ProblemSection />
-        <div class = "container">
-          <DragDropArea />
+        <div class="container">
+          <DragDropArea ref="dragDrop" />
           <CodeEditor />
         </div>
       </div>
@@ -28,6 +32,17 @@ export default {
     ProblemSection,
     DragDropArea,
     CodeEditor,
+  },
+  methods: {
+    resetBlocks() {
+      this.$refs.dragDrop.resetBlocks();
+    },
+    mark() {
+      this.$refs.dragDrop.mark();
+    },
+    rebuild(){
+      this.$refs.dragDrop.rebuild();
+    },
   },
 };
 </script>

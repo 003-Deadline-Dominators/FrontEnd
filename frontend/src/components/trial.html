@@ -107,7 +107,6 @@
             margin: 20px;
         }
         .container {
-            display: inline-block;
             display: flex;
             flex-direction: column;
             width: 70%;
@@ -119,17 +118,21 @@
             display: flex;
             flex-direction: row;
         }
-        .drag-zone, .drop-zone {
-            padding: 10px;
-            width: 50%;
+        #left, #right {
+            display: flex;
             flex-direction: column;
+            width: 300px;
+            min-height: 300px;
+            margin: 20px;
+            border: 2px dashed #bbbbbb;
             border-radius: 5px;
-            min-height: 150px;
+            padding: 10px;
         }
         .drag-title {
             font-size: 18px;
             font-weight: bold;
-            padding: 2%;
+            padding: 4%;
+            margin: 5%;
             background-color: #d9ebff;
             color: #007aff;
             border-radius: 5px;
@@ -137,22 +140,17 @@
         .drop-title {
             font-size: 18px;
             font-weight: bold;
-            padding: 2%;
+            padding: 4%;
+            margin: 5%;
             background-color: #daf9f1;
             color: #06d49f;
             border-radius: 5px;
         }
-        .code-blocks {
-            border: 2px dotted #cccccc;
-            border-radius: 5px;
-            padding: 10px;
-            display: block;
-            white-space: pre-wrap;
-        }
         .code-block {
             margin-bottom: 1px;
             padding: 10px;
-            background-color: #4fc3f7;
+            color: #f6f6f6;
+            font-weight: bold;
             cursor: grab;
             border-radius: 5px;
         }
@@ -242,19 +240,18 @@
 
         <div class="container">
             <div class = "answer">
-                <div class="drag-zone">
+                <div class = "drag-zone">
                     <h4 class = "drag-title">Drag from here</h4>
-                    <div class = "code-blocks">
-                    <div class="code-block" draggable="true">Drag from here 20PX</div>
-                    <div class="code-block" draggable="true">Code block</div>
-                    <div class="code-block" draggable="true">Code block</div>
-                    <div class="code-block" draggable="true">Code block</div>
+                    <div id = "left">
+                        <div class="code-block" draggable="true">Drag from here 20PX</div>
+                        <div class="code-block" draggable="true">Code block</div>
+                        <div class="code-block" draggable="true">Code block</div>
+                        <div class="code-block" draggable="true">Code block</div>
                     </div>
                 </div>
-
-                <div class="drop-zone">
+                <div class = "drop-zone">
                     <h4 class = "drop-title">Drop blocks here</h4>
-                    <div class="code-blocks"></div>
+                    <div id = "right"></div>
                 </div>
             </div>
             <div class="code-editor">
@@ -289,34 +286,39 @@ public class SnakeGame {
 </div>
 
 <script>
-    const dragZone = document.querySelector('.drag-zone');
-    const dropZone = document.querySelector('.drop-zone');
-    let draggedBlock = null;
+    const colors = ['#007aff', '#06d6a0'];
 
-    document.querySelectorAll('.code-block').forEach(block => {
-        block.addEventListener('dragstart', (e) => {
-            draggedBlock = block;
-            setTimeout(() => block.style.display = 'none', 0);
-        });
+    const codeBlocks = document.querySelectorAll('.code-block');
 
-        block.addEventListener('dragend', () => {
-            setTimeout(() => {
-                draggedBlock.style.display = 'block';
-                draggedBlock = null;
-            }, 0);
-        });
+    // Apply a mixed color to each code-block
+    codeBlocks.forEach((block, index) => {
+        block.style.backgroundColor = colors[index % colors.length];
     });
 
-    [dragZone, dropZone].forEach(zone => {
-        zone.addEventListener('dragover', e => e.preventDefault());
 
-        zone.addEventListener('drop', e => {
-            e.preventDefault();
-            if (draggedBlock) {
-                e.target.appendChild(draggedBlock);
-            }
-        });
-    });
+    let lists = document.getElementsByClassName("code-block");
+    let right = document.getElementById("left");
+    let left = document.getElementById("right");
+
+    for(list of lists){
+        list.addEventListener("dragstart", function(e){
+            let selected = e.target;
+            right.addEventListener("dragover", function(e){
+                e.preventDefault();
+            });
+            right.addEventListener("drop", function(e) {
+                right.appendChild(selected);
+                selected=null;
+            });
+            left.addEventListener("dragover", function(e){
+                e.preventDefault();
+            });
+            left.addEventListener("drop", function(e) {
+                left.appendChild(selected);
+                selected=null;
+            });
+        })
+    }
 </script>
 
 </body>

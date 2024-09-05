@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4%;
+        }
+        .start{
+            height: 100vh;
+            font-size: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .start h1{
+            width: 50%;
+            margin-left: 5%;
+        }
+        .start p{
+            width: 30%;
+            margin-left: 5%;
+        }
+        .button-rows{
+            display: flex;
+            flex-direction: row;
+        }
+        button{
+            font-size: 20px;
+            border-radius: 5px;
+            width: 12%;
+            background-color: #96ea63;
+            border-style: none;
+            margin-right: 2%;
+        }
+        button#admin{
+            margin-bottom: 2%;
+            right: 0;
+        }
+        button#start{
+        }
+        button#learn{
+            background-color: white;
+            border-style: solid;
+            border-color: #d9d9d9;
+            border-width: 1px;
+        }
+        .content-wrapper{
+            text-align: center;
+        }
+        .content-section-left{
+            height: 30vh;
+            margin: 5%;
+            text-align: left;
+            width: 30%;
+
+        }
+        .content-section-right{
+            height: 30vh;
+            margin: 5%;
+            text-align: right;
+            width: 30%;
+            padding-left: 60%;
+        }
+        </style>
+</head>
+<body>
+    <div class="start">
+        <div class = "nav">
+            <img src="C:\Users\61415\Downloads\neat download\frontend\frontend\src\assets\logo.svg" width="200" height="100">
+            <button id = "admin">admin login</button>
+        </div>
+            <h1>Data collection and integration</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu diam ut condimentum lacinia. Sagittis, maecenas sed tristique dolor sed. Mauris nunc fames tincidunt id hac lacus, donec. Pellentesque amet cursus morbi enim fringilla mi pellentesque a lorem.</p>
+        <div class="button-rows">
+            <button id = "start">Start</button>
+            <button id = "learn">Learn More</button>
+        </div>
+</div>
+    <div class="content-wrapper">
+        <h2>Function introduction</h2>
+        <p>The following is</p>
+        <div class="content-section-left">
+            <h1>Simple way to manage your contacts</h1>
+            <p>Background description of contacts usually involves the part of a system used to manage and maintain contact information between users or enterprises</p>
+        </div>
+        <div class="content-section-right">
+            <h1>This includes the types of tasks and how they are as</h1>
+            <p>It is suitable for tasks with high real-time requirements and short time consuming, such as state saving and data compression. This type of task usually needs to be completed in a</p>
+        </div>
+        <div class="content-section-left">
+            <h1>Data collection and integrated storage and processing</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu diam ut condimentum lacinia. Sagittis, maecenas sed tristique dolor sed. Mauris nunc fames tincidunt id hac lacus, donec. </p>
+        </div>
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach((section, index) => {
+            if (index % 2 === 0) {
+                section.classList.add('align-left'); // Align left for even-indexed sections
+            } else {
+                section.classList.add('align-right'); // Align right for odd-indexed sections
+            }
+        });
+    });
+</script>
+</body>
+</html>

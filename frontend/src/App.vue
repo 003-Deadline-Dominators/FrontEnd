@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import Sidebar from './components/Sidebar.vue';
-import Header from './components/Header.vue';
-import ProblemSection from './components/ProblemSection.vue';
-import DragDropArea from './components/DragDropArea.vue';
-import CodeEditor from './components/CodeEditor.vue';
+import Sidebar from './components/Question/Sidebar.vue';
+import Header from './components/Question/Header.vue';
+import ProblemSection from './components/Question/ProblemSection.vue';
+import DragDropArea from './components/Question/DragDropArea.vue';
+import CodeEditor from './components/Question/CodeEditor.vue';
 
 export default {
   components: {

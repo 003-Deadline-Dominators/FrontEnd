@@ -55,33 +55,20 @@ export default {
       this.attempts++;
 
       const rightZone = document.getElementById('right');
-      const rightBlocks = rightZone.querySelectorAll('.code-block');
+      const rightBlocks = Array.from(rightZone.querySelectorAll('.code-block'));
 
-      if (rightBlocks.length !== this.blocks.length) {
-        alert('False - Not all blocks are in the right zone');
-        return;
-      }
+      // Extract block content
+      const blockContents = rightBlocks.map(block => block.textContent.trim());
 
-      for (let i = 0; i < this.blocks.length; i++) {
-        const userBlock = rightBlocks[i].textContent.trim();
-        const correctBlock = this.blocks[i].trim();
+      console.log("Sending blocks:", blockContents); // Log the blocks being sent
 
-        if (userBlock !== correctBlock) {
-          alert('False - Order is incorrect');
-          return;
+      axios.post('http://localhost:8080/submit-blocks', blockContents, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-      }
+      })
 
-      const endTime = new Date();
-      const timeElapsed = (endTime - this.startTime) / 1000; // Convert to seconds
-
-      alert(`Correct - Order matches exactly\nTime taken: ${timeElapsed.toFixed(2)} seconds\nAttempts: ${this.attempts}`);
-
-      this.startTime = null;
-      this.attempts = 0;
     },
-
-
 
     handleDragStart(event) {
       this.selectedBlock = event.target;

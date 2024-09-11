@@ -1,23 +1,27 @@
 <template>
   <div>
     <div class="nav">
-      <img src="../../../../assets/Topic/Context/Question/code.svg" alt="Logo">
-      <button id="start">Module</button>
-      <button id="Context">Context</button>
-      <button id="admin">admin login</button>
-    </div>
-    <div class="sub-nav">
-      <label for="sub-nav">Sort By:</label>
-      <select name="selection" id="selection">
-        <option value="All categories">All categories</option>
-        <option value="Algorithm">Algorithm</option>
-        <option value="Unsupervised">Unsupervised</option>
-        <option value="Supervised">Supervised</option>
-      </select>
+      <div class="original-nav">
+        <img :src="logo" alt="Logo" width="300" height="150">
+        <button @click="goToTopic" id="module">Module</button>
+        <button id="context">Context</button>
+      </div>
+      <div class="image-input-container">
+        <img :src="icon" @click="toggleInput"
+             alt="Clickable image"
+             style="cursor: pointer;" class="clickable-image">
+        <input
+            v-if="showInput"
+            v-model="inputValue"
+            type="text"
+            placeholder="Enter text here"
+            class="input-field"
+        />
+      </div>
     </div>
 
     <div class="card-container">
-      <div class="card" v-for="(card,index) in cards" :key="index"
+      <div class="card" v-for="(card,index) in cards" :key="index" @click="gotoToQuestion"
            style="cursor: pointer;">
         <h2 class = "card-title">{{ card.title }}</h2>
         <span>{{ card.description }}</span>
@@ -27,10 +31,15 @@
 </template>
 
 <script>
+import logo from '@/assets/logo.svg';
+import icon from '@/assets/Topic/icon.svg';
 export default {
+
   name: 'Topic',
   data() {
     return {
+      logo,
+      icon,
       cards: [
         {
           title: 'Dataframe',
@@ -65,8 +74,12 @@ export default {
   },
 
   methods: {
-    goToContext(card) {
-      this.$router.push({name: 'context', params: {title: card.title}});
+    goToTopic() {
+      // This will navigate back to the /topic route
+      this.$router.push('/topic');
+    },
+    gotoToQuestion() {
+      this.$router.push({name :'Question'});
     }
   }
 };
@@ -78,11 +91,29 @@ export default {
   justify-content: space-between;
   background-color: white;
 }
-.sub-nav{
-  padding: 20px;
+.original-nav{
   display: flex;
-  justify-content: right;
-  background-color: #eeeeee;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
+}
+.image-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clickable-image {
+  cursor: pointer;
+  max-width: 100%;
+  height: auto;
+}
+
+.input-field {
+  margin-top: 10px;
+  padding: 5px;
+  width: 100%;
+  max-width: 300px;
 }
 
 .card-container {
@@ -90,7 +121,7 @@ export default {
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 20px;
-  background-color: #eeeeee;
+  background-color: #F6F6F6;
 }
 
 .card {
@@ -131,5 +162,13 @@ span{
 h2{
   font-size: 24px;
 }
-
+button{
+  margin-left: 11%;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+}
+#module{
+  background-color: #cbf4b1;
+}
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="nav">
+    <img :src="logo" alt="Logo" width="300" height="150">
     <button id="admin">admin login</button>
   </div>
   <div class="start">
@@ -42,6 +43,7 @@ export default {
 </script>
 
 <script setup>
+import logo from '../../assets/logo.svg';
 import { ref } from 'vue';
 
 const targetSection = ref(null);

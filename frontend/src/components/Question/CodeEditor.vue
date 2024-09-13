@@ -2,11 +2,11 @@
   <div class="code-editor">
     <div class="sub-select">
       <button class="sub-button" v-for="btn in buttons" :key="btn.text">
-        <img :src="btn.src" width="20" height="20" />
+        <img :src="btn.src"/>
         {{ btn.text }}
       </button>
       <button class="sub-button-right">
-        <img :src="expandIcon" width="20" height="20" />
+        <img :src="expandIcon"/>
       </button>
     </div>
     <pre class="code" v-pre>
@@ -58,14 +58,16 @@ export default {
 }
 
 .sub-button {
+  display: flex;
+  flex-direction: row;
   background-color: transparent;
   color: white;
   border: none;
   cursor: pointer;
-  padding: 10px;
   font-size: 16px;
+  padding: 10px;
+  margin-right: 15px;
 }
-
 .sub-button-right {
   margin-left: auto;
   background-color: transparent;
@@ -77,10 +79,45 @@ export default {
 .code {
   padding: 15px;
   white-space: pre-wrap; /* Ensure the code block wraps */
+  border-radius: 5px;
 }
 
 img {
   width: 20px;
   height: 20px;
 }
+.code-editor {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.sub-select {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #30313d;
+}
+
+.sub-button {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  margin-right: 15px;
+}
+
+.sub-button-right {
+  margin-left: auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
 </style>

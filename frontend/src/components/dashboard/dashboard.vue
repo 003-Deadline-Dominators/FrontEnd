@@ -1,22 +1,5 @@
 <template>
-    <div class="nav">
-      <div class="original-nav">
-        <img :src="logo" alt="Logo" width="300" height="150">
-        <button id="start">Module</button>
-      </div>
-      <div class="image-input-container">
-        <img :src="icon" @click="toggleInput"
-             alt="Clickable image"
-             style="cursor: pointer;" class="clickable-image">
-        <input
-            v-if="showInput"
-            v-model="inputValue"
-            type="text"
-            placeholder="Enter text here"
-            class="input-field"
-        />
-      </div>
-    </div>
+  <nava :show-context="false" :show-selected="false"/>
   <div ref="chartContainer" class="chart-container"></div>
   <el-table :data="tableData" stripe class="table">
     <el-table-column prop="userId" label="User ID" align="center"></el-table-column>
@@ -31,13 +14,15 @@
 <script>
 import * as echarts from 'echarts';
 import logo from '@/assets/logo.svg';   // Import logo
-import icon from '@/assets/Topic/user.svg';
+import icon from '@/assets/user.svg';
 import { ElTable, ElTableColumn } from 'element-plus';
+import Nava from "@/components/nav.vue";
 export default {
   name: 'LineChart',
   components: {
     ElTable,
-    ElTableColumn
+    ElTableColumn,
+    Nava,
   },
   data() {
     return {
@@ -91,7 +76,7 @@ export default {
             type: 'line',
             areaStyle: {
               color: {
-                type: 'linear', // Type of gradient: 'linear', 'radial'
+                type: 'linear', // Type of  gradient: 'linear', 'radial'
                 x: 0, y: 0, x2: 0, y2: 1, // Gradient direction (x, y, x2, y2 define start and end points)
                 colorStops: [
                   { offset: 0, color: '#b8f5aa' }, // Start color
@@ -122,35 +107,10 @@ export default {
   height: 50vh; /* 60% of the viewport height */
   margin: 0 auto; /* Center the chart */
 }
-.original-nav{
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  align-items: center;
-}
-.image-input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.clickable-image {
-  cursor: pointer;
-  max-width: 100%;
-  height: auto;
-}
-
-.input-field {
-  margin-top: 10px;
-  padding: 5px;
-  width: 100%;
-  max-width: 300px;
-}
 button{
-  margin-left: 14%;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 100%;
+  margin-left: 4%;
+  align-content: center;
+  width: 12%;
 }
 .table {
   width: 100%;

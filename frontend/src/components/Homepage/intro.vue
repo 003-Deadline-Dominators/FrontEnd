@@ -1,34 +1,34 @@
 <template>
-  <div class="nav">
-    <img :src="logo" alt="Logo" width="300" height="150">
-    <button id="admin">admin login</button>
-  </div>
-  <div class="start">
-    <div class="welcome-wrapper">
-      <h1 class = "welcome">Welcome to CodeCraft</h1>
-      <p>Unleash the power of coding with hands-on learning. CodeCraft is your gateway to mastering essential programming concepts through real-world problem-solving.</p>
+    <div class="nav">
+      <img :src="logo" alt="Logo">
+      <button id="admin">admin login</button>
     </div>
-    <div class="button-rows">
-      <button @click="goToTopic" id="start">Start</button>
-      <button @click="scrollToSection" id="learn">Learn More</button>
+    <div class="start">
+      <div class="welcome-wrapper">
+        <h1 class = "welcome">Welcome to CodeCraft</h1>
+        <p>Unleash the power of coding with hands-on learning. CodeCraft is your gateway to mastering essential programming concepts through real-world problem-solving.</p>
+      </div>
+      <div class="button-rows">
+        <button @click="goToTopic" id="start">Start</button>
+        <button @click="scrollToSection" id="learn">Learn More</button>
+      </div>
     </div>
-  </div>
-  <div class="content-wrapper">
-    <h2 ref="targetSection">Explore Our Platform</h2>
-    <h3>Function introduction</h3>
-    <div class="content-section-left">
-      <h1>Simple way to manage your contacts</h1>
-      <p>Background description of contacts usually involves the part of a system used to manage and maintain contact information between users or enterprises</p>
+    <div class="content-wrapper">
+      <h2 ref="targetSection">Explore Our Platform</h2>
+      <h3>Function introduction</h3>
+      <div class="content-section-left">
+        <h1>Simple way to manage your contacts</h1>
+        <p>Background description of contacts usually involves the part of a system used to manage and maintain contact information between users or enterprises</p>
+      </div>
+      <div class="content-section-right">
+        <h1>This includes the types of tasks and how they are as</h1>
+        <p>It is suitable for tasks with high real-time requirements and short time consuming, such as state saving and data compression. This type of task usually needs to be completed in a</p>
+      </div>
+     <div class="content-section-left">
+       <h1>Data collection and integrated storage and processing</h1>
+       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu diam ut condimentum lacinia. Sagittis, maecenas sed tristique dolor sed. Mauris nunc fames tincidunt id hac lacus, donec. </p>
+     </div>
     </div>
-    <div class="content-section-right">
-      <h1>This includes the types of tasks and how they are as</h1>
-      <p>It is suitable for tasks with high real-time requirements and short time consuming, such as state saving and data compression. This type of task usually needs to be completed in a</p>
-    </div>
-    <div class="content-section-left">
-      <h1>Data collection and integrated storage and processing</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu diam ut condimentum lacinia. Sagittis, maecenas sed tristique dolor sed. Mauris nunc fames tincidunt id hac lacus, donec. </p>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -65,7 +65,7 @@ const scrollToSection = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 4%;
+  padding: 2%;
 }
 .nav button {
   padding: 10px;
@@ -146,5 +146,14 @@ h3{
   font-weight: normal;
   color: grey;
 }
+.nav img {
+  width: 260px; /* Adjust this size as needed */
+  height: auto; /* This will maintain the aspect ratio */
+}
+</style>
 
+<style>
+body{
+  background-color: white;
+}
 </style>

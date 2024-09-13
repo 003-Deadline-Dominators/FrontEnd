@@ -41,8 +41,20 @@ export default {
 </script>
 
 <style scoped>
+.scenario {
+  background-color: #ece7fb;
+  padding: 15px;
+  border-radius: 5px;
+  color: #8363e2;
+}
+
+p{
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
 .problem-section {
-  width: 100%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -52,14 +64,8 @@ export default {
 .problem {
   padding: 4%;
   border-radius: 5px;
+  height: 100%;
   background-color: white;
-}
-
-.scenario {
-  background-color: #ece7fb;
-  padding: 15px;
-  border-radius: 5px;
-  color: #8363e2;
 }
 
 .task {
@@ -71,13 +77,12 @@ export default {
 
 .hint {
   background-color: #f9eee2;
+  padding: 15px;
   border-radius: 5px;
   color: #ea7e31;
-  margin: 0;
 }
+h3{
+  color: #ea7e31;
 
-p{
-  padding-left: 4%;
-  padding-right: 4%;
 }
 </style>

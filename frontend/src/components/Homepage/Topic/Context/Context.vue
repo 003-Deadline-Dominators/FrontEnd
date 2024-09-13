@@ -1,74 +1,28 @@
 <template>
-  <div>
-    <div class="nav">
-      <div class="original-nav">
-        <img :src="logo" alt="Logo" width="300" height="150">
-        <button @click="goToTopic" id="module">Module</button>
-        <button id="context">Context</button>
-      </div>
-      <div class="image-input-container">
-        <img :src="icon" @click="toggleInput"
-             alt="Clickable image"
-             style="cursor: pointer;" class="clickable-image">
-        <input
-            v-if="showInput"
-            v-model="inputValue"
-            type="text"
-            placeholder="Enter text here"
-            class="input-field"
-        />
-      </div>
-    </div>
+  <Nava :show-dashboard="false" :show-selected="false"/>
 
-    <div class="card-container">
-      <div class="card" v-for="(card,index) in cards" :key="index" @click="gotoToQuestion"
+  <div class="card-container">
+      <div class="card" v-for="(card,index) in cards" :key="index" @click="gotoToQuestion(this.$route.query.topicTitle, card.contextTitle)"
            style="cursor: pointer;">
-        <h2 class = "card-title">{{ card.title }}</h2>
-        <span>{{ card.description }}</span>
+        <h2 class = "card-title">{{ card.contextTitle }}</h2>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
 import logo from '@/assets/logo.svg';
-import icon from '@/assets/Topic/icon.svg';
+import icon from '@/assets/icon.svg';
+import axios from "axios";
+import Nava from "@/components/nav.vue";
 export default {
 
   name: 'Topic',
+  components: {Nava},
   data() {
     return {
       logo,
       icon,
       cards: [
-        {
-          title: 'Dataframe',
-          description: 'Learn Angular js to build beautifull landingpage for your business',
-        },
-        {
-          title: 'Dataframe',
-          description: 'Learn Angular js to build beautifull landingpage for your business',
-        },
-        {
-          title: 'Dataframe',
-          description: 'Learn Angular js to build beautifull landingpage for your business',
-        },
-        {
-          title: 'Dataframe',
-          description: 'Learn Angular js to build beautifull landingpage for your business',
-        },
-        {
-          title: 'Dataframe',
-          description: 'Learn Angular js to build beautifull landingpage for your business',
-        },
-        {
-          title: 'Dataframe',
-          description: 'Learn Angular js to build beautifull landingpage for your business',
-        },
-        {
-          title: 'Dataframe',
-          description: 'Learn Angular js to build beautifull landingpage for your business',
-        },
       ]
     };
   },
@@ -78,8 +32,24 @@ export default {
       // This will navigate back to the /topic route
       this.$router.push('/topic');
     },
-    gotoToQuestion() {
-      this.$router.push({name :'Question'});
+    gotoToQuestion(topicTitle, contextTitle) {
+      const formattedTitle = `${topicTitle} : ${contextTitle}`;
+      this.$router.push({name :'Question', query: { formattedTitle }});
+    }
+
+  },
+  mounted() {
+    const topicTitle = this.$route.query.topicTitle;
+
+    if (topicTitle) {
+      axios
+          .get(`http://localhost:8080/topics/${topicTitle}`)
+          .then(response => {
+            this.cards = response.data;
+          })
+          .catch(error => {
+            console.error("Error fetching context data:", error);
+          });
     }
   }
 };
@@ -90,6 +60,8 @@ export default {
   display: flex;
   justify-content: space-between;
   background-color: white;
+  padding: 2%;
+  align-items: center;
 }
 .original-nav{
   display: flex;
@@ -105,7 +77,7 @@ export default {
 
 .clickable-image {
   cursor: pointer;
-  max-width: 100%;
+  width: 60px;
   height: auto;
 }
 
@@ -117,11 +89,14 @@ export default {
 }
 
 .card-container {
+  width: 100%; /* Ensure it spans 100% of the parent container */
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 20px;
   background-color: #F6F6F6;
+  box-sizing: border-box; /* Include padding and border in width calculations */
+  margin: 0; /* Remove any default margins */
 }
 
 .card {
@@ -170,5 +145,10 @@ button{
 }
 #module{
   background-color: #cbf4b1;
+}
+</style>
+<style>
+body {
+  background: #F6F6F6;
 }
 </style>

@@ -147,8 +147,10 @@ export default {
 .answer {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   background-color: white;
   border-radius: 5px;
+  width: 100%;
 }
 
 .drag-zone, .drop-zone {
@@ -162,5 +164,56 @@ export default {
   color: white;
   border-radius: 5px;
   cursor: grab;
+}
+
+.answer {
+  display: flex;
+  flex-direction: row;
+}
+
+#left, #right {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  min-height: 300px;
+  margin: 20px;
+  border: 2px dashed #bbbbbb;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.drag-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 4%;
+  margin: 5%;
+  background-color: #d9ebff;
+  color: #007aff;
+  border-radius: 5px;
+}
+
+.drop-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 4%;
+  margin: 5%;
+  background-color: #daf9f1;
+  color: #06d49f;
+  border-radius: 5px;
+}
+
+.code-block {
+  margin-bottom: 1px;
+  padding: 10px;
+  color: #f6f6f6;
+  font-weight: bold;
+  cursor: grab;
+  border-radius: 5px;
+}
+</style>
+
+<style>
+body{
+  background-color: white;
 }
 </style>

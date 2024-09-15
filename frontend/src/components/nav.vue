@@ -6,7 +6,7 @@
       <button v-if="showContext" id="context">Context</button>
       <button v-if="showSelected" id="selected">question</button>
     </div>
-    <button v-if="showDashboard" id="dashboard">dashboard</button>
+    <button v-if="showDashboard" @click="goToDashboard" id="dashboard">dashboard</button>
     <div class="image-input-container">
       <img :src="currentIcon" @click="toggleInput"
            alt="Clickable image"
@@ -47,6 +47,7 @@ export default {
   data() {
     return {
       logo,
+      user,
       showInput: false,
       inputValue: '',
     }
@@ -61,6 +62,9 @@ export default {
     },
     toggleInput() {
       this.showInput = !this.showInput;
+    },
+    goToDashboard() {
+      this.$router.push('/dashboard');
     },
     checkPasscode() {
       if (this.inputValue === "passcode") {

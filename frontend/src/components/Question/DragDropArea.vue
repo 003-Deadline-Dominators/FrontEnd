@@ -51,7 +51,7 @@ export default {
       }
     },
 
-    mark() {
+    submit() {
       this.attempts++;
 
       const rightZone = document.getElementById('right');
@@ -62,13 +62,20 @@ export default {
 
       console.log("Sending blocks:", blockContents); // Log the blocks being sent
 
-      axios.post('http://localhost:8080/submit-blocks', blockContents, {
+      // Post block contents as an object
+      axios.post('http://localhost:8080/submit', { blocks: blockContents }, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
-
+          .then(response => {
+            console.log('Server response:', response.data); // Handle server response
+          })
+          .catch(error => {
+            console.error('Error submitting data:', error); // Handle error
+          });
     },
+
 
     handleDragStart(event) {
       this.selectedBlock = event.target;
@@ -102,7 +109,7 @@ export default {
 
   mounted() {
     axios
-        .get('http://localhost:8080/code')
+        .get('http://localhost:8080/code', { params: {  variable1: this.$route.query.topicTitle, variable2: this.$route.query.contextTitle } })
         .then(response => {
           console.log(response.data); // Check the structure here
           this.blocks = response.data.code; // Correct access to 'blocks'
@@ -127,11 +134,6 @@ export default {
             rightZone.addEventListener('drop', (event) => this.handleDrop(event, rightZone));
 
             // Random color allocation for code blocks
-            const colors = ['#007aff', '#06d6a0']; // Add more colors if needed
-
-            codeBlocks.forEach((block, index) => {
-              block.style.backgroundColor = colors[index % colors.length];
-            });
           });
         })
         .catch(error => {
@@ -155,6 +157,7 @@ export default {
 
 .drag-zone, .drop-zone {
   margin: 20px;
+  width: 78%;
 }
 
 .code-block {
@@ -164,6 +167,7 @@ export default {
   color: white;
   border-radius: 5px;
   cursor: grab;
+  width: 30%;
 }
 
 .answer {
@@ -174,7 +178,6 @@ export default {
 #left, #right {
   display: flex;
   flex-direction: column;
-  width: 300px;
   min-height: 300px;
   margin: 20px;
   border: 2px dashed #bbbbbb;
@@ -205,10 +208,14 @@ export default {
 .code-block {
   margin-bottom: 1px;
   padding: 10px;
-  color: #f6f6f6;
-  font-weight: bold;
+  color: black;
+  background-color: #D8D8D8;
+  font-weight: normal;
   cursor: grab;
   border-radius: 5px;
+  font-size: 16px;
+  width: 40%;
+  overflow: auto;
 }
 </style>
 

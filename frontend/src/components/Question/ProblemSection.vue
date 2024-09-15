@@ -21,22 +21,39 @@ export default {
   data() {
     return {
       scenario: '',
-      task: ''
-    }
+      task: '',
+      hasFetchedData: false, // Flag to check if data has been fetched
+    };
   },
 
   mounted() {
-    axios
-        .get('http://localhost:8080/problem')
-        .then(response => {
-          console.log(response.data); // Check the structure here
-          this.scenario = response.data.scenario; // Correct access to 'scenario'
-          this.task = response.data.task; // Correct access to 'task'
-        })
-        .catch(error => {
-          console.log(error);
-        });
-  }
+    this.fetchProblemData();
+  },
+
+  methods: {
+    fetchProblemData() {
+      // Check if data has already been fetched to avoid redundant API calls
+      if (this.hasFetchedData) return;
+
+      const topicTitle = this.$route.query.topicTitle;
+      const contextTitle = this.$route.query.contextTitle;
+      console.log(topicTitle, contextTitle);
+
+      axios
+          .get('http://localhost:8080/problem', {
+            params: { variable1: topicTitle, variable2: contextTitle },
+          })
+          .then((response) => {
+            console.log(response.data); // Check the structure here
+            this.scenario = response.data.scenario;
+            this.task = response.data.task;
+            this.hasFetchedData = true; // Set the flag to true after data is fetched
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+  },
 };
 </script>
 
@@ -54,7 +71,7 @@ p{
 }
 
 .problem-section {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background-color: white;

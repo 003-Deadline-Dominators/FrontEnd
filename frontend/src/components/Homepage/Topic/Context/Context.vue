@@ -2,7 +2,7 @@
   <Nava :show-dashboard="false" :show-selected="false"/>
 
   <div class="card-container">
-      <div class="card" v-for="(card,index) in cards" :key="index" @click="gotoToQuestion(this.$route.query.topicTitle, card.contextTitle)"
+      <div class="card" v-for="(card,index) in cards" :key="index" @click="gotoToQuestion(this.$route.query.formattedTitle, card.contextTitle)"
            style="cursor: pointer;">
         <h2 class = "card-title">{{ card.contextTitle }}</h2>
       </div>
@@ -28,22 +28,22 @@ export default {
   },
 
   methods: {
-    goToTopic() {
-      // This will navigate back to the /topic route
-      this.$router.push('/topic');
-    },
     gotoToQuestion(topicTitle, contextTitle) {
-      const formattedTitle = `${topicTitle} : ${contextTitle}`;
-      this.$router.push({name :'Question', query: { formattedTitle }});
+      this.$router.push({
+        name: 'Question',
+        query: {
+          topicTitle: topicTitle,
+          contextTitle: contextTitle
+        }
+      });
     }
-
   },
   mounted() {
-    const topicTitle = this.$route.query.topicTitle;
+    const topicTitle = this.$route.query.formattedTitle;
 
     if (topicTitle) {
       axios
-          .get(`http://localhost:8080/topics/${topicTitle}`)
+          .get(`http://localhost:8080/topics/contexts/${topicTitle}`)
           .then(response => {
             this.cards = response.data;
           })
@@ -56,37 +56,6 @@ export default {
 </script>
 
 <style scoped>
-.nav {
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  padding: 2%;
-  align-items: center;
-}
-.original-nav{
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  align-items: center;
-}
-.image-input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.clickable-image {
-  cursor: pointer;
-  width: 60px;
-  height: auto;
-}
-
-.input-field {
-  margin-top: 10px;
-  padding: 5px;
-  width: 100%;
-  max-width: 300px;
-}
 
 .card-container {
   width: 100%; /* Ensure it spans 100% of the parent container */
@@ -108,6 +77,10 @@ export default {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
 }
 .card-title {
   color: #8260e6;

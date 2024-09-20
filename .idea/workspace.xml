@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="merged version from howard branch" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Vue Composition API Component" />
+        <option value="JavaScript File" />
+        <option value="package.json" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/frontend/src/main.js" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2l1Kn7gjQFQAm6TzIyuhvVbNXjR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Node.js.main.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/61415/Downloads/neat download/project-frontend/frontend/src/assets/Topic/Context/Question",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "vue.recent.templates": [
+      "Vue Composition API Component"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets\Topic\Context\Question" />
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets\Topic" />
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets" />
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\my-vue-project\src\components" />
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\vue-project\src\components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src" />
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\components" />
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets" />
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets\Topic\Context\Question" />
+      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\components\Question" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="project-frontend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="project-frontend" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="project-frontend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Python.FlaskServer">
+      <module name="project-frontend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="project-frontend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Docutils task">
+      <module name="project-frontend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Sphinx task">
+      <module name="project-frontend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="project-frontend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="project-frontend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="" />
+      <created>1724342306653</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1724342306653</updated>
+      <workItem from="1724342307746" duration="203000" />
+      <workItem from="1724378473876" duration="4654000" />
+      <workItem from="1724387883690" duration="1788000" />
+      <workItem from="1724391206006" duration="1888000" />
+      <workItem from="1724395585591" duration="1820000" />
+      <workItem from="1724409212186" duration="4343000" />
+      <workItem from="1724461134361" duration="7069000" />
+      <workItem from="1724474129822" duration="3381000" />
+      <workItem from="1724481746925" duration="11433000" />
+      <workItem from="1724549796860" duration="2489000" />
+      <workItem from="1724555404703" duration="7649000" />
+      <workItem from="1724578846795" duration="2640000" />
+      <workItem from="1724627871225" duration="5169000" />
+      <workItem from="1724635328753" duration="1107000" />
+      <workItem from="1724645806803" duration="4717000" />
+      <workItem from="1724756022067" duration="1152000" />
+      <workItem from="1724828964737" duration="657000" />
+      <workItem from="1725256828717" duration="1812000" />
+      <workItem from="1725368908029" duration="4420000" />
+      <workItem from="1725450308355" duration="2057000" />
+      <workItem from="1725509347914" duration="4072000" />
+      <workItem from="1725531729267" duration="7157000" />
+      <workItem from="1725575736266" duration="1820000" />
+      <workItem from="1725605553739" duration="2801000" />
+      <workItem from="1725734087516" duration="659000" />
+      <workItem from="1725785536864" duration="12429000" />
+      <workItem from="1725841422345" duration="4193000" />
+      <workItem from="1725851924995" duration="9454000" />
+      <workItem from="1725874290729" duration="1609000" />
+      <workItem from="1725922701955" duration="5144000" />
+      <workItem from="1725933710317" duration="13474000" />
+      <workItem from="1726013338049" duration="1446000" />
+      <workItem from="1726129757023" duration="33146000" />
+      <workItem from="1726188815199" duration="11773000" />
+      <workItem from="1726209599262" duration="5965000" />
+      <workItem from="1726218964087" duration="2594000" />
+      <workItem from="1726272200199" duration="606000" />
+      <workItem from="1726360268674" duration="30365000" />
+      <workItem from="1726448209103" duration="4387000" />
+      <workItem from="1726457587724" duration="263000" />
+      <workItem from="1726457863096" duration="7291000" />
+      <workItem from="1726533211724" duration="4128000" />
+      <workItem from="1726541945226" duration="8029000" />
+      <workItem from="1726633519766" duration="3006000" />
+      <workItem from="1726655475795" duration="5998000" />
+      <workItem from="1726685626804" duration="3542000" />
+      <workItem from="1726736398202" duration="117000" />
+      <workItem from="1726805879549" duration="5352000" />
+    </task>
+    <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
+      <option name="closed" value="true" />
+      <created>1724342504305</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1724342504305</updated>
+    </task>
+    <task id="LOCAL-00002" summary="intital vue framework frontend">
+      <option name="closed" value="true" />
+      <created>1724475851393</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1724475851393</updated>
+    </task>
+    <task id="LOCAL-00003" summary="improved prototype answering page, with an initial connection from data generated from the AI model">
+      <option name="closed" value="true" />
+      <created>1724648392894</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1724648392894</updated>
+    </task>
+    <task id="LOCAL-00004" summary="prototype of start page and topic page">
+      <option name="closed" value="true" />
+      <created>1725576733453</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1725576733453</updated>
+    </task>
+    <task id="LOCAL-00005" summary="draft version, from homepage to topic, context selection">
+      <option name="closed" value="true" />
+      <created>1725858543506</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1725858543506</updated>
+    </task>
+    <task id="LOCAL-00006" summary="draft version: admin dashboard and table">
+      <option name="closed" value="true" />
+      <created>1726150650888</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1726150650888</updated>
+    </task>
+    <task id="LOCAL-00007" summary="draft version: admin login and dashboard access">
+      <option name="closed" value="true" />
+      <created>1726207094141</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726207094141</updated>
+    </task>
+    <task id="LOCAL-00008" summary="updated interface: question and nav component">
+      <option name="closed" value="true" />
+      <created>1726405683904</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1726405683904</updated>
+    </task>
+    <task id="LOCAL-00009" summary="updated drag and drop area">
+      <option name="closed" value="true" />
+      <created>1726806816277</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1726806816277</updated>
+    </task>
+    <task id="LOCAL-00010" summary="merged version from howard branch">
+      <option name="closed" value="true" />
+      <created>1726807801391</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1726807801391</updated>
+    </task>
+    <task id="LOCAL-00011" summary="merged version from howard branch">
+      <option name="closed" value="true" />
+      <created>1726837745160</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1726837745160</updated>
+    </task>
+    <task id="LOCAL-00012" summary="merged version from howard branch">
+      <option name="closed" value="true" />
+      <created>1726838079183</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1726838079183</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="draft version of Q&amp;A interface" />
+    <MESSAGE value="intital vue framework frontend" />
+    <MESSAGE value="improved prototype answering page, with an initial connection from data generated from the AI model" />
+    <MESSAGE value="prototype of start page and topic page" />
+    <MESSAGE value="draft version, from homepage to topic, context selection" />
+    <MESSAGE value="draft version: admin dashboard and table" />
+    <MESSAGE value="draft version: admin login and dashboard access" />
+    <MESSAGE value="updated interface: question and nav component" />
+    <MESSAGE value="updated drag and drop area" />
+    <MESSAGE value="merged version from howard branch" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged version from howard branch" />
+  </component>
+</project>

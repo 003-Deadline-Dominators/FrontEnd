@@ -34,12 +34,12 @@
 
 
 <script>
-import Nava from './components/nav.vue';
-import Header from './components/Question/Header.vue';
-import ProblemSection from './components/Question/ProblemSection.vue';
-import Overlay from '@/assets/Topic/Context/Question/overlay.svg';
-import loading from './components/Question/loading.vue';
-import DragDrop from './components/Question/DragDrop.vue';
+import Nava from './nav.vue';
+import Header from './Question/Header.vue';
+import ProblemSection from './Question/ProblemSection.vue';
+import Overlay from './assets/Topic/Context/Question/overlay.svg';
+import loading from './Question/loading.vue';
+import DragDrop from './Question/DragDrop.vue';
 
 export default {
   components: {

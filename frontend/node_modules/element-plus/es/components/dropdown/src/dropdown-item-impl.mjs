@@ -5,7 +5,7 @@ import { ElIcon } from '../../icon/index.mjs';
 import '../../../hooks/index.mjs';
 import '../../../utils/index.mjs';
 import '../../../constants/index.mjs';
-import { dropdownItemProps, DROPDOWN_COLLECTION_ITEM_INJECTION_KEY as COLLECTION_ITEM_INJECTION_KEY } from './dropdown2.mjs';
+import { dropdownItemProps, DROPDOWN_COLLECTION_ITEM_INJECTION_KEY as COLLECTION_ITEM_INJECTION_KEY } from './dropdown.mjs';
 import { DROPDOWN_INJECTION_KEY } from './tokens.mjs';
 import _export_sfc from '../../../_virtual/plugin-vue_export-helper.mjs';
 import { useNamespace } from '../../../hooks/use-namespace/index.mjs';

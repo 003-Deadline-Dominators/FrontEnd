@@ -37,7 +37,7 @@
 import Nava from './nav.vue';
 import Header from './Question/Header.vue';
 import ProblemSection from './Question/ProblemSection.vue';
-import Overlay from './assets/Topic/Context/Question/overlay.svg';
+import Overlay from '../assets/Topic/Context/Question/overlay.svg';
 import loading from './Question/loading.vue';
 import DragDrop from './Question/DragDrop.vue';
 

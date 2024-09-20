@@ -9,7 +9,7 @@ require('../../focus-trap/index.js');
 require('../../roving-focus-group/index.js');
 require('../../../hooks/index.js');
 var tokens$1 = require('./tokens.js');
-var dropdown = require('./dropdown2.js');
+var dropdown = require('./dropdown.js');
 var useDropdown = require('./useDropdown.js');
 var pluginVue_exportHelper = require('../../../_virtual/plugin-vue_export-helper.js');
 var index = require('../../../hooks/use-namespace/index.js');

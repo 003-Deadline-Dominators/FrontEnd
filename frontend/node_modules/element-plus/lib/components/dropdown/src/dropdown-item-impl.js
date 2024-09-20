@@ -9,7 +9,7 @@ var index = require('../../icon/index.js');
 require('../../../hooks/index.js');
 require('../../../utils/index.js');
 require('../../../constants/index.js');
-var dropdown = require('./dropdown2.js');
+var dropdown = require('./dropdown.js');
 var tokens = require('./tokens.js');
 var pluginVue_exportHelper = require('../../../_virtual/plugin-vue_export-helper.js');
 var index$1 = require('../../../hooks/use-namespace/index.js');

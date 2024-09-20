@@ -57,15 +57,15 @@ const scrollToSection = () => {
 };
 </script>
 
-<style>
+<style scoped>
 /* Your styles here */
 /* Removed the universal selector that was setting the background to white */
-
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2%;
+  background-color: white;
 }
 .nav button {
   padding: 10px;
@@ -156,4 +156,5 @@ h3{
 body{
   background-color: white;
 }
+
 </style>

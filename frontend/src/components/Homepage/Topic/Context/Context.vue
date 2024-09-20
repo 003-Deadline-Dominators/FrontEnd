@@ -39,8 +39,8 @@ export default {
     }
   },
   mounted() {
-    const topicTitle = this.$route.query.formattedTitle;
-
+    const topicTitle = encodeURIComponent(this.$route.query.formattedTitle);
+    console.log(topicTitle)
     if (topicTitle) {
       axios
           .get(`http://localhost:8080/topics/contexts/${topicTitle}`)
@@ -89,6 +89,7 @@ export default {
   border-width: 2px;
   display: inline;
   padding: 4px;
+  font-size: 20px;
   background-color: white;
 }
 

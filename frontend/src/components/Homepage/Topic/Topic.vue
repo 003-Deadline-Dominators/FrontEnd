@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     goToContext(topicTitle) {
-      this.$router.push({ name: 'Context', query: { formattedTitle: topicTitle } });
+      this.$router.push({ name: 'Context', query: { formattedTitle: topicTitle  } });
     },
     filterCards() {
       // This method is called when the select value changes
@@ -99,15 +99,16 @@ export default {
 .cards-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-y: auto;
+  margin-left: 100px;
 }
 
 .card {
   background: linear-gradient(174deg, rgba(197,218,248,1) 0%, rgba(255,255,255,1) 30%);
   padding: 20px;
   border-radius: 5px;
-  width: calc(25% - 40px);
+  width: calc(28%);
   margin: 20px;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -126,7 +127,7 @@ export default {
   display: inline-block;
   padding: 4px;
   margin-bottom: 10px;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 select {
@@ -144,9 +145,6 @@ span {
 
 <style>
 body {
-  background: #F6F6F6;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+  background-color: #F6F6F6;
 }
 </style>

@@ -107,6 +107,7 @@ export default {
   font-size: 18px;
   font-weight: lighter;
   color: black;
+  width: 460px;
 }
 
 
@@ -123,6 +124,7 @@ export default {
   align-items: center;
   background-color: #e9e9e9;
   border-radius: 5px;
+  border-style: none;
   padding: 15px;
   width: 370px;
   height: 27px;
@@ -144,6 +146,7 @@ export default {
   font-size: 20px;
   width: auto;
   color: #FF9500;
+  border-style: none;
   border-bottom: 2px solid #FF9500;
   transition: transform 0.3s ease;
 }
@@ -156,14 +159,20 @@ export default {
   width: 25px;
   height: 25px;
   margin-right: 5px;
+  border-style: none;
 }
 
 .button-0 {
   margin-left: 0;
-  margin-right: 62px;
+  margin-right: 36px;
+  border-style: none;
 }
 
 .button-1 {
-  margin-right: 62px;
+  margin-right: 36px;
+  border-style: none;
+}
+.button-2 {
+  border-style: none;
 }
 </style>

@@ -1,5 +1,13 @@
 <template>
   <nava :show-context="false" :show-selected="false"/>
+  <div class="sub-nav">
+    <select v-model="selectedCategory" @change="filterCards" id="selection">
+      <option value="">All categories</option>
+      <option value="Algorithm">Algorithm</option>
+      <option value="Unsupervised">Unsupervised</option>
+      <option value="Supervised">Supervised</option>
+    </select>
+  </div>
   <div ref="chartContainer" class="chart-container"></div>
   <el-table :data="tableData" stripe class="table">
     <el-table-column prop="userId" label="User ID" align="center"></el-table-column>
@@ -35,7 +43,7 @@ export default {
           context: 'Supervised Learning',
           timestamp: '2024-09-10 12:30:45',
           timeTaken: '5 mins',
-          correctness: '80%'
+          correctness: 'true'
         },
         {
           userId: 'U124',
@@ -43,7 +51,7 @@ export default {
           context: 'Exploratory Data Analysis',
           timestamp: '2024-09-10 12:45:12',
           timeTaken: '8 mins',
-          correctness: '90%'
+          correctness: 'false'
         },
         // Add more rows as needed
       ]
@@ -62,13 +70,23 @@ export default {
       this.myChart = echarts.init(chartDom);
 
       const option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'cross' }
+        },
         xAxis: {
           type: 'category',
           boundaryGap: false,
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          name: 'Past 7 days',
+          nameLocation: 'middle',
+          nameGap: 30,
         },
         yAxis: {
           type: 'value',
+          name: 'Number of attempts',
+          nameGap: 30,
+          fontSize: 12,
         },
         series: [
           {
@@ -102,6 +120,23 @@ export default {
 </script>
 
 <style scoped>
+#selection{
+  display: inline-block;
+  justify-content: right;
+  align-items: center;
+  background-color: #e9e9e9;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+#selection:after{
+  border: 1px solid transparent;
+}
+#selection:hover{
+  border: 1px solid transparent;
+}
 .chart-container {
   width: 100vw; /* 90% of the viewport width */
   height: 50vh; /* 60% of the viewport height */
@@ -131,5 +166,6 @@ button{
   vertical-align: middle !important;
   padding: 20px;
 }
+
 /* Target each cell for extra padding and alignment */
 </style>

@@ -47,6 +47,7 @@ export default {
             console.log(response.data); // Check the structure here
             this.scenario = response.data.scenario;
             this.task = response.data.task;
+            this.$emit('problem-section-loaded');
             this.hasFetchedData = true; // Set the flag to true after data is fetched
           })
           .catch((error) => {

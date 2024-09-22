@@ -65,15 +65,18 @@ export default {
   methods: {
     onUpdate() {
       console.log('update');
+      this.$emit('update:list2', this.list2);
     },
     onAdd() {
       console.log('add');
+      this.$emit('update:list2', this.list2);
     },
     remove() {
       console.log('remove');
     },
     cyclePosition(item) {
       item.position = (item.position + 1) % 4;
+      this.$emit('update:list2', this.list2);
     },
     formatItems(items) {
       return items.map(item => ({
@@ -81,6 +84,9 @@ export default {
         content: item,
         position: 0
       }));
+    },
+    shuffleArray(array) {
+      return array.sort(() => Math.random() - 0.5); // Simple shuffle
     },
     rebuild(){
       location.reload();
@@ -90,15 +96,17 @@ export default {
       this.list1.push(...this.list2);
       // Clear list2
       this.list2 = [];
+      this.list1 = this.shuffleArray(this.list1);
     },
     submit() {
-      // Send list2 back to backend
       axios.post('http://localhost:8080/submit', { list2: this.list2 })
           .then(response => {
             console.log('Data submitted successfully:', response.data);
+            this.$emit('submitted-data', response.data);
           })
           .catch(error => {
             console.error('Error submitting data:', error);
+            this.$emit('submitted-data', { error: error.response ? error.response.data : 'An error occurred' });
           });
     }
   },
@@ -114,6 +122,7 @@ export default {
           console.log(response.data);
           this.$emit('drag-drop-loaded');
           this.list1 = this.formatItems(response.data.code);
+          this.list1 = this.shuffleArray(this.list1);
         })
         .catch(error => {
           console.error(error);

@@ -15,13 +15,13 @@
           <button v-show="isProblemCollapsed" @click="toggleProblemSection" class="expand-button"> >></button>
         </div>
         <div class="drag-drop-wrapper">
-          <DragDrop ref="dragDrop" @drag-drop-loaded="onDragDropLoaded"/>
-<!--          <DragDropArea ref="dragDrop" @drag-drop-loaded="onDragDropLoaded" />-->
+          <DragDrop ref="dragDrop" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" />
           <div v-if="showOverlay" class="overlay">
             <h1>Are you ready to Craft Code?</h1>
             <img :src="Overlay" alt="overlay" />
             <button @click="removeOverlay" class="overlay-button">Start</button>
           </div>
+          <CodeEditor :codeBlocks="list2" :feedbackData="submittedData" ref="codeEditor"/>
         </div>
       </div>
       <div v-if="showloading" class="loading">
@@ -31,8 +31,6 @@
   </div>
 </template>
 
-
-
 <script>
 import Nava from './components/nav.vue';
 import Header from './components/Question/Header.vue';
@@ -40,6 +38,8 @@ import ProblemSection from './components/Question/ProblemSection.vue';
 import Overlay from '@/assets/Topic/Context/Question/overlay.svg';
 import loading from './components/Question/loading.vue';
 import DragDrop from './components/Question/DragDrop.vue';
+import CodeEditor from './components/Question/CodeEditor.vue';
+import axios from 'axios';
 
 export default {
   components: {
@@ -48,6 +48,7 @@ export default {
     ProblemSection,
     DragDrop,
     loading,
+    CodeEditor,
   },
   data() {
     return {
@@ -56,12 +57,25 @@ export default {
       isProblemCollapsed: false,
       startTime: null,
       showloading: true,
-      dragDropLoaded: true, // Flag for DragDropArea load completion
+      dragDropLoaded: false,
       problemSectionLoaded: false,
+      list2: [],
+      submittedData: {},
     };
   },
   methods: {
-    submit() {
+    updateList2(newList2) {
+      this.list2 = newList2.map(item => ({
+        content: item.content,
+        position: item.position * 20
+      }));
+      console.log("Updated list2:", this.list2);
+    },
+    handleSubmittedData(data) {
+      this.submittedData = data;
+      console.log('Submitted data in App:', data);
+    },
+    submit(){
       this.$refs.dragDrop.submit();
     },
     resetBlocks() {
@@ -76,7 +90,6 @@ export default {
       this.startTime = new Date();
     },
     toggleProblemSection() {
-      console.log('toggleProblemSection method called');
       this.isProblemCollapsed = !this.isProblemCollapsed;
     },
     onDragDropLoaded() {
@@ -89,7 +102,7 @@ export default {
     },
     checkLoadingStatus() {
       if (this.dragDropLoaded && this.problemSectionLoaded) {
-        this.showloading = false; // Hide loading once both requests are complete
+        this.showloading = false;
       }
     },
   },
@@ -210,6 +223,10 @@ body {
   align-items: center;
   z-index: 10;
   background-color: #F6F6F6;
+}
+
+code-editor {
+  border-radius: 5px;
 }
 
 </style>

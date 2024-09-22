@@ -1,26 +1,31 @@
 <template>
   <div class="code-editor">
     <div class="sub-select">
-      <button class="sub-button" v-for="btn in buttons" :key="btn.text">
-        <img :src="btn.src"/>
+      <button class="sub-button" v-for="btn in buttons" :key="btn.text" @click="handleButtonClick(btn.text)">
+        <img :src="btn.src" alt="" />
         {{ btn.text }}
       </button>
-      <button class="sub-button-right">
-        <img :src="expandIcon"/>
+      <button class="sub-button-right" @click="toggleExpand">
+        <img :src="expandIcon" alt="" />
       </button>
     </div>
-    <pre class="code" v-pre>
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-public class SnakeGame {
-  private static final int WIDTH = 20;
-  private static final int HEIGHT = 20;
-  private List&lt;Position&gt; snake;
-  private Position food;
-  private char direction = 'R'; // Right
-}
+    <pre v-if="showCode" :class="['code', { expanded: !collapsed }]" ref="codeContainer">
+      <code v-for="(block, index) in codeBlocks" :key="index"
+            :style="{ paddingLeft: block.position + 'px' }"
+            class="code-line">
+        {{ block.content }}
+      </code>
     </pre>
+    <div v-if="showFeedback" class="feedback-container">
+      <pre v-if="feedbackData.stdout">
+        <h3>Standard Output:</h3>
+        {{ feedbackData.stdout }}
+      </pre>
+      <pre v-if="feedbackData.stderr">
+        <h3>Standard Error:</h3>
+        {{ feedbackData.stderr }}
+      </pre>
+    </div>
   </div>
 </template>
 
@@ -30,6 +35,28 @@ import codeIcon from '@/assets/Topic/Context/Question/code.svg';
 import expandIcon from '@/assets/Topic/Context/Question/expand.svg';
 
 export default {
+  props: {
+    codeBlocks: {
+      type: Array,
+      required: true,
+    },
+    feedbackData: {
+      type: Object,
+      default: () => ({})
+    },
+  },
+    watch: {
+      feedbackData: {
+        handler(newData) {
+          console.log('New feedbackData:', newData);
+          if (newData && (newData.stdout || newData.stderr)) {
+            this.showFeedback = true;
+            this.showCode = false;
+          }
+        },
+        deep: true
+      }
+    },
   data() {
     return {
       buttons: [
@@ -37,16 +64,39 @@ export default {
         { src: codeIcon, text: 'Code' },
       ],
       expandIcon,
+      collapsed: true,
+      showCode: true,
+      showFeedback: false,
     };
+  },
+  methods: {
+    toggleExpand() {
+      this.collapsed = !this.collapsed;
+    },
+    handleButtonClick(buttonText) {
+      if (buttonText === 'Feedback') {
+        this.showFeedback = true;
+        this.showCode = false;
+      } else if (buttonText === 'Code') {
+        this.showFeedback = false;
+        this.showCode = true;
+      }
+    },
+    showFeedback() {
+      this.showFeedback = true;
+      this.showCode = false;
+      console.log('Showing feedback...');
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .code-editor {
   background-color: #1e1e1e;
   color: #ffffff;
   border-radius: 5px;
+  overflow: hidden;
 }
 
 .sub-select {
@@ -54,70 +104,50 @@ export default {
   flex-direction: row;
   padding: 5px;
   background-color: #30313d;
-  border-radius: 5px;
 }
 
 .sub-button {
   display: flex;
-  flex-direction: row;
+  align-items: center;
   background-color: transparent;
   color: white;
   border: none;
   cursor: pointer;
-  font-size: 16px;
-  padding: 10px;
+  font-size: 14px;
+  padding: 5px 10px;
   margin-right: 15px;
 }
+
+.sub-button img {
+  margin-right: 5px;
+}
+
 .sub-button-right {
   margin-left: auto;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 10px;
+  padding: 5px;
 }
 
 .code {
-  padding: 15px;
-  white-space: pre-wrap; /* Ensure the code block wraps */
-  border-radius: 5px;
-}
-
-img {
-  width: 20px;
+  padding: 10px;
+  margin: 0;
+  white-space: pre;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-y: auto;
   height: 20px;
-}
-.code-editor {
-  background-color: #1e1e1e;
-  color: #ffffff;
-  border-radius: 5px;
+  transition: height 0.3s ease;
 }
 
-.sub-select {
-  display: flex;
-  flex-direction: row;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: #30313d;
+.code.expanded {
+  height: auto; /* Expands to fit content */
 }
 
-.sub-button {
-  display: flex;
-  flex-direction: row;
-  background-color: transparent;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 10px;
-  margin-right: 15px;
+.code-line {
+  display: block;
+  padding: 2px 0;
 }
-
-.sub-button-right {
-  margin-left: auto;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-}
-
 </style>

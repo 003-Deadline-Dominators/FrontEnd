@@ -13,7 +13,8 @@
     <el-table-column prop="userId" label="User ID" align="center"></el-table-column>
     <el-table-column prop="topic" label="Topic" align="center"></el-table-column>
     <el-table-column prop="context" label="Context" align="center"></el-table-column>
-    <el-table-column prop="timestamp" label="Timestamp" align="center"></el-table-column>
+    <el-table-column prop="generateTime" label="Generate Time" align="center"></el-table-column>
+    <el-table-column prop="submitTime" label="Submit Time" align="center"></el-table-column>
     <el-table-column prop="timeTaken" label="Time Taken" align="center"></el-table-column>
     <el-table-column prop="correctness" label="Correctness" align="center"></el-table-column>
   </el-table>
@@ -41,7 +42,8 @@ export default {
           userId: 'U123',
           topic: 'Machine Learning',
           context: 'Supervised Learning',
-          timestamp: '2024-09-10 12:30:45',
+          generateTime: '2024-09-10 12:30:45',
+          submitTime: '2024-09-10 12:45:12',
           timeTaken: '5 mins',
           correctness: 'true'
         },
@@ -49,7 +51,8 @@ export default {
           userId: 'U124',
           topic: 'Data Science',
           context: 'Exploratory Data Analysis',
-          timestamp: '2024-09-10 12:45:12',
+          generateTime: '2024-09-10 12:45:12',
+          submitTime: '2024-09-10 12:45:12',
           timeTaken: '8 mins',
           correctness: 'false'
         },

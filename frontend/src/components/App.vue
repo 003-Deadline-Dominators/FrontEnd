@@ -62,31 +62,65 @@ export default {
   },
   methods: {
     submit() {
+      /**
+     * Submits the data using the DragDrop component's submit method.
+     */
       this.$refs.dragDrop.submit();
     },
+
+    /**
+     * Resets blocks using the DragDrop component's resetBlocks method.
+     */
     resetBlocks() {
       this.$refs.dragDrop.resetBlocks();
     },
+
+    /**
+     * Rebuilds blocks using the DragDrop component's rebuild method.
+     */
     rebuild() {
       this.$refs.dragDrop.rebuild();
     },
+
+    /**
+     * Removes the overlay, collapses the problem section, and records the start time.
+     */
     removeOverlay() {
       this.showOverlay = false;
       this.isProblemCollapsed = true;
       this.startTime = new Date();
     },
+
+    /**
+     * Toggles the visibility of the problem section.
+     */
     toggleProblemSection() {
       console.log('toggleProblemSection method called');
       this.isProblemCollapsed = !this.isProblemCollapsed;
     },
+
+    /**
+     * Handler for when the DragDrop component has loaded.
+     * Sets dragDropLoaded to true and checks if loading can be stopped.
+     */
     onDragDropLoaded() {
       this.dragDropLoaded = true;
       this.checkLoadingStatus();
     },
+
+    /**
+     * Handler for when the ProblemSection component has loaded.
+     * Sets problemSectionLoaded to true and checks if loading can be stopped.
+     */
     onProblemSectionLoaded() {
       this.problemSectionLoaded = true;
       this.checkLoadingStatus();
     },
+
+    /**
+     * Checks if both DragDrop and ProblemSection components have loaded.
+     * If so, hides the loading indicator.
+     */
     checkLoadingStatus() {
       if (this.dragDropLoaded && this.problemSectionLoaded) {
         this.showloading = false; // Hide loading once both requests are complete

@@ -10,13 +10,13 @@
   </div>
   <div ref="chartContainer" class="chart-container"></div>
   <el-table :data="tableData" stripe class="table">
-    <el-table-column prop="userId" label="User ID" align="center"></el-table-column>
-    <el-table-column prop="topic" label="Topic" align="center"></el-table-column>
-    <el-table-column prop="context" label="Context" align="center"></el-table-column>
-    <el-table-column prop="generateTime" label="Generate Time" align="center"></el-table-column>
-    <el-table-column prop="submitTime" label="Submit Time" align="center"></el-table-column>
-    <el-table-column prop="timeTaken" label="Time Taken" align="center"></el-table-column>
-    <el-table-column prop="correctness" label="Correctness" align="center"></el-table-column>
+    <el-table-column prop="ipAddress" label="IP Address"></el-table-column>
+    <el-table-column prop="correctness" label="Correctness"></el-table-column>
+    <el-table-column prop="topicCategory" label="Topic Category"></el-table-column>
+    <el-table-column prop="contexts" label="Context"></el-table-column>
+    <el-table-column prop="generateTime" label="Generate Time"></el-table-column>
+    <el-table-column prop="submitTime" label="Submit Time"></el-table-column>
+    <el-table-column prop="duration" label="Time Taken"></el-table-column>
   </el-table>
 </template>
 
@@ -25,6 +25,7 @@ import * as echarts from 'echarts';
 import logo from '@/assets/logo.svg';   // Import logo
 import icon from '@/assets/user.svg';
 import { ElTable, ElTableColumn } from 'element-plus';
+import axios from 'axios';
 import Nava from "@/components/nav.vue";
 export default {
   name: 'LineChart',
@@ -37,37 +38,27 @@ export default {
     return {
       logo, // Bind logo to the data
       icon,
-      tableData: [
-        {
-          userId: 'U123',
-          topic: 'Machine Learning',
-          context: 'Supervised Learning',
-          generateTime: '2024-09-10 12:30:45',
-          submitTime: '2024-09-10 12:45:12',
-          timeTaken: '5 mins',
-          correctness: 'true'
-        },
-        {
-          userId: 'U124',
-          topic: 'Data Science',
-          context: 'Exploratory Data Analysis',
-          generateTime: '2024-09-10 12:45:12',
-          submitTime: '2024-09-10 12:45:12',
-          timeTaken: '8 mins',
-          correctness: 'false'
-        },
-        // Add more rows as needed
-      ]
+      tableData: [] // Initial empty array for table data
     };
   },
   mounted() {
+    this.fetchTableData();
     this.initChart();
-    window.addEventListener('resize', this.resizeChart); // To handle resizing the chart when the window size changes
+    window.addEventListener('resize', this.resizeChart); // Handle resizing of the chart when the window size changes
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.resizeChart);
   },
   methods: {
+    async fetchTableData() {
+      try {
+        const response = await axios.get('http://localhost:8080/admin/all'); // Fetch data from the backend
+        this.tableData = response.data; // Assign the retrieved data to tableData
+        console.log('Table data:', this.tableData);
+      } catch (error) {
+        console.error('Error fetching table data:', error);
+      }
+    },
     initChart() {
       const chartDom = this.$refs.chartContainer;
       this.myChart = echarts.init(chartDom);
@@ -97,7 +88,7 @@ export default {
             type: 'line',
             areaStyle: {
               color: {
-                type: 'linear', // Type of  gradient: 'linear', 'radial'
+                type: 'linear', // Type of gradient: 'linear', 'radial'
                 x: 0, y: 0, x2: 0, y2: 1, // Gradient direction (x, y, x2, y2 define start and end points)
                 colorStops: [
                   { offset: 0, color: '#b8f5aa' }, // Start color
@@ -105,8 +96,8 @@ export default {
                 ]
               }
             },
-            lineStyle: {color: '#efa354'},
-            itemStyle: {color: '#7e9aff'},
+            lineStyle: { color: '#efa354' },
+            itemStyle: { color: '#7e9aff' },
           },
         ],
       };
@@ -123,7 +114,7 @@ export default {
 </script>
 
 <style scoped>
-#selection{
+#selection {
   display: inline-block;
   justify-content: right;
   align-items: center;
@@ -134,18 +125,18 @@ export default {
   cursor: pointer;
   transition: transform 0.3s ease;
 }
-#selection:after{
+#selection:after {
   border: 1px solid transparent;
 }
-#selection:hover{
+#selection:hover {
   border: 1px solid transparent;
 }
 .chart-container {
-  width: 100vw; /* 90% of the viewport width */
-  height: 50vh; /* 60% of the viewport height */
+  width: 100vw; /* 100% of the viewport width */
+  height: 50vh; /* 50% of the viewport height */
   margin: 0 auto; /* Center the chart */
 }
-button{
+button {
   margin-left: 4%;
   align-content: center;
   width: 12%;

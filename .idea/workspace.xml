@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="incomplete version of codeEditor.vue, stuck on data transportation when sending IDE feedback from backend to frontend">
+    <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/CodeEditor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/CodeEditor.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Homepage/Topic/Topic.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Homepage/Topic/Topic.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +180,8 @@
       <workItem from="1726736398202" duration="117000" />
       <workItem from="1726805879549" duration="5352000" />
       <workItem from="1727020903378" duration="103000" />
-      <workItem from="1727063013971" duration="11558000" />
+      <workItem from="1727063013971" duration="12225000" />
+      <workItem from="1727096359546" duration="9010000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />
@@ -286,7 +287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727020980340</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="functional IDE response from the backend to frontend">
+      <option name="closed" value="true" />
+      <created>1727078330154</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1727078330154</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,6 +313,7 @@
     <MESSAGE value="updated drag and drop area" />
     <MESSAGE value="merged version from howard branch" />
     <MESSAGE value="incomplete version of codeEditor.vue, stuck on data transportation when sending IDE feedback from backend to frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="incomplete version of codeEditor.vue, stuck on data transportation when sending IDE feedback from backend to frontend" />
+    <MESSAGE value="functional IDE response from the backend to frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="functional IDE response from the backend to frontend" />
   </component>
 </project>

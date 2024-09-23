@@ -9,13 +9,14 @@
         <img :src="expandIcon" alt="" />
       </button>
     </div>
-    <pre v-if="showCode" :class="['code', { expanded: !collapsed }]" ref="codeContainer">
+    <p v-if="showCode" :class="['code', { expanded: !collapsed }]" ref="codeContainer">
       <code v-for="(block, index) in codeBlocks" :key="index"
-            :style="{ paddingLeft: block.position + 'px' }"
+            :style="{ marginLeft: block.position + 'px' }"
             class="code-line">
         {{ block.content }}
       </code>
-    </pre>
+    </p>
+    <div v-if="loading" class="loading-text">Loading feedback...</div>
     <div v-if="showFeedback" class="feedback-container">
       <pre v-if="feedbackData.stdout">
         <h3>Standard Output:</h3>
@@ -42,21 +43,25 @@ export default {
     },
     feedbackData: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
   },
-    watch: {
-      feedbackData: {
-        handler(newData) {
-          console.log('New feedbackData:', newData);
-          if (newData && (newData.stdout || newData.stderr)) {
-            this.showFeedback = true;
-            this.showCode = false;
-          }
-        },
-        deep: true
-      }
+  watch: {
+    feedbackData: {
+      handler(newData) {
+        console.log('New feedbackData:', newData);
+        this.loading = true; // Set loading to true when feedbackData changes
+        if (newData && (newData.stdout || newData.stderr)) {
+          this.showFeedback = true;
+          this.showCode = false;
+          this.loading = false; // Set loading to false after processing
+        } else {
+          this.loading = false; // Set loading to false if no feedback data
+        }
+      },
+      deep: true,
     },
+  },
   data() {
     return {
       buttons: [
@@ -67,6 +72,7 @@ export default {
       collapsed: true,
       showCode: true,
       showFeedback: false,
+      loading: false, // Loading state
     };
   },
   methods: {
@@ -82,11 +88,6 @@ export default {
         this.showCode = true;
       }
     },
-    showFeedback() {
-      this.showFeedback = true;
-      this.showCode = false;
-      console.log('Showing feedback...');
-    },
   },
 };
 </script>
@@ -97,6 +98,11 @@ export default {
   color: #ffffff;
   border-radius: 5px;
   overflow: hidden;
+}
+
+.feedback-container {
+  padding: 10px;
+  margin-left: 10px;
 }
 
 .sub-select {
@@ -131,14 +137,14 @@ export default {
 }
 
 .code {
-  padding: 10px;
+  padding: 30px;
   margin: 0;
   white-space: pre;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.4;
   overflow-y: auto;
-  height: 20px;
+  height: 0;
   transition: height 0.3s ease;
 }
 
@@ -147,7 +153,14 @@ export default {
 }
 
 .code-line {
-  display: block;
-  padding: 2px 0;
+  display: flex;
+  padding: 0 0;
+  margin: 2px;
+}
+
+.loading-text {
+  color: #ffffff;
+  padding: 10px;
+  text-align: center;
 }
 </style>

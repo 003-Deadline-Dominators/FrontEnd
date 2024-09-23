@@ -99,15 +99,17 @@ export default {
       this.list1 = this.shuffleArray(this.list1);
     },
     submit() {
-      axios.post('http://localhost:8080/submit', { list2: this.list2 })
+      axios.post('http://localhost:8080/submit', {
+        list2: this.list2,
+      })
           .then(response => {
-            console.log('Data submitted successfully:', response.data);
+            console.log(response.data.stdout);
+            console.log(response.data.stderr);
             this.$emit('submitted-data', response.data);
           })
           .catch(error => {
-            console.error('Error submitting data:', error);
-            this.$emit('submitted-data', { error: error.response ? error.response.data : 'An error occurred' });
-          });
+            console.error(error);
+          })
     }
   },
   mounted() {

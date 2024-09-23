@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="merged version from howard branch" />
+    <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="incomplete version of codeEditor.vue, stuck on data transportation when sending IDE feedback from backend to frontend">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/CodeEditor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/CodeEditor.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,10 +18,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Vue Composition API Component" />
         <option value="JavaScript File" />
         <option value="package.json" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -54,6 +59,7 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Node.js.main.js.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;howard&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/61415/Downloads/neat download/project-frontend/frontend/src/assets/Topic/Context/Question&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -173,6 +179,8 @@
       <workItem from="1726685626804" duration="3542000" />
       <workItem from="1726736398202" duration="117000" />
       <workItem from="1726805879549" duration="5352000" />
+      <workItem from="1727020903378" duration="103000" />
+      <workItem from="1727063013971" duration="11558000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />
@@ -270,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726838079183</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="incomplete version of codeEditor.vue, stuck on data transportation when sending IDE feedback from backend to frontend">
+      <option name="closed" value="true" />
+      <created>1727020980340</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1727020980340</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,6 +303,7 @@
     <MESSAGE value="updated interface: question and nav component" />
     <MESSAGE value="updated drag and drop area" />
     <MESSAGE value="merged version from howard branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="merged version from howard branch" />
+    <MESSAGE value="incomplete version of codeEditor.vue, stuck on data transportation when sending IDE feedback from backend to frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="incomplete version of codeEditor.vue, stuck on data transportation when sending IDE feedback from backend to frontend" />
   </component>
 </project>

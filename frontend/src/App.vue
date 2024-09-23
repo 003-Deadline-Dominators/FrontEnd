@@ -61,6 +61,7 @@ export default {
       problemSectionLoaded: false,
       list2: [],
       submittedData: {},
+      isLoading: false, // Add loading state
     };
   },
   methods: {
@@ -150,6 +151,7 @@ body {
 .drag-drop-wrapper {
   position: relative;
   flex-grow: 1;
+  width: 60%;
 }
 
 .overlay {

@@ -44,4 +44,9 @@ export default {
   33% { content: "...."; }
   66% { content: "....."; }
 }
+
+img {
+  width: auto;
+  height: 40%;
+}
 </style>

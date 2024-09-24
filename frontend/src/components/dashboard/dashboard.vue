@@ -14,8 +14,19 @@
     <el-table-column prop="correctness" label="Correctness"></el-table-column>
     <el-table-column prop="topicCategory" label="Topic Category"></el-table-column>
     <el-table-column prop="contexts" label="Context"></el-table-column>
-    <el-table-column prop="generateTime" label="Generate Time"></el-table-column>
-    <el-table-column prop="submitTime" label="Submit Time"></el-table-column>
+
+    <!-- Format the generateTime and submitTime columns -->
+    <el-table-column label="Generate Time">
+      <template #default="scope">
+        <span v-html="formatTimestamp(scope.row.generateTime)"></span>
+      </template>
+    </el-table-column>
+    <el-table-column label="Submit Time">
+      <template #default="scope">
+        <span v-html="formatTimestamp(scope.row.submitTime)"></span>
+      </template>
+    </el-table-column>
+
     <el-table-column prop="duration" label="Time Taken"></el-table-column>
   </el-table>
 </template>
@@ -27,6 +38,7 @@ import icon from '@/assets/user.svg';
 import { ElTable, ElTableColumn } from 'element-plus';
 import axios from 'axios';
 import Nava from "@/components/nav.vue";
+
 export default {
   name: 'LineChart',
   components: {
@@ -38,7 +50,8 @@ export default {
     return {
       logo, // Bind logo to the data
       icon,
-      tableData: [] // Initial empty array for table data
+      tableData: [], // Initial empty array for table data
+      selectedCategory: '', // For the dropdown selection
     };
   },
   mounted() {
@@ -109,6 +122,15 @@ export default {
         this.myChart.resize(); // Resize the chart when window size changes
       }
     },
+    // Helper method to format timestamp
+    formatTimestamp(timestamp) {
+      if (!timestamp) return '';
+      const date = new Date(timestamp);
+      const options = {timeZone: 'Australia/Sydney', hour12: false};
+      const formattedDate = date.toLocaleDateString('en-AU', options); // Format date
+      const formattedTime = date.toLocaleTimeString('en-AU', options); // Format time
+      return `${formattedDate}<br>${formattedTime}`; // Combine with line break
+    },
   },
 };
 </script>
@@ -125,27 +147,33 @@ export default {
   cursor: pointer;
   transition: transform 0.3s ease;
 }
+
 #selection:after {
   border: 1px solid transparent;
 }
+
 #selection:hover {
   border: 1px solid transparent;
 }
+
 .chart-container {
   width: 100vw; /* 100% of the viewport width */
   height: 50vh; /* 50% of the viewport height */
   margin: 0 auto; /* Center the chart */
 }
+
 button {
   margin-left: 4%;
   align-content: center;
   width: 12%;
 }
+
 .table {
   width: 100%;
   margin: 0 auto;
   font-size: 18px;
 }
+
 /* Deep selector to ensure stripes appear even with scoped styles */
 :deep(.el-table__row:nth-child(odd)) {
   background-color: #f1f7ef;

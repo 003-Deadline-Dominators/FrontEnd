@@ -5,4 +5,7 @@ module.exports = {
     '^.+\\.[t|j]sx?$': 'babel-jest',  // Babel 转换器
   },
   testEnvironment: 'jsdom',
+  transformIgnorePatterns: [
+    "/node_modules/(?!(axios)/)"
+  ]
 };

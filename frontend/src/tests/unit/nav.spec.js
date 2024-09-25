@@ -26,15 +26,16 @@ describe('Nav.vue', () => {
     });
 
     router = createRouter({
-      history: createWebHistory(),  // 使用 Vue 3 路由历史模式
-      routes: [] // 在测试中可以不定义具体路由
+      history: createWebHistory(),  // Use Vue 3's history mode for the router
+      routes: [] // No need to specify routes in tests
     });
   });
 
+  // Test if the correct buttons render based on props
   it('renders the correct buttons based on props', () => {
     const wrapper = shallowMount(Nav, {
       global: {
-        plugins: [store, router] // 注入 Vuex 和 Vue Router
+        plugins: [store, router] // Inject Vuex and Vue Router
       },
       props: {
         showModule: true,
@@ -48,6 +49,7 @@ describe('Nav.vue', () => {
     expect(wrapper.find('#selected').exists()).toBe(true); // 检查 "Question" 按钮
   });
 
+  // Test if buttons are hidden when props are false
   it('hides buttons when props are false', () => {
     const wrapper = shallowMount(Nav, {
       global: {
@@ -65,6 +67,7 @@ describe('Nav.vue', () => {
     expect(wrapper.find('#selected').exists()).toBe(false);// "Question" 按钮隐藏
   });
 
+  // Test navigation to /topic when the "Module" button is clicked
   it('navigates to /topic when "Module" button is clicked', async () => {
     const wrapper = shallowMount(Nav, {
       global: {
@@ -72,12 +75,14 @@ describe('Nav.vue', () => {
       }
     });
 
-    wrapper.vm.$router.push = jest.fn(); // 模拟路由的 `push` 方法
+    wrapper.vm.$router.push = jest.fn(); // Mock the router's `push` method
 
-    await wrapper.find('#start').trigger('click'); // 点击 "Module" 按钮
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith('/topic'); // 检查是否导航到 /topic
+    await wrapper.find('#start').trigger('click'); // Click the "Module" button
+    expect(wrapper.vm.$router.push).toHaveBeenCalledWith('/topic'); // Check if it navigates to /topic
+  });
   });
 
+  // Test if the input field is shown when the current icon is clicked
   it('shows input field when currentIcon is clicked', async () => {
     const wrapper = shallowMount(Nav, {
       global: {
@@ -85,10 +90,11 @@ describe('Nav.vue', () => {
       }
     });
 
-    await wrapper.find('.clickable-image').trigger('click'); // 点击图标
-    expect(wrapper.vm.showInput).toBe(true); // 检查输入框是否显示
+    await wrapper.find('.clickable-image').trigger('click'); // Click the icon
+    expect(wrapper.vm.showInput).toBe(true); // Check if the input field is shown 
   });
 
+  // Test handling of correct passcode and triggering Vuex actions
   it('handles correct passcode and triggers Vuex actions', async () => {
     const wrapper = shallowMount(Nav, {
       global: {
@@ -96,23 +102,24 @@ describe('Nav.vue', () => {
       }
     });
   
-    // 首先点击图标显示输入框
+    // click the icon to show the input field
     await wrapper.find('.clickable-image').trigger('click');
   
-    // 设置正确的输入值
+    // Set the correct input value
     wrapper.setData({ inputValue: 'passcode' });
   
-    // 模拟 $router.push
+    // Mock the $router.push method
     wrapper.vm.$router.push = jest.fn();
   
-    // 模拟用户按下回车键触发验证
+    // Simulate user pressing the Enter key to trigger validation
     await wrapper.find('input').trigger('keyup.enter');
   
-    // 验证 Vuex 动作是否被正确调用
+    // Verify that Vuex actions are correctly called
+    expect(actions.toggleDashboard).toHaveBeenCalled();
     expect(actions.toggleDashboard).toHaveBeenCalled();
     expect(actions.updateIcon).toHaveBeenCalled();
   
-    // 验证是否导航到 /dashboard
+    // Verify if it navigates to /dashboard
     expect(wrapper.vm.$router.push).toHaveBeenCalledWith('/dashboard');
   });
   

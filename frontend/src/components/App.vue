@@ -15,13 +15,13 @@
           <button v-show="isProblemCollapsed" @click="toggleProblemSection" class="expand-button"> >></button>
         </div>
         <div class="drag-drop-wrapper">
-          <DragDrop ref="dragDrop" @drag-drop-loaded="onDragDropLoaded"/>
-<!--          <DragDropArea ref="dragDrop" @drag-drop-loaded="onDragDropLoaded" />-->
+          <DragDrop ref="dragDrop" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" />
           <div v-if="showOverlay" class="overlay">
             <h1>Are you ready to Craft Code?</h1>
             <img :src="Overlay" alt="overlay" />
             <button @click="removeOverlay" class="overlay-button">Start</button>
           </div>
+          <CodeEditor :codeBlocks="list2" :feedbackData="submittedData" ref="codeEditor"/>
         </div>
       </div>
       <div v-if="showloading" class="loading">
@@ -31,15 +31,15 @@
   </div>
 </template>
 
-
-
 <script>
 import Nava from './nav.vue';
 import Header from './Question/Header.vue';
 import ProblemSection from './Question/ProblemSection.vue';
-import Overlay from '../assets/Topic/Context/Question/overlay.svg';
+import Overlay from '@/assets/Topic/Context/Question/overlay.svg';
 import loading from './Question/loading.vue';
 import DragDrop from './Question/DragDrop.vue';
+import CodeEditor from './Question/CodeEditor.vue';
+import axios from 'axios';
 
 export default {
   components: {
@@ -48,6 +48,7 @@ export default {
     ProblemSection,
     DragDrop,
     loading,
+    CodeEditor,
   },
   data() {
     return {
@@ -56,15 +57,77 @@ export default {
       isProblemCollapsed: false,
       startTime: null,
       showloading: true,
-      dragDropLoaded: true, // Flag for DragDropArea load completion
+      dragDropLoaded: false,
       problemSectionLoaded: false,
+      list2: [],
+      submittedData: {},
+      isLoading: false, // Add loading state
+      ipAddress: '',
+      generateTime: null,
     };
   },
   methods: {
-    submit() {
-      /**
-     * Submits the data using the DragDrop component's submit method.
-     */
+    updateList2(newList2) {
+      this.list2 = newList2.map(item => ({
+        content: item.content,
+        position: item.position * 20
+      }));
+      console.log("Updated list2:", this.list2);
+    },
+    handleSubmittedData(data) {
+      this.submittedData = data;
+      console.log('Submitted data in App:', data);
+
+      const submitTime = new Date();
+      const durationInMillis = submitTime - this.startTime; // Duration in milliseconds
+
+      // Convert the duration to hh:mm:ss format
+      const duration = this.formatDuration(durationInMillis);
+
+      const submissionData = {
+        ipAddress: this.ipAddress,
+        correctness: data.stdout ? 1 : 0,
+        topicCategory: this.$route.query.topicTitle,
+        duration: duration, // Now in hh:mm:ss format
+        contexts: this.$route.query.contextTitle,
+        submitTime: this.formatDate(submitTime),
+        generateTime: this.generateTime
+      };
+
+      this.sendDataToBackend(submissionData);
+    },
+
+// New method to format duration as hh:mm:ss
+    formatDuration(durationInMillis) {
+      const totalSeconds = Math.floor(durationInMillis / 1000); // Convert milliseconds to seconds
+      const hours = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
+      const minutes = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
+      const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+
+      return `${hours}:${minutes}:${seconds}`;
+    },
+
+    formatDate(date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+
+      return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    },
+
+    sendDataToBackend(data) {
+      axios.post('http://localhost:8080/admin/insertData', data)
+          .then(response => {
+            console.log('Data sent to backend:', response.data);
+          })
+          .catch(error => {
+            console.error('Error sending data to backend:', error);
+          });
+    },
+    submit(){
       this.$refs.dragDrop.submit();
     },
 
@@ -95,7 +158,6 @@ export default {
      * Toggles the visibility of the problem section.
      */
     toggleProblemSection() {
-      console.log('toggleProblemSection method called');
       this.isProblemCollapsed = !this.isProblemCollapsed;
     },
 
@@ -123,10 +185,22 @@ export default {
      */
     checkLoadingStatus() {
       if (this.dragDropLoaded && this.problemSectionLoaded) {
-        this.showloading = false; // Hide loading once both requests are complete
+        this.showloading = false;
       }
     },
   },
+  mounted() {
+    this.generateTime = new Date();
+
+    // Fetch IP address
+    axios.get('https://api.ipify.org?format=json')
+        .then(response => {
+          this.ipAddress = response.data.ip;
+        })
+        .catch(error => {
+          console.error('Error fetching IP address:', error);
+        });
+  }
 };
 </script>
 
@@ -171,6 +245,7 @@ body {
 .drag-drop-wrapper {
   position: relative;
   flex-grow: 1;
+  width: 60%;
 }
 
 .overlay {
@@ -244,6 +319,10 @@ body {
   align-items: center;
   z-index: 10;
   background-color: #F6F6F6;
+}
+
+code-editor {
+  border-radius: 5px;
 }
 
 </style>

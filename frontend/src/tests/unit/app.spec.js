@@ -43,31 +43,35 @@ describe('App.vue', () => {
     });
   });
 
-  //测试组件是否正确渲染
+  // Test if the components render correctly
   it('renders the correct components', () => {
     expect(wrapper.findComponent(Header).exists()).toBe(true);
     expect(wrapper.findComponent(ProblemSection).exists()).toBe(true);
     expect(wrapper.findComponent(Nava).exists()).toBe(true);
   });
 
+  // Test if the DragDrop submit method is called when triggered
   it('calls DragDrop submit method when submit is triggered', () => {
     const submitSpy = jest.spyOn(wrapper.vm.$refs.dragDrop, 'submit');
     wrapper.vm.submit();
     expect(submitSpy).toHaveBeenCalled(); // Ensure DragDrop's submit method is called
   });
 
+  // Test if the DragDrop resetBlocks method is called when triggered
   it('calls DragDrop resetBlocks method when resetBlocks is triggered', () => {
     const resetSpy = jest.spyOn(wrapper.vm.$refs.dragDrop, 'resetBlocks');
     wrapper.vm.resetBlocks();
     expect(resetSpy).toHaveBeenCalled(); // Ensure DragDrop's resetBlocks method is called
   });
 
+  // Test if the DragDrop rebuild method is called when triggered
   it('calls DragDrop rebuild method when rebuild is triggered', () => {
     const rebuildSpy = jest.spyOn(wrapper.vm.$refs.dragDrop, 'rebuild');
     wrapper.vm.rebuild();
     expect(rebuildSpy).toHaveBeenCalled(); // Ensure DragDrop's rebuild method is called
   });
 
+  // Test if the problem section toggles its state when the toggleProblemSection method is triggered
   it('toggles problem section when toggleProblemSection is triggered', async () => {
     const initialCollapsedState = wrapper.vm.isProblemCollapsed;
     wrapper.vm.toggleProblemSection();

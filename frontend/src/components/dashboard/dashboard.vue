@@ -1,23 +1,68 @@
 <template>
-  <nava :show-context="false" :show-selected="false"/>
-  <div class="sub-nav">
-    <select v-model="selectedCategory" @change="filterCards" id="selection">
-      <option value="">All categories</option>
-      <option value="Algorithm">Algorithm</option>
-      <option value="Unsupervised">Unsupervised</option>
-      <option value="Supervised">Supervised</option>
-    </select>
+  <div class="container">
+    <nava :show-context="false" :show-selected="false"/>
+    <div class="sub-nav">
+      <h1>Answer in the last seven days</h1>
+      <select v-model="selectedCategory" @change="filterCards" id="selection">
+        <option value="">All topics</option>
+        <option value="Algorithm"></option>
+        <option value="Unsupervised">Unsupervised</option>
+        <option value="Supervised">Supervised</option>
+      </select>
+    </div>
+
+    <!-- Chart container -->
+    <div ref="chartContainer" class="chart-container"></div>
+
+    <!-- Table for displaying data -->
+    <el-table :data="tableData" stripe class="table">
+      <el-table-column prop="ipAddress" label="IP Address"></el-table-column>
+      <el-table-column prop="correctness" label="Correctness"></el-table-column>
+      <el-table-column prop="topicCategory" label="Topic Category"></el-table-column>
+      <el-table-column prop="contexts" label="Context"></el-table-column>
+
+      <!-- Formatted timestamps -->
+      <el-table-column>
+        <template #header>
+          <div>
+            Generate Time<br>
+            <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
+          </div>
+        </template>
+        <template #default="scope">
+          <div>
+            <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[0]"></span><br>
+            <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[1]"></span>
+          </div>
+        </template>
+      </el-table-column>
+        <el-table-column>
+          <template #header>
+            <div>
+              submit Time<br>
+              <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
+            </div>
+          </template>
+          <template #default="scope">
+            <div>
+              <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[0]"></span><br>
+              <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[1]"></span>
+            </div>
+          </template>
+        </el-table-column>
+      <el-table-column>
+        <template #header>
+          <div>
+            Time Taken<br>
+            <span style="font-size: 12px; color: #888;">(hr:min:sec)</span>
+          </div>
+        </template>
+        <template #default="scope">
+          <span>{{ scope.row.duration }}</span> <!-- Display duration as is -->
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
-  <div ref="chartContainer" class="chart-container"></div>
-  <el-table :data="tableData" stripe class="table">
-    <el-table-column prop="ipAddress" label="IP Address"></el-table-column>
-    <el-table-column prop="correctness" label="Correctness"></el-table-column>
-    <el-table-column prop="topicCategory" label="Topic Category"></el-table-column>
-    <el-table-column prop="contexts" label="Context"></el-table-column>
-    <el-table-column prop="generateTime" label="Generate Time"></el-table-column>
-    <el-table-column prop="submitTime" label="Submit Time"></el-table-column>
-    <el-table-column prop="duration" label="Time Taken"></el-table-column>
-  </el-table>
 </template>
 
 <script>
@@ -27,6 +72,7 @@ import icon from '@/assets/user.svg';
 import { ElTable, ElTableColumn } from 'element-plus';
 import axios from 'axios';
 import Nava from "@/components/nav.vue";
+
 export default {
   name: 'LineChart',
   components: {
@@ -38,7 +84,8 @@ export default {
     return {
       logo, // Bind logo to the data
       icon,
-      tableData: [] // Initial empty array for table data
+      tableData: [], // Initial empty array for table data
+      selectedCategory: '', // For the dropdown selection
     };
   },
   mounted() {
@@ -109,11 +156,37 @@ export default {
         this.myChart.resize(); // Resize the chart when window size changes
       }
     },
+    // Helper method to format timestamp
+    formatTimestamp(timestamp) {
+      if (!timestamp) return '';
+      const date = new Date(timestamp);
+      const options = {timeZone: 'Australia/Sydney', hour12: false};
+      const formattedDate = date.toLocaleDateString('en-AU', options); // Format date
+      const formattedTime = date.toLocaleTimeString('en-AU', options); // Format time
+      return `${formattedDate}<br>${formattedTime}`; // Combine with line break
+    },
   },
 };
 </script>
 
 <style scoped>
+/* Ensure the main container stacks elements vertically */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Adds space between each block element */
+}
+
+/* .sub-nav should be properly spaced above the table */
+.sub-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 80px;
+  margin-right: 80px;
+  font-size: 10px;
+}
+
 #selection {
   display: inline-block;
   justify-content: right;
@@ -121,31 +194,22 @@ export default {
   background-color: #e9e9e9;
   border-radius: 5px;
   border: 1px solid transparent;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   transition: transform 0.3s ease;
+  padding: 10px;
 }
-#selection:after {
-  border: 1px solid transparent;
-}
-#selection:hover {
-  border: 1px solid transparent;
-}
+
 .chart-container {
-  width: 100vw; /* 100% of the viewport width */
-  height: 50vh; /* 50% of the viewport height */
-  margin: 0 auto; /* Center the chart */
+  width: 100vw;
+  height: 50vh;
 }
-button {
-  margin-left: 4%;
-  align-content: center;
-  width: 12%;
-}
+
 .table {
   width: 100%;
-  margin: 0 auto;
   font-size: 18px;
 }
+
 /* Deep selector to ensure stripes appear even with scoped styles */
 :deep(.el-table__row:nth-child(odd)) {
   background-color: #f1f7ef;
@@ -160,6 +224,4 @@ button {
   vertical-align: middle !important;
   padding: 20px;
 }
-
-/* Target each cell for extra padding and alignment */
 </style>

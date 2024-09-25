@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Homepage/Topic/Topic.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Homepage/Topic/Topic.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,6 +180,7 @@
       <workItem from="1727020903378" duration="103000" />
       <workItem from="1727063013971" duration="12225000" />
       <workItem from="1727096359546" duration="9010000" />
+      <workItem from="1727230531590" duration="5577000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />

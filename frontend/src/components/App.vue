@@ -64,6 +64,7 @@ export default {
       isLoading: false, // Add loading state
       ipAddress: '',
       generateTime: null,
+      submitTime: null,
     };
   },
   methods: {
@@ -78,8 +79,14 @@ export default {
       this.submittedData = data;
       console.log('Submitted data in App:', data);
 
-      const submitTime = new Date();
-      const durationInMillis = submitTime - this.startTime; // Duration in milliseconds
+      const submitTime1= new Date();
+
+      // Convert to Australia/Sydney time (adjust for your region if needed)
+      this.submitTime = new Date(
+          submitTime1.toLocaleString('en-US', { timeZone: 'Australia/Sydney' })
+      );
+
+      const durationInMillis = this.submitTime - this.startTime;
 
       // Convert the duration to hh:mm:ss format
       const duration = this.formatDuration(durationInMillis);
@@ -88,14 +95,15 @@ export default {
         ipAddress: this.ipAddress,
         correctness: data.stdout ? 1 : 0,
         topicCategory: this.$route.query.topicTitle,
-        duration: duration, // Now in hh:mm:ss format
+        duration: duration,
         contexts: this.$route.query.contextTitle,
-        submitTime: this.formatDate(submitTime),
+        submitTime: this.submitTime, // Use Australian time
         generateTime: this.generateTime
       };
 
       this.sendDataToBackend(submissionData);
     },
+
 
 // New method to format duration as hh:mm:ss
     formatDuration(durationInMillis) {
@@ -159,7 +167,10 @@ export default {
     },
   },
   mounted() {
-    this.generateTime = new Date();
+    const now = new Date();
+    this.generateTime = new Date(
+        now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' })
+    );
 
     // Fetch IP address
     axios.get('https://api.ipify.org?format=json')
@@ -215,6 +226,7 @@ body {
   position: relative;
   flex-grow: 1;
   width: 60%;
+  height: 100%;
 }
 
 .overlay {

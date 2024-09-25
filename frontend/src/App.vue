@@ -226,6 +226,7 @@ body {
   position: relative;
   flex-grow: 1;
   width: 60%;
+  height: 100%;
 }
 
 .overlay {

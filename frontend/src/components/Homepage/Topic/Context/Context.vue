@@ -39,8 +39,9 @@ export default {
     }
   },
   mounted() {
-    const topicTitle = encodeURIComponent(this.$route.query.formattedTitle);
-    console.log(topicTitle)
+    const topicTitle = encodeURIComponent(this.$route.query.formattedTitle).replaceAll('%2F', '%252F');
+    console.log(topicTitle);
+
     if (topicTitle) {
       axios
           .get(`http://localhost:8080/topics/contexts/${topicTitle}`)
@@ -52,7 +53,7 @@ export default {
           });
     }
   }
-};
+}
 </script>
 
 <style scoped>

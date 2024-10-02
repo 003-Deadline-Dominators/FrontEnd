@@ -2,17 +2,6 @@
   <Nava :show-context="false" :show-dashboard="false" :show-selected="false" />
 
   <div class="card-container">
-    <div class="sub-nav-wrapper">
-      <div class="sub-nav">
-        <label for="selection">Sort By:</label>
-        <select v-model="selectedCategory" @change="filterCards" id="selection">
-          <option value="">All categories</option>
-          <option value="Algorithm">Algorithm</option>
-          <option value="Unsupervised">Unsupervised</option>
-          <option value="Supervised">Supervised</option>
-        </select>
-      </div>
-    </div>
     <div class="cards-wrapper">
       <div
           v-for="(card, index) in filteredCards"
@@ -22,6 +11,18 @@
       >
         <h2 class="card-title">{{ card.topicTitle }}</h2>
         <span>{{ card.topicDescription }}</span>
+        <star-rating class="rating"
+            :rating=card.rating
+            :read-only="true"
+            active-color="#FFA82B"
+            inactive-color="#EAEBFC"
+            :star-size="24"
+            padding=1
+            :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"
+            :show-rating="false"
+            >
+
+        </star-rating>
       </div>
     </div>
   </div>
@@ -30,46 +31,43 @@
 <script>
 import axios from "axios";
 import Nava from "@/components/nav.vue";
-
+import StarRating from 'vue-star-rating'
 export default {
-  name: 'Topic',
+  name: "Topic",
   components: {
     Nava,
+    StarRating,
   },
   data() {
     return {
       cards: [],
-
-      selectedCategory: '',
+      selectedCategory: "",
     };
   },
   computed: {
     filteredCards() {
       if (!this.selectedCategory) return this.cards;
-      return this.cards.filter(card => card.category === this.selectedCategory);
-    }
+      return this.cards.filter((card) => card.category === this.selectedCategory);
+    },
   },
   methods: {
     goToContext(topicTitle) {
-      this.$router.push({ name: 'Context', query: { formattedTitle: topicTitle  } });
-    },
-    filterCards() {
-      // This method is called when the select value changes
-      // The filtering is handled by the computed property
+      this.$router.push({ name: "Context", query: { formattedTitle: topicTitle } });
     },
     async fetchTopics() {
       try {
-        const response = await axios.get('http://localhost:8080/topics/all');
+        const response = await axios.get("http://localhost:8080/topics/all");
         this.cards = response.data;
+        console.log(this.cards);
       } catch (error) {
         console.error("Error fetching data:", error);
         alert("Failed to load data. Please try again later.");
       }
-    }
+    },
   },
   mounted() {
     this.fetchTopics();
-  }
+  },
 };
 </script>
 
@@ -131,18 +129,16 @@ export default {
   font-size: 20px;
 }
 
-select {
-  font-size: 20px;
-  border: none;
-  background-color: #e9e9e9;
-  margin-left: 10px;
-}
-
 span {
   display: block;
   margin-top: 10px;
 }
+
+.rating {
+  margin-top: 20px;
+}
 </style>
+
 
 <style>
 body {

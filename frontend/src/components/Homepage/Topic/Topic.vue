@@ -78,37 +78,24 @@ export default {
   flex-direction: column;
   background-color: #F6F6F6;
   box-sizing: border-box;
-}
-
-.sub-nav-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px;
-  height: 6vh;
-}
-
-.sub-nav {
-  display: inline-block;
-  padding: 10px;
-  background-color: #e9e9e9;
-  border-radius: 10px;
-  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .cards-wrapper {
+  margin-top: 44px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   overflow-y: auto;
-  margin-left: 100px;
+  margin-left: 50px;
 }
 
 .card {
   background: linear-gradient(174deg, rgba(197,218,248,1) 0%, rgba(255,255,255,1) 30%);
   padding: 20px;
   border-radius: 5px;
-  width: calc(28%);
-  margin: 20px;
+  width: calc(26%);
+  margin: 10px 40px 10px 40px;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
@@ -139,9 +126,8 @@ span {
 }
 </style>
 
-
 <style>
 body {
-  background-color: #F6F6F6;
+  background-color: #F6F6F6 !important;
 }
 </style>

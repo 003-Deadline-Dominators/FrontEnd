@@ -5,9 +5,7 @@
       <h1>Answer in the last seven days</h1>
       <select v-model="selectedCategory" @change="filterCards" id="selection">
         <option value="">All topics</option>
-        <option value="Algorithm"></option>
-        <option value="Unsupervised">Unsupervised</option>
-        <option value="Supervised">Supervised</option>
+        <option v-for="topic in topics" :key="topic.id" :value="topic.name">{{ topic.topicTitle }}</option>
       </select>
     </div>
 
@@ -85,8 +83,12 @@ export default {
       logo, // Bind logo to the data
       icon,
       tableData: [], // Initial empty array for table data
-      selectedCategory: '', // For the dropdown selection
+      selectedCategory: '',
+      topics: [], // Add this property to store the topics
     };
+  },
+  async created() {
+    await this.fetchTopics(); // Fetch topics when the component is created
   },
   mounted() {
     this.fetchTableData();
@@ -97,6 +99,15 @@ export default {
     window.removeEventListener('resize', this.resizeChart);
   },
   methods: {
+    async fetchTopics() {
+      try {
+        const response = await axios.get('http://localhost:8080/topics/all');
+        this.topics = response.data; // Assuming the response data contains an array of topics
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        alert("Failed to load data. Please try again later.");
+      }
+    },
     async fetchTableData() {
       try {
         const response = await axios.get('http://localhost:8080/admin/all'); // Fetch data from the backend

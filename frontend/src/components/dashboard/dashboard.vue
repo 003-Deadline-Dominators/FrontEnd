@@ -1,17 +1,17 @@
 <template>
   <div class="container">
     <nava :show-context="false" :show-selected="false"/>
-    <div class = "chart-container">
+    <div class="chart-container">
       <div class="sub-nav">
         <h1>Answer in the last seven days</h1>
-        <select v-model="selectedCategory" @change="filterCards" id="selection">
+        <select v-model="selectedTopic" @change="filterCards" id="selection">
           <option value="">All topics</option>
-          <option v-for="topic in topics" :key="topic.id" :value="topic.name">{{ topic.topicTitle }}</option>
+          <option v-for="topic in topics" :key="topic.id" :value="topic.topicTitle">{{ topic.topicTitle }}</option>
         </select>
       </div>
 
       <!-- Chart container -->
-        <div ref="chartContainer" class="chart-container"></div>
+      <div ref="chartContainer" class="chart-container"></div>
     </div>
     <!-- Table for displaying data -->
     <el-table :data="tableData" stripe class="table">
@@ -35,20 +35,20 @@
           </div>
         </template>
       </el-table-column>
-        <el-table-column>
-          <template #header>
-            <div>
-              submit Time<br>
-              <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
-            </div>
-          </template>
-          <template #default="scope">
-            <div>
-              <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[0]"></span><br>
-              <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[1]"></span>
-            </div>
-          </template>
-        </el-table-column>
+      <el-table-column>
+        <template #header>
+          <div>
+            submit Time<br>
+            <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
+          </div>
+        </template>
+        <template #default="scope">
+          <div>
+            <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[0]"></span><br>
+            <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[1]"></span>
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column>
         <template #header>
           <div>
@@ -66,7 +66,7 @@
 
 <script>
 import * as echarts from 'echarts';
-import logo from '@/assets/logo.svg';   // Import logo
+import logo from '@/assets/logo.svg';
 import icon from '@/assets/user.svg';
 import { ElTable, ElTableColumn } from 'element-plus';
 import axios from 'axios';
@@ -81,20 +81,22 @@ export default {
   },
   data() {
     return {
-      logo, // Bind logo to the data
+      logo,
       icon,
-      tableData: [], // Initial empty array for table data
-      selectedCategory: '',
-      topics: [], // Add this property to store the topics
+      selectedTopic: '', // Ensure this is initialized properly
+      topics: [],
+      tableData: [],
+      chartData: [],
     };
   },
   async created() {
-    await this.fetchTopics(); // Fetch topics when the component is created
+    await this.fetchTopics();
   },
   mounted() {
-    this.fetchTableData();
-    this.initChart();
-    window.addEventListener('resize', this.resizeChart); // Handle resizing of the chart when the window size changes
+    this.fetchTableData().then(() => {
+      this.initChart();
+    });
+    window.addEventListener('resize', this.resizeChart);
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.resizeChart);
@@ -103,7 +105,7 @@ export default {
     async fetchTopics() {
       try {
         const response = await axios.get('http://localhost:8080/topics/all');
-        this.topics = response.data; // Assuming the response data contains an array of topics
+        this.topics = response.data;
       } catch (error) {
         console.error("Error fetching data:", error);
         alert("Failed to load data. Please try again later.");
@@ -111,18 +113,47 @@ export default {
     },
     async fetchTableData() {
       try {
-        const response = await axios.get('http://localhost:8080/admin/all'); // Fetch data from the backend
-        this.tableData = response.data; // Assign the retrieved data to tableData
+        const response = await axios.get('http://localhost:8080/admin/all');
+        this.tableData = response.data;
         console.log('Table data:', this.tableData);
       } catch (error) {
         console.error('Error fetching table data:', error);
       }
     },
+    async fetchChartData() {
+      try {
+        const response = await axios.get(`http://localhost:8080/admin/selectNumberOfQuestions`);
+        this.chartData = response.data;
+        console.log(this.chartData)
+        this.updateChart();
+      } catch (error) {
+        console.error('Error fetching chart data:', error);
+      }
+    },
+    async fetchChartDataFromTopic() {
+      try {
+        const response = await axios.get(`http://localhost:8080/admin/selectNumberOfQuestions/${this.selectedTopic}`);
+        this.chartData = response.data;
+        console.log(this.chartData)
+        this.updateChart();
+      } catch (error) {
+        console.error('Error fetching chart data:', error);
+      }
+    },
+    filterCards() {
+      console.log(this.selectedTopic);
+      if (this.selectedTopic === '' || this.selectedTopic === 'All topics') {
+        this.fetchChartData();
+      } else {
+        this.fetchChartDataFromTopic();
+      }
+    },
     initChart() {
       const chartDom = this.$refs.chartContainer;
       this.myChart = echarts.init(chartDom);
-
-      // Get past 7 days based on Sydney time
+      this.fetchChartData();
+    },
+    updateChart() {
       const days = [];
       const options = { timeZone: 'Australia/Sydney', year: 'numeric', month: 'short', day: 'numeric' };
       for (let i = 6; i >= 0; i--) {
@@ -152,15 +183,15 @@ export default {
         },
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: this.chartData,
             type: 'line',
             areaStyle: {
               color: {
-                type: 'linear', // Type of gradient: 'linear', 'radial'
-                x: 0, y: 0, x2: 0, y2: 1, // Gradient direction (x, y, x2, y2 define start and end points)
+                type: 'linear',
+                x: 0, y: 0, x2: 0, y2: 1,
                 colorStops: [
-                  { offset: 0, color: '#b8f5aa' }, // Start color
-                  { offset: 1, color: 'white' }  // End color
+                  { offset: 0, color: '#b8f5aa' },
+                  { offset: 1, color: 'white' }
                 ]
               }
             },
@@ -172,31 +203,28 @@ export default {
 
       this.myChart.setOption(option);
     },
-
     resizeChart() {
       if (this.myChart) {
-        this.myChart.resize(); // Resize the chart when window size changes
+        this.myChart.resize();
       }
     },
-    // Helper method to format timestamp
     formatTimestamp(timestamp) {
       if (!timestamp) return '';
       const date = new Date(timestamp);
       const options = {timeZone: 'Australia/Sydney', hour12: false};
-      const formattedDate = date.toLocaleDateString('en-AU', options); // Format date
-      const formattedTime = date.toLocaleTimeString('en-AU', options); // Format time
-      return `${formattedDate}<br>${formattedTime}`; // Combine with line break
+      const formattedDate = date.toLocaleDateString('en-AU', options);
+      const formattedTime = date.toLocaleTimeString('en-AU', options);
+      return `${formattedDate}<br>${formattedTime}`;
     },
   },
 };
 </script>
 
 <style scoped>
-/* Ensure the main container stacks elements vertically */
 .container {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Adds space between each block element */
+  gap: 20px;
 }
 .chart-container {
   display: flex;
@@ -207,8 +235,6 @@ export default {
   margin-top: 10px;
   border-radius: 10px;
 }
-
-/* .sub-nav should be properly spaced above the table */
 .sub-nav {
   display: flex;
   justify-content: space-between;
@@ -218,7 +244,6 @@ export default {
   font-size: 10px;
   background-color: white;
 }
-
 #selection {
   margin-top: 30px;
   display: inline-block;
@@ -232,24 +257,18 @@ export default {
   padding: 10px;
   width: 150px;
 }
-
-
 .table {
   width: 100%;
   font-size: 18px;
   margin-top: 30px;
   background-color: white;
 }
-
-/* Deep selector to ensure stripes appear even with scoped styles */
 :deep(.el-table__row:nth-child(odd)) {
   background-color: #f1f7ef;
 }
-
 :deep(.el-table__row:nth-child(even)) {
   background-color: #fff;
 }
-
 :deep(.el-table__cell) {
   text-align: center;
   vertical-align: middle !important;
@@ -258,7 +277,7 @@ export default {
 </style>
 
 <style>
-  body{
-    background-color: #F6F6F6 !important;
-  }
+body {
+  background-color: #F6F6F6 !important;
+}
 </style>

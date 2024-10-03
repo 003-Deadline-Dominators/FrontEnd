@@ -141,20 +141,26 @@
     font-size: 20px;
     cursor: pointer;
     width: 100%;
+    transition-duration: 0.4s;
   }
 
   #start {
     background-color: #cbf4b1;
   }
 
-  #selected {
+  #start:hover {
+    background-color: #96EA63;
+  }
+  #context:hover {
     background-color: #79e538;
   }
 
   #context {
     background-color: #96EA63;
   }
-
+  #selected {
+    background-color: #79e538;
+  }
   #dashboard {
     position: absolute;
     right: 350px;

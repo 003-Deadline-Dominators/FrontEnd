@@ -1,8 +1,5 @@
 <template>
-    <div class="nav">
-      <img :src="logo" alt="Logo">
-      <button id="admin">admin login</button>
-    </div>
+    <Nava :showModule="false" :show-context="false" :show-dashboard="false" :show-selected="false" />
     <div class="start">
       <div class="welcome-wrapper">
         <h1 class = "welcome">Welcome to CodeCraft</h1>
@@ -43,7 +40,7 @@ export default {
 </script>
 
 <script setup>
-import logo from '../../assets/logo.svg';
+import Nava from '@/components/nav.vue';
 import { ref } from 'vue';
 
 const targetSection = ref(null);
@@ -60,13 +57,6 @@ const scrollToSection = () => {
 <style scoped>
 /* Your styles here */
 /* Removed the universal selector that was setting the background to white */
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2%;
-  background-color: white;
-}
 .nav button {
   padding: 10px;
 }
@@ -88,6 +78,16 @@ const scrollToSection = () => {
   width: 30%;
   margin-left: 5%;
 }
+#start{
+  border-style: solid;
+  border-color: #d9d9d9;
+  border-width: 1px;
+  transition: background-color 0.3s ease;
+}
+
+#start:hover{
+  background-color: #79e538;
+}
 
 .welcome{
   text-shadow: 4px 4px #eeeeee;
@@ -106,15 +106,15 @@ button{
   padding: 10px;
   margin-left: 5%;
 }
-button#admin{
-  margin-bottom: 2%;
-  right: 0;
-}
 button#learn{
   background-color: white;
   border-style: solid;
   border-color: #d9d9d9;
   border-width: 1px;
+  transition: background-color 0.3s ease;
+}
+button#learn:hover{
+  background-color: #96ea63;
 }
 .content-wrapper{
   background-color: white; /* If you want the content wrapper to have a white background */

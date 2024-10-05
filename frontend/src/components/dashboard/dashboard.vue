@@ -13,54 +13,69 @@
       <!-- Chart container -->
       <div ref="chartContainer" class="chart-container"></div>
     </div>
-    <!-- Table for displaying data -->
-    <el-table :data="tableData" stripe class="table">
-      <el-table-column prop="ipAddress" label="IP Address"></el-table-column>
-      <el-table-column prop="correctness" label="Correctness"></el-table-column>
-      <el-table-column prop="topicCategory" label="Topic Category"></el-table-column>
-      <el-table-column prop="contexts" label="Context"></el-table-column>
+    <div class="table-container">
+      <img :src="expand" class="expand-icon" @click="expandTable">
+      <!-- Table for displaying data -->
+      <el-table :data="paginatedData" stripe class="table">
 
-      <!-- Formatted timestamps -->
-      <el-table-column>
-        <template #header>
-          <div>
-            Generate Time<br>
-            <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
-          </div>
-        </template>
-        <template #default="scope">
-          <div>
-            <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[0]"></span><br>
-            <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[1]"></span>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column>
-        <template #header>
-          <div>
-            submit Time<br>
-            <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
-          </div>
-        </template>
-        <template #default="scope">
-          <div>
-            <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[0]"></span><br>
-            <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[1]"></span>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column>
-        <template #header>
-          <div>
-            Time Taken<br>
-            <span style="font-size: 12px; color: #888;">(hr:min:sec)</span>
-          </div>
-        </template>
-        <template #default="scope">
-          <span>{{ scope.row.duration }}</span> <!-- Display duration as is -->
-        </template>
-      </el-table-column>
-    </el-table>
+        <el-table-column prop="ipAddress" label="IP Address"></el-table-column>
+        <el-table-column prop="correctness" label="Correctness"></el-table-column>
+        <el-table-column prop="topicCategory" label="Topic Category"></el-table-column>
+        <el-table-column prop="contexts" label="Context"></el-table-column>
+
+        <!-- Formatted timestamps -->
+        <el-table-column>
+          <template #header>
+            <div>
+              Generate Time<br>
+              <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
+            </div>
+          </template>
+          <template #default="scope">
+            <div>
+              <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[0]"></span><br>
+              <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[1]"></span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column>
+          <template #header>
+            <div>
+              submit Time<br>
+              <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
+            </div>
+          </template>
+          <template #default="scope">
+            <div>
+              <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[0]"></span><br>
+              <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[1]"></span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column>
+          <template #header>
+            <div>
+              Time Taken<br>
+              <span style="font-size: 12px; color: #888;">(hr:min:sec)</span>
+            </div>
+          </template>
+          <template #default="scope">
+            <span>{{ scope.row.duration }}</span> <!-- Display duration as is -->
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- Pagination component -->
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="10"
+          :page-size="pageSize"
+          layout="prev, pager, next"
+          :total="tableData.length"
+          class="custom-pagination">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -68,26 +83,38 @@
 import * as echarts from 'echarts';
 import logo from '@/assets/logo.svg';
 import icon from '@/assets/user.svg';
-import { ElTable, ElTableColumn } from 'element-plus';
+import { ElTable, ElTableColumn, ElPagination } from 'element-plus';
 import axios from 'axios';
 import Nava from "@/components/nav.vue";
+import expand from "@/assets/dashboard/expand.svg";
 
 export default {
   name: 'LineChart',
   components: {
     ElTable,
     ElTableColumn,
+    ElPagination,
     Nava,
   },
   data() {
     return {
       logo,
       icon,
+      expand,
       selectedTopic: '', // Ensure this is initialized properly
       topics: [],
       tableData: [],
       chartData: [],
+      currentPage: 1,
+      pageSize: 10,
     };
+  },
+  computed: {
+    paginatedData() {
+      const start = (this.currentPage - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      return this.tableData.slice(start, end);
+    },
   },
   async created() {
     await this.fetchTopics();
@@ -216,6 +243,13 @@ export default {
       const formattedTime = date.toLocaleTimeString('en-AU', options);
       return `${formattedDate}<br>${formattedTime}`;
     },
+    handleSizeChange(val) {
+      this.pageSize = val;
+      this.currentPage = 1;
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+    },
   },
 };
 </script>
@@ -263,6 +297,51 @@ export default {
   margin-top: 30px;
   background-color: white;
 }
+
+.custom-pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:deep(.el-pager) {
+  display: flex;
+  flex-direction: row;
+}
+
+:deep(.el-pager li) {
+  display: inline-block;
+  list-style-type: none;
+  cursor: pointer;
+  align-content: center;
+  margin: 0 16px;
+  background-color: #0E927A;
+  color: #203B54;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0 4px;
+  transition: all .3s;
+}
+
+:deep(.btn-prev),
+:deep(.btn-next) {
+  display: flex;
+  justify-content: center;
+  background-color: #CFE9E4;
+  color: #203B54;
+  border-radius: 2px;
+  padding: 0 6px;
+  transition: all .3s;
+}
+
+:deep(.btn-prev:hover),
+:deep(.btn-next:hover),
+:deep(.el-pager li:hover) {
+  color: white;
+}
+
 :deep(.el-table__row:nth-child(odd)) {
   background-color: #f1f7ef;
 }

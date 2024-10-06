@@ -310,36 +310,60 @@ export default {
   flex-direction: row;
 }
 
+:deep(.el-pager li.is-active.number) {
+  background-color: #0E927A;
+  color: white;
+}
+
 :deep(.el-pager li) {
   display: inline-block;
   list-style-type: none;
   cursor: pointer;
   align-content: center;
+  text-align: center;
   margin: 0 16px;
-  background-color: #0E927A;
   color: #203B54;
   width: 30px;
   height: 30px;
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 0 4px;
   transition: all .3s;
 }
 
-:deep(.btn-prev),
-:deep(.btn-next) {
+:deep(.el-icon) {
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: #CFE9E4;
   color: #203B54;
   border-radius: 2px;
   padding: 0 6px;
   transition: all .3s;
+  width: 20px;
+  height: 30px;
+  font-size: 12px;
 }
 
-:deep(.btn-prev:hover),
-:deep(.btn-next:hover),
+:deep(.el-icon:hover) {
+  background-color: #0E927A;
+  color: white;
+  border-radius: 2px;
+  padding: 0 6px;
+  transition: all .3s;
+}
+
+:deep(.btn-prev),
+:deep(.btn-next){
+  border-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 2px;
+}
+
+
 :deep(.el-pager li:hover) {
   color: white;
+  background-color: #0E927A;
 }
 
 :deep(.el-table__row:nth-child(odd)) {

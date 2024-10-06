@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="added predefined difficulty and completeness to topic and context interface">
+    <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="trialing pagination bar on dashboard.vue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Homepage/intro.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Homepage/intro.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/nav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/nav.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "howard",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets/dashboard",
+    "last_opened_file_path": "C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets/intro",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,11 +81,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\intro" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\dashboard" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\Topic" />
       <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets\Topic\Context\Question" />
       <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets\Topic" />
-      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src" />
@@ -191,7 +191,8 @@
       <workItem from="1727839435021" duration="23440000" />
       <workItem from="1727930798093" duration="10382000" />
       <workItem from="1728020438927" duration="3637000" />
-      <workItem from="1728127906809" duration="10889000" />
+      <workItem from="1728127906809" duration="11094000" />
+      <workItem from="1728198721003" duration="15510000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />
@@ -313,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727872613576</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="trialing pagination bar on dashboard.vue">
+      <option name="closed" value="true" />
+      <created>1728145629382</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1728145629382</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,6 +342,7 @@
     <MESSAGE value="incomplete version of codeEditor.vue, stuck on data transportation when sending IDE feedback from backend to frontend" />
     <MESSAGE value="functional IDE response from the backend to frontend" />
     <MESSAGE value="added predefined difficulty and completeness to topic and context interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="added predefined difficulty and completeness to topic and context interface" />
+    <MESSAGE value="trialing pagination bar on dashboard.vue" />
+    <option name="LAST_COMMIT_MESSAGE" value="trialing pagination bar on dashboard.vue" />
   </component>
 </project>

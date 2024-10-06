@@ -9,17 +9,21 @@
     <div class="button-and-image-container">
       <button v-if="showDashboard" @click="goToDashboard" id="dashboard" :class="{'active': isDashboardRoute, 'inactive': !isDashboardRoute}">Dashboard</button>
       <div class="image-input-container">
-        <img :src="currentIcon" @click="toggleInput"
+        <img :src="currentIcon" @click="toggleInputOrLogout"
              alt="Clickable image"
              style="cursor: pointer;" class="clickable-image">
-        <input
-            v-if="showInput"
-            v-model="inputValue"
-            type="text"
-            placeholder="🔑：please enter password"
-            class="input-field"
-            @keyup.enter="checkPasscode"
-        />
+        <!-- Display the input field only if not logged in and if globally allowed -->
+        <div v-if="!isLoggedIn && showInput && showInputGlobally" class="input-wrapper">
+          <input
+              v-model="inputValue"
+              type="text"
+              placeholder="🔑：please enter password"
+              class="input-field"
+              @keyup.enter="checkPasscode"
+          />
+        </div>
+        <!-- Display the logout button only if logged in and logout button is toggled -->
+        <button v-if="isLoggedIn && showLogoutButton" @click="logout" class="logout-button">Log out</button>
       </div>
     </div>
   </div>
@@ -29,6 +33,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import logo from '@/assets/logo.svg';
 import user from '@/assets/user.svg';
+import icon from '@/assets/icon.svg';
 
 export default {
   name: 'nav',
@@ -50,18 +55,20 @@ export default {
     return {
       logo,
       user,
+      icon,
       showInput: false,
       inputValue: '',
+      showLogoutButton: false, // New state to control the visibility of the logout button
     }
   },
   computed: {
-    ...mapGetters(['showDashboard', 'currentIcon']),
+    ...mapGetters(['showDashboard', 'currentIcon', 'showInputGlobally', 'isLoggedIn']),
     isDashboardRoute() {
       return this.$route.path === '/dashboard';
     }
   },
   methods: {
-    ...mapActions(['toggleDashboard', 'updateIcon']),
+    ...mapActions(['toggleDashboard', 'updateIcon', 'toggleShowInputGlobally', 'setIsLoggedIn']),
     goToTopic() {
       this.$router.push('/topic');
     },
@@ -73,8 +80,12 @@ export default {
         }
       });
     },
-    toggleInput() {
-      this.showInput = !this.showInput;
+    toggleInputOrLogout() {
+      if (!this.isLoggedIn && this.showInputGlobally) {
+        this.showInput = !this.showInput;
+      } else if (this.isLoggedIn) {
+        this.showLogoutButton = !this.showLogoutButton; // Toggle the logout button visibility when logged in
+      }
     },
     goToHomepage() {
       this.$router.push('/');
@@ -84,17 +95,31 @@ export default {
     },
     checkPasscode() {
       if (this.inputValue === "passcode") {
-        this.toggleDashboard(true);
-        this.updateIcon(user);
-        this.$router.push('/dashboard');
+        this.login();
       } else {
         alert("Incorrect passcode");
       }
+      this.inputValue = '';
+    },
+    login() {
+      this.setIsLoggedIn(true);
+      this.showInput = false;
+      this.toggleDashboard(true);
+      this.updateIcon(this.user);
+      this.toggleShowInputGlobally(false); // Hide input globally when logged in
+      this.$router.push('/dashboard');
+    },
+    logout() {
+      this.setIsLoggedIn(false);
+      this.toggleDashboard(false); // Hide dashboard button
+      this.updateIcon(this.icon); // Set icon back to default
+      this.toggleShowInputGlobally(true); // Show input globally when logged out
+      this.showLogoutButton = false; // Hide the logout button
+      this.$router.push('/'); // Redirect to homepage
     },
   }
 }
 </script>
-
 <style scoped>
 .logo {
   width: 195px;
@@ -134,9 +159,11 @@ export default {
 
 .input-field {
   position: absolute;
-  margin-top: 70px;
-  width: 100%;
-  max-width: 180px;
+  right: 60px;
+  margin-top: 6px;
+  width: 180px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 button {
@@ -187,5 +214,19 @@ button.inactive {
 
 button.inactive:hover {
   background-color: #96EA63 !important;
+}
+.logout-button {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 200px;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 60px;
+  background-color: #96EA63;
+}
+
+.logout-button:hover {
+  background-color: red;
+  color: white;
 }
 </style>

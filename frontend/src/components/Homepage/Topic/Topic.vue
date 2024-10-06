@@ -8,21 +8,28 @@
           :key="index"
           class="card"
           @click="goToContext(card.topicTitle)"
+          :style="{
+          background: card.colorPair.background,
+        }"
       >
-        <h2 class="card-title">{{ card.topicTitle }}</h2>
+        <h2
+            class="card-title"
+            :style="{ color: card.colorPair.titleColor }"
+        >
+          {{ card.topicTitle }}
+        </h2>
         <span>{{ card.topicDescription }}</span>
-        <star-rating class="rating"
-            :rating=card.rating
+        <star-rating
+            class="rating"
+            :rating="card.rating"
             :read-only="true"
             active-color="#FFA82B"
             inactive-color="#EAEBFC"
             :star-size="24"
-            padding=1
-            :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"
+            padding="1"
+            :star-points="[23, 2, 14, 17, 0, 19, 10, 34, 7, 50, 23, 43, 38, 50, 36, 34, 46, 19, 31, 17]"
             :show-rating="false"
-            >
-
-        </star-rating>
+        ></star-rating>
       </div>
     </div>
   </div>
@@ -31,7 +38,8 @@
 <script>
 import axios from "axios";
 import Nava from "@/components/nav.vue";
-import StarRating from 'vue-star-rating'
+import StarRating from 'vue-star-rating';
+
 export default {
   name: "Topic",
   components: {
@@ -42,12 +50,38 @@ export default {
     return {
       cards: [],
       selectedCategory: "",
+      colorPairs: [
+        {
+          background: "linear-gradient(174deg, rgba(197,218,248,1) 0%, rgba(255,255,255,1) 30%)",
+          titleColor: "#257efa"
+        },
+        {
+          background: "linear-gradient(174deg, rgba(255,212,203,1) 0%, rgba(255,255,255,1) 30%)",
+          titleColor: "#FF5630"
+        },
+        {
+          background: "linear-gradient(174deg, rgba(255,213,127,1) 0%, rgba(255,255,255,1) 30%)",
+          titleColor: "#FFAB00"
+        },
+        {
+          background: "linear-gradient(174deg, rgba(198,241,219,1) 0%, rgba(255,255,255,1) 30%)",
+          titleColor: "#1EC772"
+        },
+        {
+          background: "linear-gradient(174deg, rgba(81,86,92,0.9) 0%, rgba(255,255,255,1) 30%)",
+          titleColor: "#171D26"
+        },
+        {
+          background: "linear-gradient(174deg, rgba(190,171,245,1) 0%, rgba(255,255,255,1) 30%)",
+          titleColor: "#8260E6"
+        }
+      ],
     };
   },
   computed: {
     filteredCards() {
       if (!this.selectedCategory) return this.cards;
-      return this.cards.filter((card) => card.category === this.selectedCategory);
+      return this.cards.filter(card => card.category === this.selectedCategory);
     },
   },
   methods: {
@@ -58,6 +92,13 @@ export default {
       try {
         const response = await axios.get("http://localhost:8080/topics/all");
         this.cards = response.data;
+
+        // Assign color pairs in order to each card
+        this.cards.forEach((card, index) => {
+          const colorIndex = index % this.colorPairs.length; // Ensure index wraps around
+          card.colorPair = this.colorPairs[colorIndex];
+        });
+
         console.log(this.cards);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -91,11 +132,10 @@ export default {
 }
 
 .card {
-  background: linear-gradient(174deg, rgba(197,218,248,1) 0%, rgba(255,255,255,1) 30%);
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
-  width: calc(26%);
-  margin: 10px 40px 10px 40px;
+  width: calc(27.5%);
+  margin: 20px 30px;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
@@ -107,18 +147,19 @@ export default {
 }
 
 .card-title {
-  color: #257efa;
   background-color: white;
   border-radius: 5px;
   display: inline-block;
   padding: 4px;
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 span {
   display: block;
   margin-top: 10px;
+  font-size: 15px;
+  padding: 10px;
 }
 
 .rating {

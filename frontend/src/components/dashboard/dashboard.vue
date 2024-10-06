@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <nava :show-context="false" :show-selected="false"/>
-    <div class="chart-container">
+    <div v-show="isChartVisible" class="chart-container">
       <div class="sub-nav">
         <h1>Answer in the last seven days</h1>
         <select v-model="selectedTopic" @change="filterCards" id="selection">
@@ -107,6 +107,7 @@ export default {
       chartData: [],
       currentPage: 1,
       pageSize: 10,
+      isChartVisible: true,
     };
   },
   computed: {
@@ -129,6 +130,9 @@ export default {
     window.removeEventListener('resize', this.resizeChart);
   },
   methods: {
+    expandTable() {
+      this.isChartVisible = !this.isChartVisible; // Toggle the value
+    },
     async fetchTopics() {
       try {
         const response = await axios.get('http://localhost:8080/topics/all');
@@ -249,6 +253,7 @@ export default {
     },
     handleCurrentChange(val) {
       this.currentPage = val;
+      window.scrollTo(0, 0);
     },
   },
 };
@@ -291,8 +296,36 @@ export default {
   padding: 10px;
   width: 150px;
 }
+
+.expand-icon {
+  display: flex;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: 30px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  transition: transform 0.5s;
+}
+
+.expand-icon:hover {
+  transform: scale(1.4);
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  margin-top: 10px;
+  border-radius: 10px;
+}
 .table {
-  width: 100%;
+  display: flex;
+  width: 95%;
+  flex-direction: column;
+  margin-left: 2%;
+  margin-right: 2%;
   font-size: 18px;
   margin-top: 30px;
   background-color: white;
@@ -365,12 +398,20 @@ export default {
   color: white;
   background-color: #0E927A;
 }
+:deep(.is-leaf.el-table__cell) {
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-image-source: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 50%);
+  border-image-slice: 1;
+}
 
 :deep(.el-table__row:nth-child(odd)) {
   background-color: #f1f7ef;
 }
+
 :deep(.el-table__row:nth-child(even)) {
-  background-color: #fff;
+  background-color: #FFFFFF;
 }
 :deep(.el-table__cell) {
   text-align: center;

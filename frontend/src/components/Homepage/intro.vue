@@ -57,7 +57,9 @@
           <p>Follow one-step login by clicking ‘Admin Login’ and entering password. It will get you into the dashboard containing all meaningful information for analyzing students’ performance, including User ID, Topic, Context, Time Stamp, Time Taken and Percentage of Correctness.</p>
         </div>
       </div>
-      <h1>test</h1>
+      <footer>
+        <p>© 2024 CodeCraft. All rights reserved.</p>
+      </footer>
     </div>
 </template>
 

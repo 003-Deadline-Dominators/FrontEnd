@@ -120,8 +120,13 @@ export default {
   border: none;
   cursor: pointer;
   font-size: 14px;
-  padding: 5px 10px;
   margin-right: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.sub-button:hover {
+  border-bottom: 2px solid #79e538;
+  transform: scale(1.1);
 }
 
 .sub-button img {
@@ -134,6 +139,11 @@ export default {
   border: none;
   cursor: pointer;
   padding: 5px;
+  transition: transform 0.5s;
+}
+
+.sub-button-right:hover {
+  transform: scale(1.3);
 }
 
 .code {
@@ -148,6 +158,10 @@ export default {
   transition: height 0.3s ease;
 }
 
+.code:hover {
+}
+
+
 .code.expanded {
   height: auto; /* Expands to fit content */
 }
@@ -157,6 +171,7 @@ export default {
   padding: 0 0;
   margin: 2px;
 }
+
 
 .loading-text {
   color: #ffffff;

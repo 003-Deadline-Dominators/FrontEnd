@@ -147,12 +147,12 @@ export default {
   width: auto;
   color: #FF9500;
   border-style: none;
-  border-bottom: 2px solid #FF9500;
   transition: transform 0.3s ease;
 }
 
 .show-problem:hover {
-  transform: translateY(-5px);
+  transform: scale(1.06);
+  border-bottom: 2px solid #FF9500;
 }
 
 .image-button img {
@@ -172,7 +172,17 @@ export default {
   margin-right: 36px;
   border-style: none;
 }
+
 .button-2 {
   border-style: none;
 }
+
+button{
+  transition: transform 0.5s;
+}
+
+button:hover{
+  transform: scale(1.1);
+}
+
 </style>

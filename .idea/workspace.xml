@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="trialing pagination bar on dashboard.vue">
+    <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="draft version pagenation for element table, with fully implemented functionality of logout in nav component">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Homepage/Topic/Topic.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Homepage/Topic/Topic.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Homepage/intro.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Homepage/intro.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/ProblemSection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/ProblemSection.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/nav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/nav.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,37 +57,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Node.js.main.js.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "howard",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets/intro",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.dev.executor": "Run",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Node.js.main.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;howard&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets/Topic/Context/Question&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "vue.recent.templates": [
-      "Vue Composition API Component"
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\Topic\Context\Question" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\intro" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\dashboard" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\Topic" />
       <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets\Topic\Context\Question" />
-      <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src\assets\Topic" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src" />
@@ -192,7 +194,10 @@
       <workItem from="1727930798093" duration="10382000" />
       <workItem from="1728020438927" duration="3637000" />
       <workItem from="1728127906809" duration="11094000" />
-      <workItem from="1728198721003" duration="15510000" />
+      <workItem from="1728198721003" duration="15721000" />
+      <workItem from="1728242673612" duration="4843000" />
+      <workItem from="1728274878588" duration="3970000" />
+      <workItem from="1728320456849" duration="1281000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />
@@ -322,7 +327,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728145629382</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="draft version pagenation for element table, with fully implemented functionality of logout in nav component">
+      <option name="closed" value="true" />
+      <created>1728229082642</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1728229082643</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,6 +356,7 @@
     <MESSAGE value="functional IDE response from the backend to frontend" />
     <MESSAGE value="added predefined difficulty and completeness to topic and context interface" />
     <MESSAGE value="trialing pagination bar on dashboard.vue" />
-    <option name="LAST_COMMIT_MESSAGE" value="trialing pagination bar on dashboard.vue" />
+    <MESSAGE value="draft version pagenation for element table, with fully implemented functionality of logout in nav component" />
+    <option name="LAST_COMMIT_MESSAGE" value="draft version pagenation for element table, with fully implemented functionality of logout in nav component" />
   </component>
 </project>

@@ -145,6 +145,11 @@ button{
   border-style: none;
   padding: 10px;
   margin-left: 5%;
+  transition: transform 1s ease-in-out, background-color 1s;
+}
+
+button:hover{
+  transform: scale(1.1);
 }
 button#learn{
   background-color: white;
@@ -200,11 +205,4 @@ h3{
   width: 260px; /* Adjust this size as needed */
   height: auto; /* This will maintain the aspect ratio */
 }
-</style>
-
-<style>
-body{
-  background-color: white;
-}
-
 </style>

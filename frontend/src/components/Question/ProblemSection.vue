@@ -2,6 +2,7 @@
   <div class="problem-section">
     <div class="problem">
       <h3 class="scenario">Scenario</h3>
+      <img :src="scenarioSVG" alt="scenario" class="scenario-svg"/>
       <p>{{ scenario }}</p>
       <h3 class="task">Task</h3>
       <p>{{ task }}</p>
@@ -15,11 +16,13 @@
 
 <script>
 import axios from 'axios';
+import scenarioSVG from '@/assets/Topic/Context/Question/scenario.svg';
 
 export default {
   name: 'ProblemSection',
   data() {
     return {
+      scenarioSVG,
       scenario: '',
       task: '',
       hasFetchedData: false, // Flag to check if data has been fetched
@@ -101,6 +104,12 @@ p{
 }
 h3{
   color: #ea7e31;
+}
 
+.scenario-svg{
+  position: absolute;
+  top: -20px;
+  left: 320px;
+  justify-content: center;
 }
 </style>

@@ -124,6 +124,12 @@ export default {
 .logo {
   width: 195px;
   height: 34px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover{
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .nav {
   display: flex;
@@ -155,6 +161,11 @@ export default {
   cursor: pointer;
   width: 60px;
   height: auto;
+  transition: transform 0.3s ease;
+}
+
+.clickable-image:hover {
+  transform: scale(1.12);
 }
 
 .input-field {
@@ -183,6 +194,7 @@ button {
 
 #start:hover {
   background-color: #96EA63;
+  transform: scale(1.1);
 }
 
 #context {
@@ -191,6 +203,7 @@ button {
 
 #context:hover {
   background-color: #79e538;
+  transform: scale(1.1);
 }
 
 #selected {
@@ -215,13 +228,14 @@ button.inactive {
 button.inactive:hover {
   background-color: #96EA63 !important;
 }
+
 .logout-button {
   position: absolute;
   margin-top: 10px;
   margin-left: 200px;
-  padding: 5px 10px;
+  padding: 10px 20px;
   cursor: pointer;
-  width: 60px;
+  width: fit-content;
   background-color: #96EA63;
 }
 

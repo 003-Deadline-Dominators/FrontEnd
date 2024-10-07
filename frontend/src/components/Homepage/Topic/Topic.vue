@@ -7,10 +7,10 @@
           v-for="(card, index) in filteredCards"
           :key="index"
           class="card"
-          @click="goToContext(card.topicTitle)"
+          @click="goToContext(card.topicTitle, card.colorPair.background, card.colorPair.titleColor)"
           :style="{
-          background: card.colorPair.background,
-        }"
+      background: card.colorPair.background,
+  }"
       >
         <h2
             class="card-title"
@@ -68,8 +68,8 @@ export default {
           titleColor: "#1EC772"
         },
         {
-          background: "linear-gradient(174deg, rgba(81,86,92,0.9) 0%, rgba(255,255,255,1) 30%)",
-          titleColor: "#171D26"
+          background: "linear-gradient(174deg, rgba(166,174,186,0.9) 0%, rgba(255,255,255,1) 30%)",
+          titleColor: "#4e6380"
         },
         {
           background: "linear-gradient(174deg, rgba(190,171,245,1) 0%, rgba(255,255,255,1) 30%)",
@@ -85,8 +85,15 @@ export default {
     },
   },
   methods: {
-    goToContext(topicTitle) {
-      this.$router.push({ name: "Context", query: { formattedTitle: topicTitle } });
+    goToContext(topicTitle, backgroundColor, titleColor) {
+      this.$router.push({
+        name: "Context",
+        query: {
+          formattedTitle: topicTitle,
+          backgroundColor: backgroundColor,
+          titleColor: titleColor,
+        },
+      });
     },
     async fetchTopics() {
       try {

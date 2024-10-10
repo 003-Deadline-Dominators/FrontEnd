@@ -123,6 +123,7 @@ export default {
         .then(response => {
           console.log(response.data);
           this.$emit('drag-drop-loaded');
+          this.$emit('data-define', response.data.data);
           this.list1 = this.formatItems(response.data.code);
           this.list1 = this.shuffleArray(this.list1);
         })
@@ -136,6 +137,7 @@ export default {
 <style scoped>
 .container {
   background-color: white;
+  border-radius: 5px 5px 0 0;
 }
 .drag-title{
   display: flex;

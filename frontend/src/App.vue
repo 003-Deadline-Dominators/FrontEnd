@@ -11,17 +11,17 @@
       />
       <div class="content-wrappers" :class="{ 'problem-collapsed': isProblemCollapsed }">
         <div class="problem-section-wrapper" :class="{ 'collapsed': isProblemCollapsed }">
-          <ProblemSection v-show="!isProblemCollapsed" @problem-section-loaded="onProblemSectionLoaded" />
+          <ProblemSection v-show="!isProblemCollapsed" @problem-section-loaded="onProblemSectionLoaded" @hint-loaded="onHintLoaded" />
           <button v-show="isProblemCollapsed" @click="toggleProblemSection" class="expand-button"> >></button>
         </div>
-        <div class="drag-drop-wrapper">
-          <DragDrop ref="dragDrop" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" />
+        <div class="drag-drop-wrapper" :class="{ 'expanded': isExpanded }">
+          <DragDrop class = "drag-drop" ref="dragDrop" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" @data-define="handleDataDefine"/>
           <div v-if="showOverlay" class="overlay">
             <h1>Are you ready to Craft Code?</h1>
             <img :src="Overlay" alt="overlay" />
             <button @click="removeOverlay" class="overlay-button">Start</button>
           </div>
-          <CodeEditor :codeBlocks="list2" :feedbackData="submittedData" ref="codeEditor"/>
+          <CodeEditor :codeBlocks="list2" :feedbackData="submittedData" :problem-data="problemData" ref="codeEditor"/>
         </div>
       </div>
       <div v-if="showloading" class="loading">
@@ -59,15 +59,21 @@ export default {
       showloading: true,
       dragDropLoaded: false,
       problemSectionLoaded: false,
+      hintLoaded: false,
       list2: [],
       submittedData: {},
       isLoading: false, // Add loading state
       ipAddress: '',
       generateTime: null,
       submitTime: null,
+      problemData: null,
+      isExpanded: false,
     };
   },
   methods: {
+    handleDataDefine(data) {
+      this.problemData = data; // Update the problemData when emitted
+    },
     updateList2(newList2) {
       this.list2 = newList2.map(item => ({
         content: item.content,
@@ -148,6 +154,11 @@ export default {
       this.showOverlay = false;
       this.isProblemCollapsed = true;
       this.startTime = new Date();
+
+      // Set isExpanded to true after the overlay is removed
+      this.$nextTick(() => {
+        this.isExpanded = true;
+      });
     },
     toggleProblemSection() {
       this.isProblemCollapsed = !this.isProblemCollapsed;
@@ -160,8 +171,12 @@ export default {
       this.problemSectionLoaded = true;
       this.checkLoadingStatus();
     },
+    onHintLoaded() {
+      this.hintLoaded = true;
+      this.checkLoadingStatus();
+    },
     checkLoadingStatus() {
-      if (this.dragDropLoaded && this.problemSectionLoaded) {
+      if (this.dragDropLoaded && this.problemSectionLoaded && this.hintLoaded) {
         this.showloading = false;
       }
     },
@@ -226,7 +241,12 @@ body {
   position: relative;
   flex-grow: 1;
   width: 60%;
-  height: 100%;
+  max-height: 100vh;
+  height: auto;
+}
+
+.drag-drop-wrapper.expanded {
+  max-height: none;
 }
 
 .overlay {

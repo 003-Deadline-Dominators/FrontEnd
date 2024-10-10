@@ -10,14 +10,19 @@
       </button>
     </div>
     <p v-if="showCode" :class="['code', { expanded: !collapsed }]" ref="codeContainer">
+      <code v-for="(block, index) in problemData" :key="index"
+            class ="code-line">
+        {{ block }}
+      </code>
       <code v-for="(block, index) in codeBlocks" :key="index"
             :style="{ marginLeft: block.position + 'px' }"
             class="code-line">
         {{ block.content }}
       </code>
     </p>
-    <div v-if="loading" class="loading-text">Loading feedback...</div>
+    <div v-if="loading" class="loading-text"></div>
     <div v-if="showFeedback" class="feedback-container">
+      <pre v-if="loading">Loading feedback...</pre>
       <pre v-if="feedbackData.stdout">
         <h3>Standard Output:</h3>
         {{ feedbackData.stdout }}
@@ -37,6 +42,10 @@ import expandIcon from '@/assets/Topic/Context/Question/expand.svg';
 
 export default {
   props: {
+    problemData: {
+      type: Object,  // or String, depending on the structure of the data
+      required: true
+    },
     codeBlocks: {
       type: Array,
       required: true,
@@ -121,12 +130,12 @@ export default {
   cursor: pointer;
   font-size: 14px;
   margin-right: 15px;
-  transition: background-color 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
 .sub-button:hover {
   border-bottom: 2px solid #79e538;
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .sub-button img {
@@ -156,9 +165,6 @@ export default {
   overflow-y: auto;
   height: 0;
   transition: height 0.3s ease;
-}
-
-.code:hover {
 }
 
 

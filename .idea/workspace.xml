@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="draft version pagenation for element table, with fully implemented functionality of logout in nav component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/ProblemSection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/ProblemSection.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/nav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/nav.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +196,9 @@
       <workItem from="1728242673612" duration="4843000" />
       <workItem from="1728274878588" duration="3970000" />
       <workItem from="1728320456849" duration="1413000" />
-      <workItem from="1728527214447" duration="13456000" />
+      <workItem from="1728527214447" duration="13530000" />
+      <workItem from="1728547844959" duration="2904000" />
+      <workItem from="1728578201968" duration="6534000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />

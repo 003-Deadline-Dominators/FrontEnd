@@ -1,52 +1,53 @@
 <template>
   <div class="container">
-  <div class="drag-title">
-    <h1 id="drag">Drag from here</h1>
-    <h1 id="drop">Drop blocks here</h1>
-  </div>
-  <div class="flex-draggable-container">
-    <VueDraggable
-        class="draggable-list"
-        v-model="list1"
-        animation="150"
-        ghostClass="ghost"
-        group="people"
-        @update="onUpdate"
-        @add="onAdd"
-        @remove="remove"
-    >
-      <div
-          v-for="item in list1"
-          :key="item.id"
-          class="draggable-item"
-          :style="{ marginLeft: `${item.position * 20}px` }"
-          @click="cyclePosition(item)"
+    <div class="drag-title">
+      <h1 id="drag">Drag from here</h1>
+      <h1 id="drop">Drop blocks here</h1>
+    </div>
+    <!-- Add a dynamic style based on showOverlay -->
+    <div class="flex-draggable-container" :style="flexContainerStyle">
+      <VueDraggable
+          class="draggable-list"
+          v-model="list1"
+          animation="150"
+          ghostClass="ghost"
+          group="people"
+          @update="onUpdate"
+          @add="onAdd"
+          @remove="remove"
       >
-        {{ item.content }}
-      </div>
-    </VueDraggable>
-    <VueDraggable
-        class="draggable-list"
-        v-model="list2"
-        animation="150"
-        id="right"
-        group="people"
-        ghostClass="ghost"
-        @update="onUpdate"
-        @add="onAdd"
-        @remove="remove"
-    >
-      <div
-          v-for="item in list2"
-          :key="item.id"
-          class="draggable-item"
-          :style="{ marginLeft: `${item.position * 40}px` }"
-          @click="cyclePosition(item)"
+        <div
+            v-for="item in list1"
+            :key="item.id"
+            class="draggable-item"
+            :style="{ marginLeft: `${item.position * 20}px` }"
+            @click="cyclePosition(item)"
+        >
+          {{ item.content }}
+        </div>
+      </VueDraggable>
+      <VueDraggable
+          class="draggable-list"
+          v-model="list2"
+          animation="150"
+          id="right"
+          group="people"
+          ghostClass="ghost"
+          @update="onUpdate"
+          @add="onAdd"
+          @remove="remove"
       >
-        {{ item.content }}
-      </div>
-    </VueDraggable>
-  </div>
+        <div
+            v-for="item in list2"
+            :key="item.id"
+            class="draggable-item"
+            :style="{ marginLeft: `${item.position * 40}px` }"
+            @click="cyclePosition(item)"
+        >
+          {{ item.content }}
+        </div>
+      </VueDraggable>
+    </div>
   </div>
 </template>
 
@@ -56,11 +57,27 @@ import axios from 'axios';
 
 export default {
   components: { VueDraggable },
+  props: {
+    problemData: {
+      type: Object,  // or String, depending on the structure of the data
+      required: true
+    },
+    showOverlay: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       list1: [],
-      list2: [],
+      list2: []
     };
+  },
+  computed: {
+    // Dynamically set maxHeight based on showOverlay prop
+    flexContainerStyle() {
+      return this.showOverlay ? { maxHeight: '80% !important'} : {maxHeight: 'none'};
+    }
   },
   methods: {
     onUpdate() {
@@ -88,7 +105,7 @@ export default {
     shuffleArray(array) {
       return array.sort(() => Math.random() - 0.5); // Simple shuffle
     },
-    rebuild(){
+    rebuild() {
       location.reload();
     },
     resetBlocks() {
@@ -99,8 +116,13 @@ export default {
       this.list1 = this.shuffleArray(this.list1);
     },
     submit() {
+
+      const plainProblemData = JSON.parse(JSON.stringify(this.problemData));
+      console.log(plainProblemData)
       axios.post('http://localhost:8080/submit', {
-        list2: this.list2,
+
+        preDefine: plainProblemData,  // Ensure that problemData is serialized as JSON
+        requestBody: this.list2
       })
           .then(response => {
             console.log(response.data.stdout);
@@ -109,7 +131,7 @@ export default {
           })
           .catch(error => {
             console.error(error);
-          })
+          });
     }
   },
   mounted() {
@@ -139,16 +161,15 @@ export default {
   background-color: white;
   border-radius: 5px 5px 0 0;
 }
+
 .drag-title{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+
 }
+
 .flex-draggable-container {
-  display: flex;
-  flex-direction: row;
-}
-.drag-title{
   display: flex;
   flex-direction: row;
 }
@@ -179,42 +200,31 @@ export default {
   font-size: 16px;
 }
 
-#right{
+#right {
   width: 50%;
   overflow-x: auto;
 }
 
-#drag {
+#drag, #drop {
   font-size: 20px;
   font-weight: bold;
   display: flex;
   height: fit-content;
   justify-content: center;
-  width: 45%;
   padding: 10px;
-  margin: 20px 0 0 5px;
+  border-radius: 5px;
+}
+
+#drag {
+  width: 45.6%;
   background-color: #d9ebff;
   color: #007aff;
-  border-radius: 5px;
 }
 
 #drop {
-  display: flex;
-  height: fit-content;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px;
-  margin: 20px 0 0 10px;
   width: 50%;
   background-color: #daf9f1;
   color: #06d49f;
-  border-radius: 5px;
-}
-</style>
-
-<style>
-body{
-  background-color: white;
+  margin-left: 5px;
 }
 </style>

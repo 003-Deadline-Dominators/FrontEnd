@@ -9,7 +9,7 @@
       <p>{{ task }}</p>
 
       <div @click="toggleHintVisibility" class="hint">
-        <h3>Hint</h3>
+        <h3>Hint (Click to review)</h3>
         <p v-if="isHintVisible" v-for="(item, index) in hint" :key="index">{{ item }}</p>
       </div>
     </div>

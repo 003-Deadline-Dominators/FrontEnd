@@ -215,6 +215,10 @@ button {
   align-items: center;
   justify-content: center;
   width: fit-content;
+  transition-duration: 0.4s;
+}
+#dashboard:hover {
+  transform: scale(1.1);
 }
 
 button.active {

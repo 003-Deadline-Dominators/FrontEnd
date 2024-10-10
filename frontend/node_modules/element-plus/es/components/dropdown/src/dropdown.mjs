@@ -7,7 +7,7 @@ import { useTooltipTriggerProps } from '../../tooltip/src/trigger.mjs';
 import { useTooltipContentProps } from '../../tooltip/src/content.mjs';
 import { iconPropType } from '../../../utils/vue/icon.mjs';
 import { EVENT_CODE } from '../../../constants/aria.mjs';
-import { createCollectionWithScope } from '../../collection/src/collection.mjs';
+import { createCollectionWithScope } from '../../collection/src/collection2.mjs';
 
 const dropdownProps = buildProps({
   trigger: useTooltipTriggerProps.trigger,

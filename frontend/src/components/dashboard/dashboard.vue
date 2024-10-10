@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <nava :show-context="false" :show-selected="false"/>
-    <div class="chart-container">
+    <div v-show="isChartVisible" class="chart-container">
       <div class="sub-nav">
         <h1>Answer in the last seven days</h1>
         <select v-model="selectedTopic" @change="filterCards" id="selection">
@@ -13,54 +13,69 @@
       <!-- Chart container -->
       <div ref="chartContainer" class="chart-container"></div>
     </div>
-    <!-- Table for displaying data -->
-    <el-table :data="tableData" stripe class="table">
-      <el-table-column prop="ipAddress" label="IP Address"></el-table-column>
-      <el-table-column prop="correctness" label="Correctness"></el-table-column>
-      <el-table-column prop="topicCategory" label="Topic Category"></el-table-column>
-      <el-table-column prop="contexts" label="Context"></el-table-column>
+    <div class="table-container">
+      <img :src="expand" class="expand-icon" @click="expandTable">
+      <!-- Table for displaying data -->
+      <el-table :data="paginatedData" stripe class="table">
 
-      <!-- Formatted timestamps -->
-      <el-table-column>
-        <template #header>
-          <div>
-            Generate Time<br>
-            <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
-          </div>
-        </template>
-        <template #default="scope">
-          <div>
-            <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[0]"></span><br>
-            <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[1]"></span>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column>
-        <template #header>
-          <div>
-            submit Time<br>
-            <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
-          </div>
-        </template>
-        <template #default="scope">
-          <div>
-            <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[0]"></span><br>
-            <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[1]"></span>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column>
-        <template #header>
-          <div>
-            Time Taken<br>
-            <span style="font-size: 12px; color: #888;">(hr:min:sec)</span>
-          </div>
-        </template>
-        <template #default="scope">
-          <span>{{ scope.row.duration }}</span> <!-- Display duration as is -->
-        </template>
-      </el-table-column>
-    </el-table>
+        <el-table-column prop="ipAddress" label="IP Address"></el-table-column>
+        <el-table-column prop="correctness" label="Correctness"></el-table-column>
+        <el-table-column prop="topicCategory" label="Topic Category"></el-table-column>
+        <el-table-column prop="contexts" label="Context"></el-table-column>
+
+        <!-- Formatted timestamps -->
+        <el-table-column>
+          <template #header>
+            <div>
+              Generate Time<br>
+              <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
+            </div>
+          </template>
+          <template #default="scope">
+            <div>
+              <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[0]"></span><br>
+              <span v-html="formatTimestamp(scope.row.generateTime).split(' ')[1]"></span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column>
+          <template #header>
+            <div>
+              submit Time<br>
+              <span style="font-size: 12px; color: #888;">AEST (UTC+10)</span>
+            </div>
+          </template>
+          <template #default="scope">
+            <div>
+              <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[0]"></span><br>
+              <span v-html="formatTimestamp(scope.row.submitTime).split(' ')[1]"></span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column>
+          <template #header>
+            <div>
+              Time Taken<br>
+              <span style="font-size: 12px; color: #888;">(hr:min:sec)</span>
+            </div>
+          </template>
+          <template #default="scope">
+            <span>{{ scope.row.duration }}</span> <!-- Display duration as is -->
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- Pagination component -->
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="10"
+          :page-size="pageSize"
+          layout="prev, pager, next"
+          :total="tableData.length"
+          class="custom-pagination">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -68,26 +83,39 @@
 import * as echarts from 'echarts';
 import logo from '@/assets/logo.svg';
 import icon from '@/assets/user.svg';
-import { ElTable, ElTableColumn } from 'element-plus';
+import { ElTable, ElTableColumn, ElPagination } from 'element-plus';
 import axios from 'axios';
 import Nava from "@/components/nav.vue";
+import expand from "@/assets/dashboard/expand.svg";
 
 export default {
   name: 'LineChart',
   components: {
     ElTable,
     ElTableColumn,
+    ElPagination,
     Nava,
   },
   data() {
     return {
       logo,
       icon,
+      expand,
       selectedTopic: '', // Ensure this is initialized properly
       topics: [],
       tableData: [],
       chartData: [],
+      currentPage: 1,
+      pageSize: 10,
+      isChartVisible: true,
     };
+  },
+  computed: {
+    paginatedData() {
+      const start = (this.currentPage - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      return this.tableData.slice(start, end);
+    },
   },
   async created() {
     await this.fetchTopics();
@@ -102,6 +130,9 @@ export default {
     window.removeEventListener('resize', this.resizeChart);
   },
   methods: {
+    expandTable() {
+      this.isChartVisible = !this.isChartVisible; // Toggle the value
+    },
     async fetchTopics() {
       try {
         const response = await axios.get('http://localhost:8080/topics/all');
@@ -216,6 +247,14 @@ export default {
       const formattedTime = date.toLocaleTimeString('en-AU', options);
       return `${formattedDate}<br>${formattedTime}`;
     },
+    handleSizeChange(val) {
+      this.pageSize = val;
+      this.currentPage = 1;
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      window.scrollTo(0, 0);
+    },
   },
 };
 </script>
@@ -257,17 +296,122 @@ export default {
   padding: 10px;
   width: 150px;
 }
+
+.expand-icon {
+  display: flex;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: 30px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  transition: transform 0.5s;
+}
+
+.expand-icon:hover {
+  transform: scale(1.4);
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  margin-top: 10px;
+  border-radius: 10px;
+}
 .table {
-  width: 100%;
+  display: flex;
+  width: 95%;
+  flex-direction: column;
+  margin-left: 2%;
+  margin-right: 2%;
   font-size: 18px;
   margin-top: 30px;
   background-color: white;
 }
+
+.custom-pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:deep(.el-pager) {
+  display: flex;
+  flex-direction: row;
+}
+
+:deep(.el-pager li.is-active.number) {
+  background-color: #0E927A;
+  color: white;
+}
+
+:deep(.el-pager li) {
+  display: inline-block;
+  list-style-type: none;
+  cursor: pointer;
+  align-content: center;
+  text-align: center;
+  margin: 0 16px;
+  color: #203B54;
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  padding: 0 4px;
+  transition: all .3s;
+}
+
+:deep(.el-icon) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #CFE9E4;
+  color: #203B54;
+  border-radius: 2px;
+  padding: 0 6px;
+  transition: all .3s;
+  width: 20px;
+  height: 30px;
+  font-size: 12px;
+}
+
+:deep(.el-icon:hover) {
+  background-color: #0E927A;
+  color: white;
+  border-radius: 2px;
+  padding: 0 6px;
+  transition: all .3s;
+}
+
+:deep(.btn-prev),
+:deep(.btn-next){
+  border-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 2px;
+}
+
+
+:deep(.el-pager li:hover) {
+  color: white;
+  background-color: #0E927A;
+}
+:deep(.is-leaf.el-table__cell) {
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-image-source: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 50%);
+  border-image-slice: 1;
+}
+
 :deep(.el-table__row:nth-child(odd)) {
   background-color: #f1f7ef;
 }
+
 :deep(.el-table__row:nth-child(even)) {
-  background-color: #fff;
+  background-color: #FFFFFF;
 }
 :deep(.el-table__cell) {
   text-align: center;

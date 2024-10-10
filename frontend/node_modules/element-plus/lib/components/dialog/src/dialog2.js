@@ -7,7 +7,7 @@ var index$4 = require('../../overlay/index.js');
 require('../../../hooks/index.js');
 require('../../focus-trap/index.js');
 var index$3 = require('../../teleport/index.js');
-var dialogContent = require('./dialog-content2.js');
+var dialogContent = require('./dialog-content.js');
 var constants = require('./constants.js');
 var dialog = require('./dialog.js');
 var useDialog = require('./use-dialog.js');

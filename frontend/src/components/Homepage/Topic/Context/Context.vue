@@ -2,8 +2,8 @@
   <Nava :show-dashboard="false" :show-selected="false"/>
   <div class="card-container">
     <div class="card" v-for="(card,index) in cards" :key="index" @click="gotoToQuestion(this.$route.query.formattedTitle, card[0])"
-         style="cursor: pointer;">
-      <h2 class="card-title">{{ this.$route.query.formattedTitle}}</h2>
+         style="cursor: pointer;" :style="{ background: this.$route.query.backgroundColor }" >
+      <h2 class="card-title" :style="{ color: this.$route.query.titleColor }" >{{ this.$route.query.formattedTitle}}</h2>
       <div class="content-wrapper">
         <h4>{{card[0]}}</h4>
         <h4>{{calculatePercentage(card[1])}}% complete</h4>

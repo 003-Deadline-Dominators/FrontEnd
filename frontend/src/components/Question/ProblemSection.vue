@@ -9,7 +9,10 @@
       <p>{{ task }}</p>
 
       <div @click="toggleHintVisibility" class="hint">
-        <h3>Hint (Click to review)</h3>
+        <h3>
+          <span class="hint-label">Hint: </span>
+          <span class="hint-text">Click here to get the hint.</span>
+        </h3>
         <p v-if="isHintVisible" v-for="(item, index) in hint" :key="index">{{ item }}</p>
       </div>
     </div>
@@ -22,6 +25,12 @@ import scenarioSVG from '@/assets/Topic/Context/Question/scenario.svg';
 
 export default {
   name: 'ProblemSection',
+  props: {
+    dragDropLoaded: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       scenarioSVG,
@@ -32,7 +41,14 @@ export default {
       isHintVisible: false // Toggle visibility of hint
     };
   },
-
+  watch: {
+    // Watch the dragDropLoaded prop and trigger hint fetching when true
+    dragDropLoaded(newValue) {
+      if (newValue) {
+        this.fetchHint();
+      }
+    },
+  },
   mounted() {
     this.fetchProblemData();
   },
@@ -57,19 +73,23 @@ export default {
             this.$emit('problem-section-loaded');
             this.hasFetchedData = true; // Set the flag to true after data is fetched
 
-            axios
-                .get('http://localhost:8080/hint', {})
-                .then((response) => {
-                  console.log(response.data); // Check the structure here
-                  this.hint = response.data.hints;
-                  this.$emit('hint-loaded');
-                });
           })
           .catch((error) => {
             console.log(error);
           });
     },
-
+    fetchHint() {
+      axios
+          .get('http://localhost:8080/hint')
+          .then((response) => {
+            console.log(response.data); // Check the structure here
+            this.hint = response.data.hints;
+            this.$emit('hint-loaded');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
     toggleHintVisibility() {
       this.isHintVisible = !this.isHintVisible;
     }
@@ -139,4 +159,11 @@ h3{
   left: 320px;
   justify-content: center;
 }
+
+.hint-text{
+  color: #979797;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
 </style>

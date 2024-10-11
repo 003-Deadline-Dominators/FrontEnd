@@ -65,6 +65,18 @@ export default {
     showOverlay: {
       type: Boolean,
       default: false
+    },
+    problemSectionLoaded: {
+      type: Boolean,
+      default: false
+    }
+  },
+  watch: {
+    // Watch for the problemSectionLoaded prop to change
+    problemSectionLoaded(newVal) {
+      if (newVal) {
+        this.fetchCodeData();  // Fetch data after the problem section is loaded
+      }
     }
   },
   data() {
@@ -80,6 +92,20 @@ export default {
     }
   },
   methods: {
+    fetchCodeData() {
+      axios
+          .get('http://localhost:8080/code')
+          .then((response) => {
+            console.log(response.data);
+            this.$emit('drag-drop-loaded');
+            this.$emit('data-define', response.data.data);
+            this.list1 = this.formatItems(response.data.code);
+            this.list1 = this.shuffleArray(this.list1);
+          })
+          .catch((error) => {
+            console.error("Error fetching code data:", error);
+          });
+    },
     onUpdate() {
       console.log('update');
       this.$emit('update:list2', this.list2);
@@ -116,13 +142,18 @@ export default {
       this.list1 = this.shuffleArray(this.list1);
     },
     submit() {
+      const plainProblemData = JSON.stringify(this.problemData);
+      const requestBodyData = JSON.stringify(this.list2);
 
-      const plainProblemData = JSON.parse(JSON.stringify(this.problemData));
-      console.log(plainProblemData)
-      axios.post('http://localhost:8080/submit', {
+      let formData = new FormData();
+      formData.append('preDefine', plainProblemData);
+      formData.append('requestBody', requestBodyData);
 
-        preDefine: plainProblemData,  // Ensure that problemData is serialized as JSON
-        requestBody: this.list2
+      // Send data to backend using axios
+      axios.post('http://localhost:8080/submit', formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
           .then(response => {
             console.log(response.data.stdout);
@@ -135,23 +166,9 @@ export default {
     }
   },
   mounted() {
-    axios
-        .get('http://localhost:8080/code', {
-          params: {
-            variable1: this.$route.query.topicTitle,
-            variable2: this.$route.query.contextTitle
-          }
-        })
-        .then(response => {
-          console.log(response.data);
-          this.$emit('drag-drop-loaded');
-          this.$emit('data-define', response.data.data);
-          this.list1 = this.formatItems(response.data.code);
-          this.list1 = this.shuffleArray(this.list1);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+    if (this.problemSectionLoaded) {
+      this.fetchCodeData();
+    }
   }
 };
 </script>

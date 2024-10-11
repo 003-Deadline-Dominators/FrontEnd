@@ -60,6 +60,7 @@
       <footer>
         <p>© 2024 CodeCraft. All rights reserved.</p>
       </footer>
+      <feedback />
     </div>
 </template>
 
@@ -77,6 +78,7 @@ export default {
 
 <script setup>
 import Nava from '@/components/nav.vue';
+import feedback from '@/components/Question/feedback.vue'
 import { ref } from 'vue';
 import intro1 from '@/assets/intro/intro1.png'
 import intro2 from '@/assets/intro/intro2.png'

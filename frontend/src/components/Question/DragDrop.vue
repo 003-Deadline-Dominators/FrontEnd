@@ -82,13 +82,13 @@ export default {
   data() {
     return {
       list1: [],
-      list2: []
+      list2: [],
     };
   },
   computed: {
     // Dynamically set maxHeight based on showOverlay prop
     flexContainerStyle() {
-      return this.showOverlay ? { maxHeight: '80% !important'} : {maxHeight: 'none'};
+      return this.showOverlay ? { maxHeight: '80vh !important'} : {maxHeight: 'none'};
     }
   },
   methods: {

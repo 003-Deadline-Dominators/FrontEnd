@@ -30,8 +30,7 @@
       </div>
     </div>
     <div v-if="showFeedbackOverlay" class="feedback-overlay">
-      <feedBack />
-      <button @click="removeFeedbackOverlay" class="close-overlay-button">Close</button>
+      <feedBack :takenTime="duration" :attempts="attempts" :Retry="removeFeedbackOverlay" :Next="rebuild"/>
     </div>
   </div>
 </template>
@@ -76,6 +75,8 @@
         problemData: null,
         isExpanded: false,
         showFeedbackOverlay: false,
+        attempts: 0,
+        duration: 'no attempts yet'
       };
     },
     computed: {
@@ -103,6 +104,7 @@
       },
       handleSubmittedData(data) {
         this.submittedData = data;
+        this.attempts++;
         console.log('Submitted data in App:', data);
 
         const submitTime1= new Date();
@@ -116,7 +118,7 @@
 
         // Convert the duration to hh:mm:ss format
         const duration = this.formatDuration(durationInMillis);
-
+        this.duration = duration;
         const submissionData = {
           ipAddress: this.ipAddress,
           correctness: data.stdout ? 1 : 0,
@@ -163,6 +165,7 @@
       },
       submit(){
         this.$refs.dragDrop.submit();
+        this.showFeedback = true;
       },
       resetBlocks() {
         this.$refs.dragDrop.resetBlocks();

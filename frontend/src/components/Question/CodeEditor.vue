@@ -26,9 +26,11 @@
         {{ block.content }}
       </code>
     </p>
-    <div v-if="loading" class="loading-text"></div>
     <div v-if="showFeedback" class="feedback-container">
-      <pre v-if="loading">Loading feedback...</pre>
+      <pre>
+        <h3 v-if="feedbackData.correct === true">The output is correct!</h3>
+        <h3 v-else>The output is incorrect, check your answer.</h3>
+    </pre>
       <pre v-if="feedbackData.stdout">
         <h3>Standard Output:</h3>
         {{ feedbackData.stdout }}
@@ -67,7 +69,6 @@ export default {
     feedbackData: {
       handler(newData) {
         console.log('New feedbackData:', newData);
-        this.loading = true; // Set loading to true when feedbackData changes
         if (newData && (newData.stdout || newData.stderr)) {
           this.showFeedback = true;
           this.showCode = false;
@@ -90,7 +91,6 @@ export default {
       collapsed: true,
       showCode: true,
       showFeedback: false,
-      loading: false, // Loading state
     };
   },
   methods: {

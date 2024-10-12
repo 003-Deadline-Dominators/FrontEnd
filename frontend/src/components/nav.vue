@@ -122,8 +122,8 @@ export default {
 </script>
 <style scoped>
 .logo {
-  width: 195px;
-  height: 34px;
+  width: auto;
+  height: 50px;
   transition: transform 0.3s ease;
 }
 

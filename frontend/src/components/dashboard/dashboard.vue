@@ -13,6 +13,16 @@
       <!-- Chart container -->
       <div ref="chartContainer" class="chart-container"></div>
     </div>
+    <div v-show="!isChartVisible" class="navigator">
+      <select v-model="sortBy" @change="sortData">
+        <option value="Newest">Newest</option>
+        <option value="Oldest">Oldest</option>
+      </select>
+      <select v-model = "selectedNavTopic" @change="sortData">Filter
+        <option value="All topics">All topics</option>
+        <option v-for="topic in topics" :key="topic.id" :value="topic.topicTitle">{{ topic.topicTitle }}</option>
+      </select>
+    </div>
     <div class="table-container">
       <img :src="expand" class="expand-icon" @click="expandTable">
       <!-- Table for displaying data -->
@@ -102,6 +112,8 @@ export default {
       icon,
       expand,
       selectedTopic: '', // Ensure this is initialized properly
+      selectedNavTopic: 'All topics',
+      sortBy: 'Newest',
       topics: [],
       tableData: [],
       chartData: [],
@@ -171,6 +183,15 @@ export default {
         console.error('Error fetching chart data:', error);
       }
     },
+    async fetchTableDataFromTopic() {
+      try {
+        const topic = this.selectedNavTopic; // Handle empty case
+        const response = await axios.get(`http://localhost:8080/admin/selectUsersByTopicDESC/${topic}/${this.sortBy}`);
+        this.tableData = response.data;
+      } catch (error) {
+        console.error('Error fetching table data:', error);
+      }
+    },
     filterCards() {
       console.log(this.selectedTopic);
       if (this.selectedTopic === '' || this.selectedTopic === 'All topics') {
@@ -179,6 +200,9 @@ export default {
         this.fetchChartDataFromTopic();
       }
     },
+    sortData() {
+        this.fetchTableDataFromTopic(); // Fetch data filtered by topic and sorted
+      },
     initChart() {
       const chartDom = this.$refs.chartContainer;
       this.myChart = echarts.init(chartDom);
@@ -283,6 +307,22 @@ export default {
   font-size: 10px;
   background-color: white;
 }
+.navigator{
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 10px;
+}
+
+.navigator select {
+  padding: 10px;
+  margin-right: 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  width: 130px;
+}
+
 #selection {
   margin-top: 30px;
   display: inline-block;

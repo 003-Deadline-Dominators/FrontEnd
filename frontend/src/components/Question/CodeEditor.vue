@@ -1,13 +1,19 @@
 <template>
   <div class="code-editor">
     <div class="sub-select">
-      <button class="sub-button" v-for="btn in buttons" :key="btn.text" @click="handleButtonClick(btn.text)">
+      <button class="sub-button" v-for="btn in buttons" :key="btn.text" @click="handleButtonClick(btn.text) " :class="{ 'active-button': (btn.text === 'Feedback' && showFeedback) || (btn.text === 'Code' && showCode) }">
         <img :src="btn.src" alt="" />
         {{ btn.text }}
       </button>
+      <div class = "button-right">
+        <button class="run-button" @click="onSubmit">
+          <img :src="runIcon" alt="Run"/>
+          Run
+        </button>
       <button class="sub-button-right" @click="toggleExpand">
         <img :src="expandIcon" alt="" />
       </button>
+      </div>
     </div>
     <p v-if="showCode" :class="['code', { expanded: !collapsed }]" ref="codeContainer">
       <code v-for="(block, index) in problemData" :key="index"
@@ -20,9 +26,11 @@
         {{ block.content }}
       </code>
     </p>
-    <div v-if="loading" class="loading-text"></div>
     <div v-if="showFeedback" class="feedback-container">
-      <pre v-if="loading">Loading feedback...</pre>
+      <pre>
+        <h3 v-if="feedbackData.correct === true">The output is correct!</h3>
+        <h3 v-else>The output is incorrect, check your answer.</h3>
+    </pre>
       <pre v-if="feedbackData.stdout">
         <h3>Standard Output:</h3>
         {{ feedbackData.stdout }}
@@ -39,6 +47,7 @@
 import feedbackIcon from '@/assets/Topic/Context/Question/feedback.svg';
 import codeIcon from '@/assets/Topic/Context/Question/code.svg';
 import expandIcon from '@/assets/Topic/Context/Question/expand.svg';
+import runIcon from '@/assets/Topic/Context/Question/run.svg'
 
 export default {
   props: {
@@ -54,12 +63,12 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    onSubmit: Function,
   },
   watch: {
     feedbackData: {
       handler(newData) {
         console.log('New feedbackData:', newData);
-        this.loading = true; // Set loading to true when feedbackData changes
         if (newData && (newData.stdout || newData.stderr)) {
           this.showFeedback = true;
           this.showCode = false;
@@ -77,11 +86,11 @@ export default {
         { src: feedbackIcon, text: 'Feedback' },
         { src: codeIcon, text: 'Code' },
       ],
+      runIcon,
       expandIcon,
       collapsed: true,
       showCode: true,
       showFeedback: false,
-      loading: false, // Loading state
     };
   },
   methods: {
@@ -132,7 +141,9 @@ export default {
   margin-right: 15px;
   transition: transform 0.5s ease;
 }
-
+.active-button {
+  border-bottom: 2px solid #79e538; /* Active button style */
+}
 .sub-button:hover {
   border-bottom: 2px solid #79e538;
   transform: scale(1.08);
@@ -149,6 +160,32 @@ export default {
   cursor: pointer;
   padding: 5px;
   transition: transform 0.5s;
+  margin-right: 10px;
+}
+
+.run-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: #A4D48D;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.5s ease;
+  margin-right: 30px;
+}
+
+.button-right{
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  margin-left: auto;
+
+}
+
+.run-button:hover {
+  border-bottom: 2px solid #79e538;
+  transform: scale(1.08);
 }
 
 .sub-button-right:hover {

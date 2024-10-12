@@ -3,7 +3,7 @@
     <div class="main-content">
       <Nava :showDashboard="false" />
       <Header
-          :submit="submit"
+          :submit="preview"
           :resetBlocks="resetBlocks"
           :rebuild="rebuild"
           :startTime="startTime"
@@ -11,35 +11,39 @@
       />
       <div class="content-wrappers" :class="{ 'problem-collapsed': isProblemCollapsed }">
         <div class="problem-section-wrapper" :class="{ 'collapsed': isProblemCollapsed }">
-          <ProblemSection v-show="!isProblemCollapsed" @problem-section-loaded="onProblemSectionLoaded" @hint-loaded="onHintLoaded" />
+          <ProblemSection v-show="!isProblemCollapsed" :dragDropLoaded="dragDropLoaded" @problem-section-loaded="onProblemSectionLoaded" @hint-loaded="onHintLoaded" />
           <button v-show="isProblemCollapsed" @click="toggleProblemSection" class="expand-button"> >></button>
         </div>
         <div class="drag-drop-wrapper" >
           <!-- Pass showOverlay prop -->
-          <DragDrop class="drag-drop" ref="dragDrop" :showOverlay="showOverlay" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" @data-define="handleDataDefine" :problem-data="problemData" :style="flexContainerStyle"/>
+          <DragDrop class="drag-drop" ref="dragDrop" :showOverlay="showOverlay" :problemSectionLoaded="problemSectionLoaded" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" @data-define="handleDataDefine" :problem-data="problemData" :style="flexContainerStyle"/>
           <div v-if="showOverlay" class="overlay">
             <h1>Are you ready to Craft Code?</h1>
             <img :src="Overlay" alt="overlay" />
             <button @click="removeOverlay" class="overlay-button">Start</button>
           </div>
-          <CodeEditor :codeBlocks="list2" :feedbackData="submittedData" :problem-data="problemData" ref="codeEditor"/>
+          <CodeEditor :codeBlocks="list2" :feedbackData="submittedData" :problem-data="problemData" ref="codeEditor" :onSubmit="submit"/>
         </div>
       </div>
       <div v-if="showloading" class="loading">
         <loading />
       </div>
     </div>
+    <div v-if="showFeedbackOverlay" class="feedback-overlay">
+      <feedBack :takenTime="duration" :attempts="attempts" :Retry="removeFeedbackOverlay" :Next="rebuild"/>
+    </div>
   </div>
 </template>
 
 <script>
-  import Nava from './nav.vue';
-  import Header from './Question/Header.vue';
-  import ProblemSection from './Question/ProblemSection.vue';
+  import Nava from './components/nav.vue';
+  import Header from './components/Question/Header.vue';
+  import ProblemSection from './components/Question/ProblemSection.vue';
+  import feedBack from './components/Question/feedback.vue';
   import Overlay from '@/assets/Topic/Context/Question/overlay.svg';
-  import loading from './Question/loading.vue';
-  import DragDrop from './Question/DragDrop.vue';
-  import CodeEditor from './Question/CodeEditor.vue';
+  import loading from './components/Question/loading.vue';
+  import DragDrop from './components/Question/DragDrop.vue';
+  import CodeEditor from './components/Question/CodeEditor.vue';
   import axios from 'axios';
 
   export default {
@@ -50,6 +54,7 @@
       DragDrop,
       loading,
       CodeEditor,
+      feedBack,
     },
     data() {
       return {
@@ -69,6 +74,9 @@
         submitTime: null,
         problemData: null,
         isExpanded: false,
+        showFeedbackOverlay: false,
+        attempts: 0,
+        duration: 'no attempts yet'
       };
     },
     computed: {
@@ -78,6 +86,12 @@
       }
     },
     methods: {
+      preview() {
+        this.showFeedbackOverlay = true;
+      },
+      removeFeedbackOverlay() {
+        this.showFeedbackOverlay = false;
+      },
       handleDataDefine(data) {
         this.problemData = data; // Update the problemData when emitted
       },
@@ -90,6 +104,7 @@
       },
       handleSubmittedData(data) {
         this.submittedData = data;
+        this.attempts++;
         console.log('Submitted data in App:', data);
 
         const submitTime1= new Date();
@@ -103,7 +118,7 @@
 
         // Convert the duration to hh:mm:ss format
         const duration = this.formatDuration(durationInMillis);
-
+        this.duration = duration;
         const submissionData = {
           ipAddress: this.ipAddress,
           correctness: data.stdout ? 1 : 0,
@@ -150,6 +165,7 @@
       },
       submit(){
         this.$refs.dragDrop.submit();
+        this.showFeedback = true;
       },
       resetBlocks() {
         this.$refs.dragDrop.resetBlocks();
@@ -321,6 +337,36 @@
 
   code-editor {
     border-radius: 5px;
+  }
+
+  .feedback-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+  }
+
+  .close-overlay-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: #ff9500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .close-overlay-button:hover {
+    background-color: #ff6500;
   }
 
   </style>

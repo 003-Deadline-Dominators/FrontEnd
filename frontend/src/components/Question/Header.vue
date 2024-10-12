@@ -148,11 +148,11 @@ export default {
   color: #FF9500;
   border-style: none;
   transition: transform 0.3s ease;
+  border-bottom: 2px solid #FF9500;
 }
 
 .show-problem:hover {
   transform: scale(1.06);
-  border-bottom: 2px solid #FF9500;
 }
 
 .image-button img {

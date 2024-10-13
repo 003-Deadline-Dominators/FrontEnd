@@ -233,7 +233,8 @@ export default {
 }
 
 #drag {
-  width: 45.6%;
+  margin-left: 5px;
+  width: 45.3%;
   background-color: #d9ebff;
   color: #007aff;
 }

@@ -10,11 +10,13 @@
           @toggle-problem="toggleProblemSection"
       />
       <div class="content-wrappers" :class="{ 'problem-collapsed': isProblemCollapsed }">
+
         <div class="problem-section-wrapper" :class="{ 'collapsed': isProblemCollapsed }">
           <ProblemSection v-show="!isProblemCollapsed" :dragDropLoaded="dragDropLoaded" @problem-section-loaded="onProblemSectionLoaded" @hint-loaded="onHintLoaded" />
           <button v-show="isProblemCollapsed" @click="toggleProblemSection" class="expand-button"> >></button>
         </div>
         <div class="drag-drop-wrapper" >
+          <el-alert title="single click to indent block" type="success" />
           <!-- Pass showOverlay prop -->
           <DragDrop class="drag-drop" ref="dragDrop" :showOverlay="showOverlay" :problemSectionLoaded="problemSectionLoaded" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" @data-define="handleDataDefine" :problem-data="problemData" :style="flexContainerStyle"/>
           <div v-if="showOverlay" class="overlay">
@@ -45,6 +47,7 @@
   import DragDrop from './components/Question/DragDrop.vue';
   import CodeEditor from './components/Question/CodeEditor.vue';
   import axios from 'axios';
+  import { ElAlert } from 'element-plus'
 
   export default {
     components: {
@@ -55,6 +58,7 @@
       loading,
       CodeEditor,
       feedBack,
+      ElAlert,
     },
     data() {
       return {
@@ -324,7 +328,7 @@
   /* Constrain loading screen to content-wrappers */
   .loading {
     position: absolute;
-    top: 130px; /* Adjust based on header height */
+    top: 114px; /* Adjust based on header height */
     left: 0;
     width: 100%;
     height: calc(100% - 60px); /* Adjust based on header height */
@@ -367,6 +371,38 @@
 
   .close-overlay-button:hover {
     background-color: #ff6500;
+  }
+
+  .el-alert {
+    display: flex;
+    align-items:  center;
+    justify-content: flex-start;
+    width: fit-content;
+    background-color: #79e538;
+    color: black;
+    border-radius: 5px;
+
+  }
+  .el-alert:first-child {
+    margin-left: auto;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 18px;
+    padding: 10px;
+  }
+  .el-alert svg{
+    align-items: center;
+    justify-content: flex-start;
+    height: 14px;
+    padding-left: 10px;
+    margin: 0;
+    transition: transform 0.5s ease;
+  }
+  .el-alert svg:hover {
+    cursor: pointer;
+    transform: scale(1.3);
   }
 
   </style>

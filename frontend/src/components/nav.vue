@@ -129,13 +129,13 @@ export default {
 
 .logo:hover{
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 .nav {
   display: flex;
   justify-content: space-between;
   background-color: white;
-  padding: 2%;
+  padding: 1%;
   align-items: center;
 }
 
@@ -159,7 +159,7 @@ export default {
 
 .clickable-image {
   cursor: pointer;
-  width: 60px;
+  width: 70px;
   height: auto;
   transition: transform 0.3s ease;
 }
@@ -172,8 +172,8 @@ export default {
   position: absolute;
   right: 60px;
   margin-top: 6px;
-  width: 180px;
-  padding: 5px 10px;
+  width: 200px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -234,12 +234,14 @@ button.inactive:hover {
 }
 
 .logout-button {
+  display: flex;
+  align-items: center;
   position: absolute;
   margin-top: 10px;
   margin-left: 200px;
-  padding: 10px 20px;
+  padding: 10px 10px 10px 16px;
   cursor: pointer;
-  width: fit-content;
+  width: 100px;
   background-color: #96EA63;
 }
 

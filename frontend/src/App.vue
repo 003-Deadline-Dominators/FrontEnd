@@ -16,7 +16,6 @@
           <button v-show="isProblemCollapsed" @click="toggleProblemSection" class="expand-button"> >></button>
         </div>
         <div class="drag-drop-wrapper" >
-          <el-alert title="single click to indent block" type="success" />
           <!-- Pass showOverlay prop -->
           <DragDrop class="drag-drop" ref="dragDrop" :showOverlay="showOverlay" :problemSectionLoaded="problemSectionLoaded" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" @data-define="handleDataDefine" :problem-data="problemData" :style="flexContainerStyle"/>
           <div v-if="showOverlay" class="overlay">
@@ -91,6 +90,14 @@
     },
     methods: {
       preview() {
+        const submitTime1= new Date();
+        this.submitTime = new Date(
+            submitTime1.toLocaleString('en-US', { timeZone: 'Australia/Sydney' })
+        );
+
+        const duration = this.submitTime - this.startTime;
+        const time = this.formatDuration(duration);
+        this.duration = time;
         this.showFeedbackOverlay = true;
       },
       removeFeedbackOverlay() {
@@ -122,7 +129,6 @@
 
         // Convert the duration to hh:mm:ss format
         const duration = this.formatDuration(durationInMillis);
-        this.duration = duration;
         const submissionData = {
           ipAddress: this.ipAddress,
           correctness: data.stdout ? 1 : 0,
@@ -357,52 +363,5 @@
     z-index: 1000; /* Ensure it's on top */
   }
 
-  .close-overlay-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px;
-    background-color: #ff9500;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .close-overlay-button:hover {
-    background-color: #ff6500;
-  }
-
-  .el-alert {
-    display: flex;
-    align-items:  center;
-    justify-content: flex-start;
-    width: fit-content;
-    background-color: #79e538;
-    color: black;
-    border-radius: 5px;
-
-  }
-  .el-alert:first-child {
-    margin-left: auto;
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 18px;
-    padding: 10px;
-  }
-  .el-alert svg{
-    align-items: center;
-    justify-content: flex-start;
-    height: 14px;
-    padding-left: 10px;
-    margin: 0;
-    transition: transform 0.5s ease;
-  }
-  .el-alert svg:hover {
-    cursor: pointer;
-    transform: scale(1.3);
-  }
 
   </style>

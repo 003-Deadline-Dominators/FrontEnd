@@ -102,11 +102,11 @@ export default {
       this.inputValue = '';
     },
     login() {
-      this.setIsLoggedIn(true);
+      this.$store.commit('setIsLoggedIn', true);
       this.showInput = false;
-      this.toggleDashboard(true);
-      this.updateIcon(this.user);
-      this.toggleShowInputGlobally(false); // Hide input globally when logged in
+      this.$store.dispatch('toggleDashboard', true);
+      this.$store.dispatch('updateIcon', this.user);
+      this.$store.dispatch('toggleShowInputGlobally', false);
       this.$router.push('/dashboard');
     },
     logout() {

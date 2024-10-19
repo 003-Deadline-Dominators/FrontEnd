@@ -5,9 +5,9 @@ export default createStore({
     state() {
         return {
             showDashboard: false,
-            currentIcon: icon, // Add currentIcon to the state
-            showInputGlobally: true, // State to control input field visibility globally
-            isLoggedIn: false, // State to track if the user is logged in
+            currentIcon: icon,
+            showInputGlobally: true,
+            isLoggedIn: false,
         };
     },
     mutations: {
@@ -21,7 +21,7 @@ export default createStore({
             state.showInputGlobally = value;
         },
         setIsLoggedIn(state, value) {
-            state.isLoggedIn = value; // Mutation to set login status
+            state.isLoggedIn = value;
         },
     },
     actions: {
@@ -35,13 +35,13 @@ export default createStore({
             commit('setShowInputGlobally', value);
         },
         setIsLoggedIn({ commit }, value) {
-            commit('setIsLoggedIn', value); // Action to set login status
+            commit('setIsLoggedIn', value);
         },
     },
     getters: {
         showDashboard: (state) => state.showDashboard,
         currentIcon: (state) => state.currentIcon,
         showInputGlobally: (state) => state.showInputGlobally,
-        isLoggedIn: (state) => state.isLoggedIn, // Getter for login status
+        isLoggedIn: (state) => state.isLoggedIn,
     },
 });

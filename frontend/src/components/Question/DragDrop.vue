@@ -4,7 +4,6 @@
       <h1 id="drag">Drag from here</h1>
       <h1 id="drop">Drop blocks here</h1>
     </div>
-    <!-- Add a dynamic style based on showOverlay -->
     <div class="flex-draggable-container" :style="flexContainerStyle">
       <VueDraggable
           class="draggable-list"
@@ -25,6 +24,7 @@
         >
           {{ item.content }}
         </div>
+        <img :src="animation" alt="animation" class = "animation"/>
       </VueDraggable>
       <VueDraggable
           class="draggable-list"
@@ -44,16 +44,26 @@
             :style="{ marginLeft: `${item.position * 40}px` }"
             @click="cyclePosition(item)"
         >
-          {{ item.content }}
+          <!-- Only show tooltip when list2 has exactly 1 item and tooltip hasn't been shown before -->
+          <el-tooltip
+              v-if="shouldShowTooltip"
+              content="Single click to indent"
+              placement="top"
+          >
+            {{ item.content }}
+          </el-tooltip>
+          <div v-else>{{ item.content }}</div>
         </div>
       </VueDraggable>
     </div>
   </div>
 </template>
 
+
 <script>
 import { VueDraggable } from 'vue-draggable-plus';
 import axios from 'axios';
+import animation from '@/assets/Topic/Context/Question/dragAni.svg';
 
 export default {
   components: { VueDraggable },
@@ -83,12 +93,19 @@ export default {
     return {
       list1: [],
       list2: [],
+      animation,
+      showTooltip: false, // Control for showing the tooltip
+      tooltipShown: localStorage.getItem('tooltipShown') === 'true',
     };
   },
   computed: {
     // Dynamically set maxHeight based on showOverlay prop
     flexContainerStyle() {
       return this.showOverlay ? { maxHeight: '80vh !important'} : {maxHeight: 'none'};
+    },
+    shouldShowTooltip() {
+      console.log(`update: status  = ${this.tooltipShown}`);
+      return this.list2.length === 1 && !this.tooltipShown;
     }
   },
   methods: {
@@ -109,10 +126,14 @@ export default {
     onUpdate() {
       console.log('update');
       this.$emit('update:list2', this.list2);
+      this.checkTooltip();
+      console.log(`update: status  = ${this.tooltipShown}`);
     },
     onAdd() {
       console.log('add');
       this.$emit('update:list2', this.list2);
+      this.checkTooltip();
+      console.log(`update: status  = ${this.tooltipShown}`);
     },
     remove() {
       console.log('remove');
@@ -163,12 +184,23 @@ export default {
           .catch(error => {
             console.error(error);
           });
+    },
+    checkTooltip() {
+      if (this.list2.length === 1 && !this.tooltipShown) {
+        setTimeout(() => {
+          // Store that the tooltip has been shown after delay
+          localStorage.setItem('tooltipShown', 'true');
+          this.tooltipShown = true;
+        }, 25000);  // Delay for 2 seconds (adjust the time as needed)
+      }
     }
   },
   mounted() {
     if (this.problemSectionLoaded) {
       this.fetchCodeData();
     }
+    this.tooltipShown = localStorage.getItem('tooltipShown') === 'true';
+    console.log(`update: status  = ${this.tooltipShown}`);
   }
 };
 </script>
@@ -197,22 +229,22 @@ export default {
   flex-direction: column;
   padding: 10px;
   width: 45%;
-  height: auto;
+  min-height: 50vh;
+  max-height: 50vh;
+  overflow-y: scroll;
   margin: 10px 0 20px 5px;
   border-radius: 0.5rem;
-  overflow: auto;
   border: 2px dashed #bbbbbb;
 }
 
 .draggable-item {
   cursor: move;
   color: black;
-  height: fit-content;
   background-color: #D8D8D8;
+  height: fit-content;
   border-radius: 0.5rem;
   padding: 0.75rem;
   margin: 5px;
-  overflow-x: auto;
   transition: margin-left 0.3s ease;
   font-size: 16px;
 }
@@ -220,6 +252,7 @@ export default {
 #right {
   width: 50%;
   overflow-x: auto;
+  min-height: 50.01vh;
 }
 
 #drag, #drop {
@@ -245,4 +278,61 @@ export default {
   color: #06d49f;
   margin-left: 5px;
 }
+
+.indent-alert:first-child {
+  margin-left: auto;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 18px;
+  padding: 10px;
+}
+.indent-alert {
+  display: flex;
+  align-items:  center;
+  justify-content: flex-start;
+  width: fit-content;
+  background-color: #79e538;
+  color: black;
+  margin-left: auto;
+  margin-right: 34px;
+  border-radius: 5px;
+}
+
+svg{
+  width: 10px;
+}
+
+.animation{
+  display: flex;
+  margin-top: auto;
+  margin-left: auto;
+  width: 200px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 0.5rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #B9B9B9AB;
+  max-height: 10px;
+  border-radius: 0.5rem;
+  height: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bbbbbb;
+}
+
 </style>
+
+

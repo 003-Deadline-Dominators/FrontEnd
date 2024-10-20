@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/Homepage/intro.vue'
 import Topic from '../components/Homepage/Topic/Topic.vue'
 import Context from '../components/Homepage/Topic/Context/Context.vue'
 import dashboard from "../components/dashboard/dashboard.vue";
 import App from '../components/App.vue'
+=======
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../components/Homepage/intro.vue';
+import Topic from '../components/Homepage/Topic/Topic.vue';
+import Context from '../components/Homepage/Topic/Context/Context.vue';
+import Dashboard from "@/components/dashboard/dashboard.vue"; // Use PascalCase for component name
+import App from '../App.vue';
+import store from '@/store'; // Import the store
+>>>>>>> howard
 
 const routes = [
     {
@@ -28,14 +38,25 @@ const routes = [
     },
     {
         path: '/dashboard',
-        name: 'dashboard',
-        component: dashboard
+        name: 'Dashboard',
+        component: Dashboard,
+        meta: { requiresAuth: true } // Add meta field for authentication check
     }
-]
+];
 
 const router = createRouter({
     history: createWebHistory(),
     routes
-})
+});
 
-export default router
+// Navigation guard
+router.beforeEach((to, from, next) => {
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    if (requiresAuth && !store.state.isLoggedIn) {
+        next('/');
+    } else {
+        next();
+    }
+});
+
+export default router;

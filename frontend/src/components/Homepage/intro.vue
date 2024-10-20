@@ -48,7 +48,7 @@
             <li>Hint: Click ‘Hint’ to receive a clue of the code.</li>
           </ul>
         </div>
-        <img :src="intro4" alt="image">
+        <img :src="intro4" alt="image" id="intro4">
       </div>
       <div class="content-section">
         <img :src="intro5" alt="image">
@@ -78,11 +78,11 @@ export default {
 <script setup>
 import Nava from '@/components/nav.vue';
 import { ref } from 'vue';
-import intro1 from '@/assets/intro/intro1.png'
-import intro2 from '@/assets/intro/intro2.png'
-import intro3 from '@/assets/intro/intro3.png'
-import intro4 from '@/assets/intro/intro4.png'
-import intro5 from '@/assets/intro/intro5.png'
+import intro1 from '@/assets/Intro/home1.png'
+import intro2 from '@/assets/Intro/home2.png'
+import intro3 from '@/assets/Intro/home3.png'
+import intro4 from '@/assets/Intro/home4.png'
+import intro5 from '@/assets/Intro/home5.png'
 const targetSection = ref(null);
 
 const scrollToSection = () => {
@@ -101,11 +101,13 @@ const scrollToSection = () => {
   padding: 10px;
 }
 .start{
+  margin: 0;
   height: 100vh;
   font-size: 30px;
   display: flex;
   flex-direction: column;
   background-image: url("../../assets/home-back.gif");
+  background-color: white;
   background-repeat: no-repeat;
   background-size: 100%;
 }
@@ -162,6 +164,7 @@ button#learn:hover{
   background-color: #96ea63;
 }
 .content-wrapper{
+  display: flex;
   background-color: white; /* If you want the content wrapper to have a white background */
   text-align: center;
   flex-direction: column;
@@ -190,7 +193,7 @@ button#learn:hover{
 }
 img{
   width: auto;
-  height: 140%;
+  height: 300px;
 }
 h2{
   font-size: 40px;
@@ -204,5 +207,11 @@ h3{
 .nav img {
   width: 260px; /* Adjust this size as needed */
   height: auto; /* This will maintain the aspect ratio */
+}
+</style>
+
+<style>
+html{
+  background-color: white;
 }
 </style>

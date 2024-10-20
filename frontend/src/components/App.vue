@@ -10,6 +10,7 @@
           @toggle-problem="toggleProblemSection"
       />
       <div class="content-wrappers" :class="{ 'problem-collapsed': isProblemCollapsed }">
+
         <div class="problem-section-wrapper" :class="{ 'collapsed': isProblemCollapsed }">
           <ProblemSection v-show="!isProblemCollapsed" :dragDropLoaded="dragDropLoaded" @problem-section-loaded="onProblemSectionLoaded" @hint-loaded="onHintLoaded" />
           <button v-show="isProblemCollapsed" @click="toggleProblemSection" class="expand-button"> >></button>
@@ -45,6 +46,7 @@
   import DragDrop from './components/Question/DragDrop.vue';
   import CodeEditor from './components/Question/CodeEditor.vue';
   import axios from 'axios';
+  import { ElAlert } from 'element-plus'
 
   export default {
     components: {
@@ -55,6 +57,7 @@
       loading,
       CodeEditor,
       feedBack,
+      ElAlert,
     },
     data() {
       return {
@@ -87,6 +90,14 @@
     },
     methods: {
       preview() {
+        const submitTime1= new Date();
+        this.submitTime = new Date(
+            submitTime1.toLocaleString('en-US', { timeZone: 'Australia/Sydney' })
+        );
+
+        const duration = this.submitTime - this.startTime;
+        const time = this.formatDuration(duration);
+        this.duration = time;
         this.showFeedbackOverlay = true;
       },
       removeFeedbackOverlay() {
@@ -118,7 +129,6 @@
 
         // Convert the duration to hh:mm:ss format
         const duration = this.formatDuration(durationInMillis);
-        this.duration = duration;
         const submissionData = {
           ipAddress: this.ipAddress,
           correctness: data.stdout ? 1 : 0,
@@ -324,7 +334,7 @@
   /* Constrain loading screen to content-wrappers */
   .loading {
     position: absolute;
-    top: 130px; /* Adjust based on header height */
+    top: 114px; /* Adjust based on header height */
     left: 0;
     width: 100%;
     height: calc(100% - 60px); /* Adjust based on header height */
@@ -353,20 +363,5 @@
     z-index: 1000; /* Ensure it's on top */
   }
 
-  .close-overlay-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px;
-    background-color: #ff9500;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .close-overlay-button:hover {
-    background-color: #ff6500;
-  }
 
   </style>

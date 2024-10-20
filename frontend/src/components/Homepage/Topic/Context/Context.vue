@@ -1,15 +1,11 @@
 <template>
   <Nava :show-dashboard="false" :show-selected="false"/>
   <div class="card-container">
-    <div class="card" v-for="(card,index) in cards" :key="index" @click="gotoToQuestion(this.$route.query.formattedTitle, card[0])"
+    <div class="card" v-for="(card,index) in cards" :key="index" @click="gotoToQuestion(this.$route.query.formattedTitle, card.contextTitle)"
          style="cursor: pointer;" :style="{ background: this.$route.query.backgroundColor }" >
       <h2 class="card-title" :style="{ color: this.$route.query.titleColor }" >{{ this.$route.query.formattedTitle}}</h2>
       <div class="content-wrapper">
-        <h4>{{card[0]}}</h4>
-        <h4>{{calculatePercentage(card[1])}}% complete</h4>
-      </div>
-      <div class="progress-container">
-        <div class="progress-bar" :style="{ width: calculatePercentage(card[1]) + '%' }"></div>
+        <h4>{{ card.contextTitle }}</h4>
       </div>
     </div>
   </div>
@@ -51,22 +47,15 @@ export default {
     const topicTitle = encodeURIComponent(this.$route.query.formattedTitle).replaceAll('%2F', '%252F');
     console.log(topicTitle);
 
+
     if (topicTitle) {
-      axios.get('https://api.ipify.org?format=json')
+      axios
+          .get(`http://localhost:8080/topics/contexts/${topicTitle}`)
           .then(response => {
-            this.ipAddress = response.data.ip;
-            axios
-                .get(`http://localhost:8080/topics/contexts/${this.ipAddress}/${topicTitle}`)
-                .then(response => {
-                  this.cards = response.data;
-                  console.log(this.cards);
-                })
-                .catch(error => {
-                  console.error("Error fetching context data:", error);
-                });
+            this.cards = response.data;
           })
           .catch(error => {
-            console.error('Error fetching IP address:', error);
+            console.error("Error fetching context data:", error);
           });
     }
   }

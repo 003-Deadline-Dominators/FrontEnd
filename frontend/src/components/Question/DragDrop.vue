@@ -14,6 +14,7 @@
           @update="onUpdate"
           @add="onAdd"
           @remove="remove"
+          id="left"
       >
         <div
             v-for="item in list1"
@@ -45,13 +46,10 @@
             @click="cyclePosition(item)"
         >
           <!-- Only show tooltip when list2 has exactly 1 item and tooltip hasn't been shown before -->
-          <el-tooltip
-              v-if="shouldShowTooltip"
-              content="Single click to indent"
-              placement="top"
-          >
+          <div class="tooltip" v-if="shouldShowTooltip">
             {{ item.content }}
-          </el-tooltip>
+            <span class="tooltiptext">single click to indent</span>
+          </div>
           <div v-else>{{ item.content }}</div>
         </div>
       </VueDraggable>
@@ -191,7 +189,7 @@ export default {
           // Store that the tooltip has been shown after delay
           localStorage.setItem('tooltipShown', 'true');
           this.tooltipShown = true;
-        }, 25000);  // Delay for 2 seconds (adjust the time as needed)
+        }, 250000);  // Delay for 2 seconds (adjust the time as needed)
       }
     }
   },
@@ -221,6 +219,7 @@ export default {
 .flex-draggable-container {
   display: flex;
   flex-direction: row;
+  overflow: visible;
 }
 
 .draggable-list {
@@ -231,7 +230,7 @@ export default {
   width: 45%;
   min-height: 50vh;
   max-height: 50vh;
-  overflow-y: scroll;
+  overflow-y: auto !important;
   margin: 10px 0 20px 5px;
   border-radius: 0.5rem;
   border: 2px dashed #bbbbbb;
@@ -246,13 +245,19 @@ export default {
   padding: 0.75rem;
   margin: 5px;
   transition: margin-left 0.3s ease;
+  overflow: visible;
   font-size: 16px;
+}
+
+#left{
+  padding-top: 30px;
 }
 
 #right {
   width: 50%;
   overflow-x: auto;
   min-height: 50.01vh;
+  padding-top: 30px;
 }
 
 #drag, #drop {
@@ -277,27 +282,6 @@ export default {
   background-color: #daf9f1;
   color: #06d49f;
   margin-left: 5px;
-}
-
-.indent-alert:first-child {
-  margin-left: auto;
-  margin-right: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 18px;
-  padding: 10px;
-}
-.indent-alert {
-  display: flex;
-  align-items:  center;
-  justify-content: flex-start;
-  width: fit-content;
-  background-color: #79e538;
-  color: black;
-  margin-left: auto;
-  margin-right: 34px;
-  border-radius: 5px;
 }
 
 svg{
@@ -331,6 +315,44 @@ svg{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #bbbbbb;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  overflow-y: visible !important;
+}
+
+.tooltip .tooltiptext {
+  visibility: visible;
+  background-color: #96EA63;
+  color: #6e6e6e;
+  text-align: center;
+  border-radius: 15px;
+  padding: 6px 16px;
+  position: absolute;
+  z-index: 1;
+  bottom: 200%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #96EA63 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
 
 </style>

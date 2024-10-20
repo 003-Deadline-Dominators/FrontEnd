@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="draft version pagenation for element table, with fully implemented functionality of logout in nav component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/nav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/nav.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +58,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;howard&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets/Topic/Context/Question&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -81,11 +77,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\Topic\Context\Question" />
+      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\Intro" />
+      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\intro" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\dashboard" />
-      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\Topic" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src" />
@@ -208,6 +204,8 @@
       <workItem from="1728870653444" duration="5860000" />
       <workItem from="1728955750658" duration="72000" />
       <workItem from="1729226394642" duration="8355000" />
+      <workItem from="1729314425796" duration="15541000" />
+      <workItem from="1729396703959" duration="8804000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />

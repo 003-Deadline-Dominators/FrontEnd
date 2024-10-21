@@ -17,7 +17,7 @@
         </div>
         <div class="drag-drop-wrapper" >
           <!-- Pass showOverlay prop -->
-          <DragDrop class="drag-drop" ref="dragDrop" :showOverlay="showOverlay" :problemSectionLoaded="problemSectionLoaded" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" @data-define="handleDataDefine" :problem-data="problemData" :style="flexContainerStyle"/>
+          <DragDrop class="drag-drop" ref="dragDrop" :showOverlay="showOverlay" :problemSectionLoaded="problemSectionLoaded" @drag-drop-loaded="onDragDropLoaded" @update:list2="updateList2" @submitted-data="handleSubmittedData" @data-define="handleDataDefine" :problem-data="problemData"/>
           <div v-if="showOverlay" class="overlay">
             <h1>Are you ready to Craft Code?</h1>
             <img :src="Overlay" alt="overlay" />
@@ -37,14 +37,14 @@
 </template>
 
 <script>
-  import Nava from './components/nav.vue';
-  import Header from './components/Question/Header.vue';
-  import ProblemSection from './components/Question/ProblemSection.vue';
-  import feedBack from './components/Question/feedback.vue';
+  import Nava from './nav.vue'
+  import Header from './Question/Header.vue';
+  import ProblemSection from './Question/ProblemSection.vue';
+  import feedBack from './Question/feedback.vue';
   import Overlay from '@/assets/Topic/Context/Question/overlay.svg';
-  import loading from './components/Question/loading.vue';
-  import DragDrop from './components/Question/DragDrop.vue';
-  import CodeEditor from './components/Question/CodeEditor.vue';
+  import loading from './/Question/loading.vue';
+  import DragDrop from './Question/DragDrop.vue';
+  import CodeEditor from './Question/CodeEditor.vue';
   import axios from 'axios';
   import { ElAlert } from 'element-plus'
 
@@ -81,12 +81,6 @@
         attempts: 0,
         duration: 'no attempts yet'
       };
-    },
-    computed: {
-      // Dynamically set maxHeight based on showOverlay prop
-      flexContainerStyle() {
-        return this.showOverlay ? { maxHeight: '80% !important'} : {maxHeight: 'none'};
-      }
     },
     methods: {
       preview() {
@@ -246,7 +240,7 @@
     gap: 10px;
     background-color: #f6f6f6;
     flex-direction: row;
-    height: calc(100vh - 60px); /* Adjust based on your header height */
+    height: calc(100vh - 60px);
     position: relative;
   }
 

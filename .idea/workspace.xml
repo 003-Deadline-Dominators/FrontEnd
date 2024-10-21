@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="draft version pagenation for element table, with fully implemented functionality of logout in nav component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +61,7 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "Node.js.main.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets/Topic/Context/Question",
     "node.js.detected.package.eslint": "true",
@@ -204,7 +210,8 @@
       <workItem from="1728955750658" duration="72000" />
       <workItem from="1729226394642" duration="8355000" />
       <workItem from="1729314425796" duration="15541000" />
-      <workItem from="1729396703959" duration="9578000" />
+      <workItem from="1729396703959" duration="10438000" />
+      <workItem from="1729487440073" duration="4124000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />

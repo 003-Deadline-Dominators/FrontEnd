@@ -1,19 +1,10 @@
-<<<<<<< HEAD
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../components/Homepage/intro.vue'
-import Topic from '../components/Homepage/Topic/Topic.vue'
-import Context from '../components/Homepage/Topic/Context/Context.vue'
-import dashboard from "../components/dashboard/dashboard.vue";
-import App from '../components/App.vue'
-=======
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../components/Homepage/intro.vue';
 import Topic from '../components/Homepage/Topic/Topic.vue';
 import Context from '../components/Homepage/Topic/Context/Context.vue';
-import Dashboard from "@/components/dashboard/dashboard.vue"; // Use PascalCase for component name
-import App from '../App.vue';
-import store from '@/store'; // Import the store
->>>>>>> howard
+import Dashboard from "@/components/dashboard/dashboard.vue";
+import App from '../components/App.vue';
+import store from '@/store'; // Import your store to access Vuex state
 
 const routes = [
     {
@@ -40,23 +31,20 @@ const routes = [
         path: '/dashboard',
         name: 'Dashboard',
         component: Dashboard,
-        meta: { requiresAuth: true } // Add meta field for authentication check
+        beforeEnter: (to, from, next) => {
+            // Check if user is logged in
+            if (store.getters.isLoggedIn) {
+                next(); // Allow access if logged in
+            } else {
+                next('/'); // Redirect to home if not logged in
+            }
+        }
     }
 ];
 
 const router = createRouter({
     history: createWebHistory(),
     routes
-});
-
-// Navigation guard
-router.beforeEach((to, from, next) => {
-    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-    if (requiresAuth && !store.state.isLoggedIn) {
-        next('/');
-    } else {
-        next();
-    }
 });
 
 export default router;

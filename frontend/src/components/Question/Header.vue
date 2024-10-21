@@ -107,11 +107,12 @@ export default {
   font-size: 18px;
   font-weight: lighter;
   color: black;
-  width: 460px;
+  width: fit-content;
 }
 
 
 .timer {
+  margin-left: 188px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -140,7 +141,8 @@ export default {
 }
 
 .show-problem {
-  margin-left: 60px;
+  margin-left: 40px;
+  margin-right: 0;
   cursor: pointer;
   background-color: #f6f6f6;
   font-size: 20px;

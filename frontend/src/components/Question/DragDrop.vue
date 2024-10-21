@@ -4,7 +4,7 @@
       <h1 id="drag">Drag from here</h1>
       <h1 id="drop">Drop blocks here</h1>
     </div>
-    <div class="flex-draggable-container" :style="flexContainerStyle">
+    <div class="flex-draggable-container">
       <VueDraggable
           class="draggable-list"
           v-model="list1"
@@ -98,9 +98,6 @@ export default {
   },
   computed: {
     // Dynamically set maxHeight based on showOverlay prop
-    flexContainerStyle() {
-      return this.showOverlay ? { maxHeight: '80vh !important'} : {maxHeight: 'none'};
-    },
     shouldShowTooltip() {
       console.log(`update: status  = ${this.tooltipShown}`);
       return this.list2.length === 1 && !this.tooltipShown;

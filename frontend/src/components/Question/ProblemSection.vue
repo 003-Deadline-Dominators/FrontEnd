@@ -1,18 +1,26 @@
 <template>
   <div class="problem-section">
     <div class="problem">
-      <h3 class="scenario">Scenario</h3>
+      <div class="scenario-title">
+        <img :src="subIcon" alt="sub icon" class="sub-icon"/>
+        <h3 class="scenario">Scenario</h3>
+        </div>
       <img :src="scenarioSVG" alt="scenario" class="scenario-svg"/>
       <p>{{ scenario }}</p>
-
-      <h3 class="task">Task</h3>
-      <p>{{ task }}</p>
+      <div class="task-title">
+        <img :src="subIcon" alt="sub icon" class="sub-icon"/>
+        <h3 class="task">Task</h3>
+      </div>
+        <p>{{ task }}</p>
 
       <div @click="toggleHintVisibility" class="hint">
+        <div class = "hint-title">
+        <img :src="hintIcon" alt="hintIcon" class="hint-Icon"/>
         <h3>
           <span class="hint-label">Hint: </span>
           <span class="hint-text">Click here to get the hint.</span>
         </h3>
+        </div>
         <p v-if="isHintVisible" v-for="(item, index) in hint" :key="index">{{ item }}</p>
       </div>
     </div>
@@ -22,6 +30,8 @@
 <script>
 import axios from 'axios';
 import scenarioSVG from '@/assets/Topic/Context/Question/scenario.svg';
+import subIcon from '@/assets/Topic/Context/Question/subIcon.svg';
+import hintIcon from '@/assets/Topic/Context/Question/hint.svg';
 
 export default {
   name: 'ProblemSection',
@@ -34,6 +44,8 @@ export default {
   data() {
     return {
       scenarioSVG,
+      subIcon,
+      hintIcon,
       scenario: '',
       task: '',
       hasFetchedData: false, // Flag to check if data has been fetched
@@ -99,11 +111,35 @@ export default {
 
 
 <style scoped>
+.scenario-title{
+  display: flex;
+  align-items: center;
+  background-color: #ece7fb;
+  padding-left: 15px;
+  border-radius: 5px;
+  height: 60px;
+}
+
 .scenario {
   background-color: #ece7fb;
-  padding: 15px;
-  border-radius: 5px;
   color: #8363e2;
+}
+
+.task-title{
+  display: flex;
+  align-items: center;
+  background-color: #ece7fb;
+  border-radius: 5px;
+  padding-left: 15px;
+  height: 60px;
+}
+
+.sub-icon{
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  width: 28px;
+  height: 28px;
 }
 
 p{
@@ -128,12 +164,12 @@ p{
 
 .task {
   background-color: #ece7fb;
-  padding: 15px;
-  border-radius: 5px;
   color: #8363e2;
 }
 
-.hint {
+.hint-title{
+  display: flex;
+  align-items: center;
   background-color: #f9eee2;
   padding: 15px;
   border-radius: 5px;
@@ -141,23 +177,37 @@ p{
   transition: transform 0.3s;
 }
 
+.hint-Icon{
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  width: 28px;
+  height: 28px;
+}
+
+.hint {
+  background-color: #f9eee2;
+  border-radius: 5px;
+  color: #ea7e31;
+  transition: transform 0.3s;
+  padding: 15px;
+}
+
 .hint:hover {
   cursor: pointer;
   transform: scale(1.02);
 }
+
 h3{
   color: #ea7e31;
 }
 
-.dataset {
-  height: 200px;
-  overflow-y: auto;
-}
 .scenario-svg{
   position: absolute;
-  top: -20px;
-  left: 320px;
+  top: -30px;
+  left: 328px;
   justify-content: center;
+  height: 120px;
 }
 
 .hint-text{

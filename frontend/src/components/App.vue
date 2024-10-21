@@ -252,6 +252,7 @@
     flex: 0 0 500px;
     transition: flex 0.3s ease-in-out;
     margin-right: 10px;
+    border-radius: 0 5px 5px 0;
   }
 
   .problem-section-wrapper.collapsed {
@@ -310,7 +311,7 @@
     height: 100%;
     width: 100%;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 0 5px 5px 0;
     font-size: 24px;
     cursor: pointer;
     border: none;
@@ -359,3 +360,9 @@
 
 
   </style>
+
+<style>
+html{
+  background-color: #f6f6f6;
+}
+</style>

@@ -112,7 +112,7 @@ export default {
 
 
 .timer {
-  margin-left: 188px;
+  margin-left: 132px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

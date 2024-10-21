@@ -199,6 +199,7 @@ export default {
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.4;
+  overflow-x: hidden;
   overflow-y: auto;
   height: 0;
   transition: height 0.3s ease;
@@ -207,6 +208,8 @@ export default {
 
 .code.expanded {
   height: auto; /* Expands to fit content */
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .code-line {
@@ -215,10 +218,32 @@ export default {
   margin: 2px;
 }
 
-
 .loading-text {
   color: #ffffff;
   padding: 10px;
   text-align: center;
 }
+
+::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 1rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 0.5rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #B9B9B9AB;
+  border-radius: 0.5rem;
+  width: 0.5rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bbbbbb;
+}
+
 </style>

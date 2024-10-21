@@ -1,8 +1,14 @@
 <template>
   <div class="container">
-    <div class="drag-title">
-      <h1 id="drag">Drag from here</h1>
-      <h1 id="drop">Drop blocks here</h1>
+    <div class="header">
+      <div class="drag-title">
+        <img :src="dragIcon" alt="drag icon" class="drag-icon"/>
+        <h1 id="drag">Drag from here</h1>
+      </div>
+      <div class = "drop-title">
+        <img :src="dropIcon" alt="drop icon" class="drop-icon"/>
+        <h1 id="drop">Drop blocks here</h1>
+      </div>
     </div>
     <div class="flex-draggable-container">
       <VueDraggable
@@ -62,6 +68,8 @@
 import { VueDraggable } from 'vue-draggable-plus';
 import axios from 'axios';
 import animation from '@/assets/Topic/Context/Question/dragAni.svg';
+import dragIcon from '@/assets/Topic/Context/Question/dragIcon.svg';
+import dropIcon from '@/assets/Topic/Context/Question/dropIcon.svg';
 
 export default {
   components: { VueDraggable },
@@ -92,6 +100,8 @@ export default {
       list1: [],
       list2: [],
       animation,
+      dragIcon,
+      dropIcon,
       showTooltip: false, // Control for showing the tooltip
       tooltipShown: localStorage.getItem('tooltipShown') === 'true',
     };
@@ -206,13 +216,6 @@ export default {
   border-radius: 5px 5px 0 0;
 }
 
-.drag-title{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-
-}
-
 .flex-draggable-container {
   display: flex;
   flex-direction: row;
@@ -224,7 +227,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  width: 45%;
+  width: 43%;
   min-height: 50vh;
   max-height: 50vh;
   overflow-y: auto !important;
@@ -251,7 +254,7 @@ export default {
 }
 
 #right {
-  width: 50%;
+  width: 52.5%;
   overflow-x: auto;
   min-height: 50.01vh;
   padding-top: 30px;
@@ -263,22 +266,53 @@ export default {
   display: flex;
   height: fit-content;
   justify-content: center;
-  padding: 10px;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  padding: 10px 4px;
   border-radius: 5px;
 }
 
-#drag {
-  margin-left: 5px;
-  width: 45.3%;
+.drag-title{
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45.1%;
   background-color: #d9ebff;
   color: #007aff;
+  border-radius: 5px;
 }
 
-#drop {
-  width: 50%;
+.drag-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4%;
+  padding-right: 14px;
+}
+
+.drop-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  width: 53.3%;
   background-color: #daf9f1;
   color: #06d49f;
-  margin-left: 5px;
+  border-radius: 5px;
+}
+
+.drop-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3%;
+  padding-right: 14px;
 }
 
 svg{
@@ -292,25 +326,26 @@ svg{
   width: 200px;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
+.draggable-list::-webkit-scrollbar {
+  width: 6px;
+  height: 0.1rem;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+.draggable-list::-webkit-scrollbar-track {
   border-radius: 0.5rem;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+.draggable-list::-webkit-scrollbar-thumb {
   background: #B9B9B9AB;
-  max-height: 10px;
   border-radius: 0.5rem;
-  height: 20px;
+  height: 0.1rem;
+  width: 0.1rem;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+.draggable-list::-webkit-scrollbar-thumb:hover {
   background: #bbbbbb;
 }
 .tooltip {

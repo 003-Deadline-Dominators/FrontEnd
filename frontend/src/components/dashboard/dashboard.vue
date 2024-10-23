@@ -14,17 +14,23 @@
       <div ref="chartContainer" class="chart-container"></div>
     </div>
     <div v-show="!isChartVisible" class="navigator">
+      <div class = "order-container">
+      <img :src="order" alt="order" class="order">
       <select v-model="sortBy" @change="sortData">
         <option value="Newest">Newest</option>
         <option value="Oldest">Oldest</option>
       </select>
+      </div>
+      <div class = "order-container">
+        <img :src="filter" alt="filter" class="filter">
       <select v-model = "selectedNavTopic" @change="sortData">Filter
         <option value="All topics">All topics</option>
         <option v-for="topic in topics" :key="topic.id" :value="topic.topicTitle">{{ topic.topicTitle }}</option>
       </select>
+        </div>
     </div>
     <div class="table-container">
-      <img :src="expand" class="expand-icon" @click="expandTable">
+      <img :src="isChartVisible ? expand : collapse" alt="expand" class="expand-icon" @click="expandTable">
       <!-- Table for displaying data -->
       <el-table :data="paginatedData" stripe class="table">
 
@@ -97,6 +103,9 @@ import { ElTable, ElTableColumn, ElPagination } from 'element-plus';
 import axios from 'axios';
 import Nava from "@/components/nav.vue";
 import expand from "@/assets/dashboard/expand.svg";
+import order from '@/assets/dashboard/order.svg';
+import filter from '@/assets/dashboard/filter.svg';
+import collapse from '@/assets/dashboard/collapse.svg';
 
 export default {
   name: 'LineChart',
@@ -111,6 +120,9 @@ export default {
       logo,
       icon,
       expand,
+      order,
+      filter,
+      collapse,
       selectedTopic: '', // Ensure this is initialized properly
       selectedNavTopic: 'All topics',
       sortBy: 'Newest',
@@ -310,17 +322,44 @@ export default {
 .navigator{
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-left: auto;
   padding: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 4px;
 }
 
-.navigator select {
-  padding: 10px;
-  margin-right: 30px;
+.order-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-right: 20px;
   font-size: 20px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 8px;
   background-color: #FFFFFF;
+  color: black;
+  width: 140px;
+  border-color: #DEE4F1;
+  overflow: hidden;
+}
+
+.order-container select {
+  font-size: 20px;
   width: 130px;
+  display: flex;
+  justify-content: flex-end;
+  border: none;
+  text-align: center;
+}
+.order-container select:after{
+  border: none;
+}
+
+.navigator select:hover {
+  cursor: pointer;
 }
 
 #selection {
@@ -334,7 +373,7 @@ export default {
   cursor: pointer;
   transition: transform 0.3s ease;
   padding: 10px;
-  width: 150px;
+  width: 200px;
 }
 
 .expand-icon {

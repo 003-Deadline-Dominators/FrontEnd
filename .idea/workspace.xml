@@ -6,34 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="draft version pagenation for element table, with fully implemented functionality of logout in nav component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/axios.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/axios.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/chunk-HAO3XF6O.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/chunk-HAO3XF6O.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/chunk-UUT5EJER.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/chunk-UUT5EJER.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/chunk-V4OQ3NZ2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/chunk-V4OQ3NZ2.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/chunk-VID4RN2V.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/chunk-VID4RN2V.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/echarts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/echarts.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/element-plus.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/element-plus.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/vue-router.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/vue-router.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/vue-star-rating.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/vue-star-rating.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/vue.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/vue.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/vuex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps_temp_13ed7b92/vuex.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/CodeEditor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/CodeEditor.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/ProblemSection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/ProblemSection.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/dashboard/dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/nav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/nav.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +61,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets/Topic/Context/Question&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -105,11 +80,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets" />
+      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\dashboard" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\Topic\Context\Question" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\Intro" />
-      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets" />
       <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\intro" />
-      <recent name="C:\Users\61415\Downloads\neat download\FrontEnd\frontend\src\assets\dashboard" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\61415\Downloads\neat download\project-frontend\frontend\src" />
@@ -235,7 +210,9 @@
       <workItem from="1729314425796" duration="15541000" />
       <workItem from="1729396703959" duration="10438000" />
       <workItem from="1729487440073" duration="5273000" />
-      <workItem from="1729524081426" duration="5619000" />
+      <workItem from="1729524081426" duration="5660000" />
+      <workItem from="1729573768858" duration="10155000" />
+      <workItem from="1729658095276" duration="299000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />

@@ -96,6 +96,7 @@
       },
       removeFeedbackOverlay() {
         this.showFeedbackOverlay = false;
+        this.resetBlocks();
       },
       handleDataDefine(data) {
         this.problemData = data; // Update the problemData when emitted
@@ -329,7 +330,7 @@
   /* Constrain loading screen to content-wrappers */
   .loading {
     position: absolute;
-    top: 114px; /* Adjust based on header height */
+    top: 100px; /* Adjust based on header height */
     left: 0;
     width: 100%;
     height: calc(100% - 60px); /* Adjust based on header height */

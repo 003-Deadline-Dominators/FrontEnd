@@ -7,7 +7,10 @@
       <button v-if="showSelected" id="selected">Question</button>
     </div>
     <div class="button-and-image-container">
-      <button v-if="showDashboard" @click="goToDashboard" id="dashboard" :class="{'active': isDashboardRoute, 'inactive': !isDashboardRoute}">Dashboard</button>
+      <div v-if="showDashboard" class="dashboard-container" id="dashboard" :class="{'active': isDashboardRoute, 'inactive': !isDashboardRoute}" @click="goToDashboard">
+        <img :src="dashboard" alt="Dashboard">
+        <button>Dashboard</button>
+      </div>
       <div class="image-input-container">
         <img :src="currentIcon" @click="toggleInputOrLogout"
              alt="Clickable image"
@@ -34,7 +37,7 @@ import { mapGetters, mapActions } from 'vuex';
 import logo from '@/assets/logo.svg';
 import user from '@/assets/user.svg';
 import icon from '@/assets/icon.svg';
-
+import dashboard from '@/assets/dashboard.svg';
 export default {
   name: 'nav',
   props: {
@@ -56,6 +59,7 @@ export default {
       logo,
       user,
       icon,
+      dashboard,
       showInput: false,
       inputValue: '',
       showLogoutButton: false, // New state to control the visibility of the logout button
@@ -147,19 +151,18 @@ export default {
 .button-and-image-container {
   display: flex;
   align-items: center;
-  gap: 80px; /* Adjust spacing between the button and image input container */
 }
 
 .image-input-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 100px;
+  margin-right: 110px;
 }
 
 .clickable-image {
   cursor: pointer;
-  width: 70px;
+  width: 60px;
   height: auto;
   transition: transform 0.3s ease;
 }
@@ -180,7 +183,7 @@ export default {
 button {
   margin-left: 50px;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   border-style: none;
   font-size: 20px;
   cursor: pointer;
@@ -210,27 +213,42 @@ button {
   background-color: #79e538;
 }
 
-#dashboard {
-  background-color: #F2F2F2;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
+.dashboard-container{
+  display: flex;
+  background-color: #96EA63;
+  width: 130px;
+  padding: 10px 8px;
+  margin-right: 37px;
   transition-duration: 0.4s;
+  justify-content: space-between;
+  border-radius: 8px;
 }
+
+.dashboard-container img{
+  width: 20px;
+}
+
+.dashboard-container button{
+  padding: 0;
+  margin: 0;
+}
+
 #dashboard:hover {
   transform: scale(1.1);
 }
 
-button.active {
+.active {
   background-color: #96EA63 !important;
 }
 
-button.inactive {
-  background-color: #F2F2F2 !important;
-}
+.inactive{
+  background-color: #F2F2F2 !important;}
 
-button.inactive:hover {
+.inactive:hover {
   background-color: #96EA63 !important;
+  button {
+    background-color: #96EA63 !important;
+  }
 }
 
 .logout-button {
@@ -238,10 +256,10 @@ button.inactive:hover {
   align-items: center;
   position: absolute;
   margin-top: 10px;
-  margin-left: 200px;
-  padding: 10px 10px 10px 16px;
+  margin-left: 190px;
+  padding: 10px 10px;
   cursor: pointer;
-  width: 100px;
+  width: fit-content;
   background-color: #96EA63;
 }
 

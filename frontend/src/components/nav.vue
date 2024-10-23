@@ -9,7 +9,7 @@
     <div class="button-and-image-container">
       <div v-if="showDashboard" class="dashboard-container" id="dashboard" :class="{'active': isDashboardRoute, 'inactive': !isDashboardRoute}" @click="goToDashboard">
         <img :src="dashboard" alt="Dashboard">
-        <button>Dashboard</button>
+        <button v-if="showDashboard" :class="{'active': isDashboardRoute, 'inactive': !isDashboardRoute}">Dashboard</button>
       </div>
       <div class="image-input-container">
         <img :src="currentIcon" @click="toggleInputOrLogout"

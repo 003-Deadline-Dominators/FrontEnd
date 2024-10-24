@@ -97,7 +97,7 @@ export default {
     },
     async fetchTopics() {
       try {
-        const response = await axios.get("http://localhost:8080/topics/all");
+        const response = await axios.get("http://54.252.5.239:8080/topics/all");
         this.cards = response.data;
 
         // Assign color pairs in order to each card

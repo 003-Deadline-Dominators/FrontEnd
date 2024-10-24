@@ -116,7 +116,7 @@ export default {
   methods: {
     fetchCodeData() {
       axios
-          .get('http://localhost:8080/code')
+          .get('http://54.252.5.239:8080/code')
           .then((response) => {
             console.log(response.data);
             this.$emit('drag-drop-loaded');
@@ -176,7 +176,7 @@ export default {
       formData.append('requestBody', requestBodyData);
 
       // Send data to backend using axios
-      axios.post('http://localhost:8080/submit', formData, {
+      axios.post('http://54.252.5.239:8080/submit', formData, {
         headers: {
           'Content-Type': 'application/json'
         }

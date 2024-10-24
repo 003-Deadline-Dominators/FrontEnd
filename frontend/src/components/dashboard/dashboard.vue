@@ -156,7 +156,7 @@ export default {
     },
     async fetchTableData() {
       try {
-        const response = await axios.get('http://localhost:8080/admin/all');
+        const response = await axios.get('http://54.252.5.239:8080/admin/all');
         this.tableData = response.data;
         console.log('Table data:', this.tableData);
       } catch (error) {
@@ -165,7 +165,7 @@ export default {
     },
     async fetchChartData() {
       try {
-        const response = await axios.get(`http://localhost:8080/admin/selectNumberOfQuestions`);
+        const response = await axios.get(`http://54.252.5.239:8080/admin/selectNumberOfQuestions`);
         this.chartData = response.data;
         console.log(this.chartData)
         this.updateChart();
@@ -175,7 +175,7 @@ export default {
     },
     async fetchChartDataFromTopic() {
       try {
-        const response = await axios.get(`http://localhost:8080/admin/selectNumberOfQuestions/${this.selectedTopic}`);
+        const response = await axios.get(`http://54.252.5.239:8080/admin/selectNumberOfQuestions/${this.selectedTopic}`);
         this.chartData = response.data;
         console.log(this.chartData)
         this.updateChart();
@@ -186,7 +186,7 @@ export default {
     async fetchTableDataFromTopic() {
       try {
         const topic = this.selectedNavTopic; // Handle empty case
-        const response = await axios.get(`http://localhost:8080/admin/selectUsersByTopicDESC/${topic}/${this.sortBy}`);
+        const response = await axios.get(`http://54.252.5.239:8080/admin/selectUsersByTopicDESC/${topic}/${this.sortBy}`);
         this.tableData = response.data;
       } catch (error) {
         console.error('Error fetching table data:', error);

@@ -56,7 +56,7 @@ export default {
   watch: {
     // Watch the dragDropLoaded prop and trigger hint fetching when true
     dragDropLoaded(newValue) {
-      if (newValue) {
+      if (newValue === true) {
         this.fetchHint();
       }
     },

@@ -59,6 +59,7 @@
       </div>
       <footer>
         <p>© 2024 CodeCraft. All rights reserved.</p>
+        <p>howard3@my.student.unimelb.edu.au</p>
       </footer>
     </div>
 </template>

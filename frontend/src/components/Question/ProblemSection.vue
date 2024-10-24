@@ -75,7 +75,7 @@ export default {
       console.log(topicTitle, contextTitle);
 
       axios
-          .get('http://localhost:8080/problem', {
+          .get('http://54.252.5.239:8080//problem', {
             params: { variable1: topicTitle, variable2: contextTitle },
           })
           .then((response) => {
@@ -92,7 +92,7 @@ export default {
     },
     fetchHint() {
       axios
-          .get('http://localhost:8080/hint')
+          .get('http://54.252.5.239:8080//hint')
           .then((response) => {
             console.log(response.data); // Check the structure here
             this.hint = response.data.hints;

@@ -28,7 +28,7 @@
     </p>
     <div v-if="showFeedback" class="feedback-container">
       <pre>
-        <h3 v-if="feedbackData.correct === true">The output is correct!</h3>
+        <h3 v-if="feedbackData.correct[0] === true">The output is correct!</h3>
         <h3 v-else>The output is incorrect, check your answer.</h3>
     </pre>
       <pre v-if="feedbackData.stdout">

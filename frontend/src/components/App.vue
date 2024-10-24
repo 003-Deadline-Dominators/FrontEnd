@@ -159,7 +159,7 @@
       },
 
       sendDataToBackend(data) {
-        axios.post('http://localhost:8080/admin/insertData', data)
+        axios.post('http://54.252.5.239:8080//admin/insertData', data)
             .then(response => {
               console.log('Data sent to backend:', response.data);
             })

@@ -50,7 +50,7 @@ export default {
 
     if (topicTitle) {
       axios
-          .get(`http://localhost:8080/topics/contexts/${topicTitle}`)
+          .get(`http://54.252.5.239:8080/topics/contexts/${topicTitle}`)
           .then(response => {
             this.cards = response.data;
           })

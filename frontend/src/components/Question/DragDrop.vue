@@ -158,7 +158,7 @@ export default {
       return array.sort(() => Math.random() - 0.5); // Simple shuffle
     },
     rebuild() {
-      location.reload();
+      this.$router.go(0);
     },
     resetBlocks() {
       // Move all items from list2 back to list1
@@ -176,7 +176,7 @@ export default {
       formData.append('requestBody', requestBodyData);
 
       // Send data to backend using axios
-      axios.post('http://54.252.5.239:8080//submit', formData, {
+      axios.post('http://54.252.5.239:8080/submit', formData, {
         headers: {
           'Content-Type': 'application/json'
         }

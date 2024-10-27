@@ -1,46 +1,34 @@
 import { shallowMount } from '@vue/test-utils';
-import LineChart from '@/components/LineChart.vue';
+import Dashboard from '@/components/dashboard/dashboard.vue';
 import Nava from '@/components/nav.vue';
 import { ElTable, ElPagination } from 'element-plus';
 import axios from 'axios';
-import * as echarts from 'echarts';
 
 // Mock Axios
 jest.mock('axios');
 
-// Mock ECharts initialization
-jest.mock('echarts', () => ({
-  init: jest.fn(() => ({
-    setOption: jest.fn(),
-    resize: jest.fn(),
-  })),
-}));
+// Mock window.alert
+window.alert = jest.fn();
 
-describe('LineChart.vue', () => {
+describe('dashboard.vue', () => {
   let wrapper;
 
   beforeEach(() => {
+    // Mock Axios responses
+    axios.get.mockResolvedValueOnce({ data: [{ id: 1, topicTitle: 'Topic 1' }] }); // Mock topics data
+    axios.get.mockResolvedValueOnce({ data: [
+      { ipAddress: '192.168.1.1', correctness: 'Correct' },
+      { ipAddress: '192.168.1.2', correctness: 'Incorrect' }
+    ]}); // Mock table data
+
     // Create a shallow mount of the component
-    wrapper = shallowMount(LineChart, {
+    wrapper = shallowMount(Dashboard, {
       global: {
         stubs: {
           Nava: true,
           ElTable: true,
           ElPagination: true,
         },
-      },
-      data() {
-        return {
-          topics: [
-            { id: 1, topicTitle: 'Topic 1' },
-            { id: 2, topicTitle: 'Topic 2' },
-          ],
-          tableData: [
-            { ipAddress: '192.168.1.1', correctness: 'Correct', topicCategory: 'Math', contexts: 'Sample Context', generateTime: '2024-10-01T12:00:00', submitTime: '2024-10-01T12:05:00', duration: '00:05:00' },
-            { ipAddress: '192.168.1.2', correctness: 'Incorrect', topicCategory: 'Science', contexts: 'Sample Context 2', generateTime: '2024-10-01T12:10:00', submitTime: '2024-10-01T12:15:00', duration: '00:05:00' },
-          ],
-          isChartVisible: true,
-        };
       },
     });
   });
@@ -66,19 +54,7 @@ describe('LineChart.vue', () => {
   });
 
   it('fetches topics and table data on mount', async () => {
-    axios.get.mockResolvedValueOnce({ data: [{ id: 1, topicTitle: 'Topic 1' }] });
-    axios.get.mockResolvedValueOnce({
-      data: [
-        { ipAddress: '192.168.1.1', correctness: 'Correct' },
-        { ipAddress: '192.168.1.2', correctness: 'Incorrect' },
-      ],
-    });
-
-    // Remount the component to trigger the API calls
-    wrapper = shallowMount(LineChart);
-
-    // Wait for the promises to resolve
-    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick(); // Wait for axios mock data to be returned
 
     // Check if topics were fetched correctly
     expect(wrapper.vm.topics).toEqual([{ id: 1, topicTitle: 'Topic 1' }]);

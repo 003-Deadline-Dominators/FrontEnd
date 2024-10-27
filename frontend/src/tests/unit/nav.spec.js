@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import Nav from '@/components/nav.vue';
 import Vuex from 'vuex';
-import { createRouter, createWebHistory } from 'vue-router'; // 使用Vue 3的方式创建路由
+import { createRouter, createWebHistory } from 'vue-router';
 
 describe('Nav.vue', () => {
   let store;
@@ -12,7 +12,7 @@ describe('Nav.vue', () => {
   beforeEach(() => {
     actions = {
       toggleDashboard: jest.fn(),
-      updateIcon: jest.fn()
+      updateIcon: jest.fn(),
     };
 
     getters = {
@@ -22,105 +22,95 @@ describe('Nav.vue', () => {
 
     store = new Vuex.Store({
       getters,
-      actions
+      actions,
     });
 
     router = createRouter({
-      history: createWebHistory(),  // Use Vue 3's history mode for the router
-      routes: [] // No need to specify routes in tests
+      history: createWebHistory(),
+      routes: [],
     });
+
+    // Mock router's push method globally
+    router.push = jest.fn();
   });
 
-  // Test if the correct buttons render based on props
   it('renders the correct buttons based on props', () => {
     const wrapper = shallowMount(Nav, {
       global: {
-        plugins: [store, router] // Inject Vuex and Vue Router
+        plugins: [store, router],
       },
       props: {
         showModule: true,
         showContext: true,
-        showSelected: true
-      }
+        showSelected: true,
+      },
     });
 
-    expect(wrapper.find('#start').exists()).toBe(true); // 检查 "Module" 按钮
-    expect(wrapper.find('#context').exists()).toBe(true); // 检查 "Context" 按钮
-    expect(wrapper.find('#selected').exists()).toBe(true); // 检查 "Question" 按钮
+    expect(wrapper.find('#start').exists()).toBe(true);
+    expect(wrapper.find('#context').exists()).toBe(true);
+    expect(wrapper.find('#selected').exists()).toBe(true);
   });
 
-  // Test if buttons are hidden when props are false
   it('hides buttons when props are false', () => {
     const wrapper = shallowMount(Nav, {
       global: {
-        plugins: [store, router]
+        plugins: [store, router],
       },
       props: {
         showModule: false,
         showContext: false,
-        showSelected: false
-      }
+        showSelected: false,
+      },
     });
 
-    expect(wrapper.find('#start').exists()).toBe(false); // "Module" 按钮隐藏
-    expect(wrapper.find('#context').exists()).toBe(false); // "Context" 按钮隐藏
-    expect(wrapper.find('#selected').exists()).toBe(false);// "Question" 按钮隐藏
+    expect(wrapper.find('#start').exists()).toBe(false);
+    expect(wrapper.find('#context').exists()).toBe(false);
+    expect(wrapper.find('#selected').exists()).toBe(false);
   });
 
-  // Test navigation to /topic when the "Module" button is clicked
   it('navigates to /topic when "Module" button is clicked', async () => {
     const wrapper = shallowMount(Nav, {
       global: {
-        plugins: [store, router]
-      }
+        plugins: [store, router],
+      },
     });
 
-    wrapper.vm.$router.push = jest.fn(); // Mock the router's `push` method
-
-    await wrapper.find('#start').trigger('click'); // Click the "Module" button
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith('/topic'); // Check if it navigates to /topic
-  });
+    await wrapper.find('#start').trigger('click');
+    expect(router.push).toHaveBeenCalledWith('/topic');
   });
 
-  // Test if the input field is shown when the current icon is clicked
   it('shows input field when currentIcon is clicked', async () => {
     const wrapper = shallowMount(Nav, {
       global: {
-        plugins: [store, router]
-      }
+        plugins: [store, router],
+      },
     });
 
-    await wrapper.find('.clickable-image').trigger('click'); // Click the icon
-    expect(wrapper.vm.showInput).toBe(true); // Check if the input field is shown 
+    await wrapper.find('.clickable-image').trigger('click');
+    expect(wrapper.vm.showInput).toBe(true);
   });
 
-  // Test handling of correct passcode and triggering Vuex actions
   it('handles correct passcode and triggers Vuex actions', async () => {
     const wrapper = shallowMount(Nav, {
       global: {
-        plugins: [store, router]
-      }
+        plugins: [store, router],
+      },
     });
-  
-    // click the icon to show the input field
+
+    // Click the icon to show the input field
     await wrapper.find('.clickable-image').trigger('click');
-  
+
     // Set the correct input value
-    wrapper.setData({ inputValue: 'passcode' });
-  
-    // Mock the $router.push method
-    wrapper.vm.$router.push = jest.fn();
-  
+    await wrapper.setData({ inputValue: 'passcode' });
+
     // Simulate user pressing the Enter key to trigger validation
     await wrapper.find('input').trigger('keyup.enter');
-  
+
     // Verify that Vuex actions are correctly called
     expect(actions.toggleDashboard).toHaveBeenCalled();
-    expect(actions.toggleDashboard).toHaveBeenCalled();
     expect(actions.updateIcon).toHaveBeenCalled();
-  
+
     // Verify if it navigates to /dashboard
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith('/dashboard');
+    expect(router.push).toHaveBeenCalledWith('/dashboard');
   });
-  
 });

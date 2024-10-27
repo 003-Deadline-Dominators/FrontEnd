@@ -27,7 +27,7 @@ export default {
   props: {
     takenTime: {
       type: String,
-      required: true
+      required: true,
     },
     attempts: {
       type: Number,

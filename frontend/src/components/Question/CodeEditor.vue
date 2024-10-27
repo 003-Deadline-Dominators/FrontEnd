@@ -26,7 +26,7 @@
         {{ block.content }}
       </code>
     </p>
-    <div v-if="showFeedback" class="feedback-container">
+    <div v-if="showFeedback" :class="['feedback-container', { expanded: !collapsed }]" >
       <pre>
         <h3 v-if="feedbackData.correct[0] === true">The output is correct!</h3>
         <h3 v-else>The output is incorrect, check your answer.</h3>
@@ -119,6 +119,14 @@ export default {
 }
 
 .feedback-container {
+  padding: 10px;
+  margin-left: 10px;
+  height: 30px;
+  overflow: auto;
+}
+
+.feedback-container.expanded {
+  height: auto;
   padding: 10px;
   margin-left: 10px;
 }

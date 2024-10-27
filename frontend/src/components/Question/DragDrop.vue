@@ -228,8 +228,8 @@ export default {
   flex-direction: column;
   padding: 10px;
   width: 43%;
-  min-height: 50vh;
-  max-height: 50vh;
+  min-height: 39vh;
+  max-height: 39vh;
   overflow-y: auto !important;
   margin: 10px 0 20px 5px;
   border-radius: 0.5rem;
@@ -256,7 +256,7 @@ export default {
 #right {
   width: 52.5%;
   overflow-x: auto;
-  min-height: 50.01vh;
+  min-height: 39vh;
   padding-top: 30px;
 }
 

@@ -56,7 +56,7 @@ export default {
   watch: {
     // Watch the dragDropLoaded prop and trigger hint fetching when true
     dragDropLoaded(newValue) {
-      if (newValue) {
+      if (newValue === true) {
         this.fetchHint();
       }
     },
@@ -148,17 +148,22 @@ p{
 }
 
 .problem-section {
+  position: sticky;
+  top: 0;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   background-color: white;
   border-radius: 5px;
+  overflow-y: auto; /* Allow scrolling for overflow content */
+  max-height: 100%; /* Prevent exceeding container height */
 }
+
 
 .problem {
   padding: 4%;
   border-radius: 5px;
-  height: 100%;
   background-color: white;
 }
 
@@ -186,6 +191,9 @@ p{
 }
 
 .hint {
+  position: sticky;
+  top: 0;
+  height: fit-content;
   background-color: #f9eee2;
   border-radius: 5px;
   color: #ea7e31;
@@ -203,11 +211,12 @@ h3{
 }
 
 .scenario-svg{
+
   position: absolute;
-  top: -30px;
-  left: 328px;
+  top:0;
+  left: 360px;
   justify-content: center;
-  height: 120px;
+  height: 90px;
 }
 
 .hint-text{

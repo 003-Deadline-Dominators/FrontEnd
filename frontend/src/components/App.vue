@@ -37,18 +37,18 @@
 </template>
 
 <script>
-  import Nava from './nav.vue'
-  import Header from './Question/Header.vue';
-  import ProblemSection from './Question/ProblemSection.vue';
-  import feedBack from './Question/feedback.vue';
-  import Overlay from '@/assets/Topic/Context/Question/overlay.svg';
-  import loading from './/Question/loading.vue';
-  import DragDrop from './Question/DragDrop.vue';
-  import CodeEditor from './Question/CodeEditor.vue';
-  import axios from 'axios';
-  import { ElAlert } from 'element-plus'
+import Nava from './nav.vue'
+import Header from './Question/Header.vue';
+import ProblemSection from './Question/ProblemSection.vue';
+import feedBack from './Question/feedback.vue';
+import Overlay from '@/assets/Topic/Context/Question/overlay.svg';
+import loading from './/Question/loading.vue';
+import DragDrop from './Question/DragDrop.vue';
+import CodeEditor from './Question/CodeEditor.vue';
+import axios from 'axios';
+import {ElAlert} from 'element-plus'
 
-  export default {
+export default {
     components: {
       Nava,
       Header,
@@ -88,14 +88,15 @@
         this.submitTime = new Date(
             submitTime1.toLocaleString('en-US', { timeZone: 'Australia/Sydney' })
         );
-
-        const duration = this.submitTime - this.startTime;
-        const time = this.formatDuration(duration);
-        this.duration = time;
+        if(this.startTime !== null) {
+          const duration = this.submitTime - this.startTime;
+          this.duration = this.formatDuration(duration);
+        }
         this.showFeedbackOverlay = true;
       },
       removeFeedbackOverlay() {
         this.showFeedbackOverlay = false;
+        this.resetBlocks();
       },
       handleDataDefine(data) {
         this.problemData = data; // Update the problemData when emitted
@@ -172,6 +173,9 @@
         this.showFeedback = true;
       },
       resetBlocks() {
+        this.attempts = 0;
+        this.duration = 'no attempts yet';
+        this.startTime = new Date();
         this.$refs.dragDrop.resetBlocks();
       },
       rebuild() {
@@ -242,6 +246,7 @@
     flex-direction: row;
     height: calc(100vh - 60px);
     position: relative;
+    overflow-y: auto;
   }
 
   .content-wrappers.problem-collapsed {
@@ -249,11 +254,18 @@
   }
 
   .problem-section-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
     flex: 0 0 500px;
     transition: flex 0.3s ease-in-out;
     margin-right: 10px;
     border-radius: 0 5px 5px 0;
   }
+
+
 
   .problem-section-wrapper.collapsed {
     flex: 0 0 50px;
@@ -308,7 +320,6 @@
   }
 
   .expand-button {
-    height: 100%;
     width: 100%;
     background-color: white;
     border-radius: 0 5px 5px 0;
@@ -318,6 +329,7 @@
     margin-right: 10px;
     color: #ff9500;
     transition: transform 0.5s ease;
+    height: 100%;
   }
 
   .expand-button:hover {
@@ -329,7 +341,7 @@
   /* Constrain loading screen to content-wrappers */
   .loading {
     position: absolute;
-    top: 114px; /* Adjust based on header height */
+    top: 100px; /* Adjust based on header height */
     left: 0;
     width: 100%;
     height: calc(100% - 60px); /* Adjust based on header height */

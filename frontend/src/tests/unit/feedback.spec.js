@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Feedback from '@/components/Feedback.vue';
+import Feedback from '@/components/Question/feedback.vue';
 
 // Mocked methods for Retry and Next
 const mockRetry = jest.fn();

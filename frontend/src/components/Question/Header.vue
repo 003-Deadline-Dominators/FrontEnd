@@ -107,12 +107,12 @@ export default {
   font-size: 18px;
   font-weight: lighter;
   color: black;
-  width: fit-content;
+  width: 444px;
 }
 
 
 .timer {
-  margin-left: 132px;
+  margin-left: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

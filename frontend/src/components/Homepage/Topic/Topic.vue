@@ -103,7 +103,7 @@ export default {
         // Assign color pairs in order to each card
         this.cards.forEach((card, index) => {
           const colorIndex = index % this.colorPairs.length; // Ensure index wraps around
-          card.colorPair = this.colorPairs[colorIndex];
+          card.colorPair = this.colorPairs[colorIndex] || { background: 'white', titleColor: 'black' }; // Default color pair
         });
 
         console.log(this.cards);

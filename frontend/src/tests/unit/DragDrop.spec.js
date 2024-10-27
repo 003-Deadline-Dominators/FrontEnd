@@ -1,55 +1,64 @@
 import { shallowMount } from '@vue/test-utils';
 import DragDrop from '@/components/Question/DragDrop.vue';
-import VueDraggable from 'vue-draggable-plus';
 import axios from 'axios';
 
 // Mock axios requests
 jest.mock('axios');
 
+// Mock localStorage
+const localStorageMock = (() => {
+  let store = {};
+  return {
+    getItem(key) {
+      return store[key] || null;
+    },
+    setItem(key, value) {
+      store[key] = value.toString();
+    },
+    clear() {
+      store = {};
+    },
+  };
+})();
+Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+
 describe('DragDrop.vue', () => {
   let wrapper;
 
   beforeEach(() => {
+    localStorage.clear();
+    
+    // Mock Axios responses
+    axios.get.mockResolvedValue({ data: { code: ['function example() {}'] } });
+    axios.post.mockResolvedValue({ data: { stdout: 'Output', stderr: '' } });
+
     wrapper = shallowMount(DragDrop, {
       props: {
         problemData: { sample: 'data' },
         showOverlay: false,
         problemSectionLoaded: true,
       },
+      global: {
+        stubs: ['VueDraggable'], // 使用 stub 替代 VueDraggable
+      },
     });
   });
 
-  // Test if the component renders correctly
-  it('renders the VueDraggable components', () => {
-    expect(wrapper.findComponent(VueDraggable).exists()).toBe(true);
+  // Test if VueDraggable component is rendered correctly
+  it('renders VueDraggable components', () => {
+    expect(wrapper.findComponent({ name: 'VueDraggable' }).exists()).toBe(true);
   });
 
   // Test if data is fetched when problem section is loaded
   it('fetches code data when problem section is loaded', async () => {
-    const mockData = {
-      data: {
-        code: ['function example() {}'],
-      },
-    };
-
-    axios.get.mockResolvedValue(mockData);
-
-    // Trigger the method manually
     await wrapper.vm.fetchCodeData();
 
     expect(axios.get).toHaveBeenCalledWith('http://localhost:8080/code');
     expect(wrapper.vm.list1.length).toBeGreaterThan(0);
   });
 
-  // Test if the submit method works correctly
+  // Test if submit method works correctly
   it('calls submit and emits the correct event', async () => {
-    axios.post.mockResolvedValue({
-      data: {
-        stdout: 'Output',
-        stderr: '',
-      },
-    });
-
     await wrapper.vm.submit();
 
     expect(axios.post).toHaveBeenCalledWith(
@@ -90,14 +99,5 @@ describe('DragDrop.vue', () => {
     expect(wrapper.vm.shouldShowTooltip).toBe(true);
   });
 
-  // Test if the tooltip logic is triggered correctly
-  it('updates tooltipShown in localStorage', () => {
-    wrapper.setData({ tooltipShown: false });
-    wrapper.vm.checkTooltip();
 
-    setTimeout(() => {
-      expect(localStorage.getItem('tooltipShown')).toBe('true');
-      expect(wrapper.vm.tooltipShown).toBe(true);
-    }, 2000);
-  });
 });

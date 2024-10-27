@@ -32,10 +32,10 @@ describe('DragDrop.vue', () => {
       },
     };
 
-    axios.get.mockResolvedValue(mockData);
+    axios.get.mockResolvedValueOnce(mockData); // 使用 mockResolvedValueOnce 模拟一次性返回
 
     // Trigger the method manually
-    await wrapper.vm.fetchCodeData();
+    await wrapper.vm.fetchCodeData(); // 手动调用方法
 
     expect(axios.get).toHaveBeenCalledWith('http://localhost:8080/code');
     expect(wrapper.vm.list1.length).toBeGreaterThan(0);
@@ -43,12 +43,14 @@ describe('DragDrop.vue', () => {
 
   // Test if the submit method works correctly
   it('calls submit and emits the correct event', async () => {
-    axios.post.mockResolvedValue({
+    const mockResponse = {
       data: {
         stdout: 'Output',
         stderr: '',
       },
-    });
+    };
+
+    axios.post.mockResolvedValueOnce(mockResponse); // 模拟 POST 请求的返回
 
     await wrapper.vm.submit();
 
@@ -91,13 +93,14 @@ describe('DragDrop.vue', () => {
   });
 
   // Test if the tooltip logic is triggered correctly
-  it('updates tooltipShown in localStorage', () => {
+  it('updates tooltipShown in localStorage', async () => {
     wrapper.setData({ tooltipShown: false });
     wrapper.vm.checkTooltip();
 
-    setTimeout(() => {
-      expect(localStorage.getItem('tooltipShown')).toBe('true');
-      expect(wrapper.vm.tooltipShown).toBe(true);
-    }, 2000);
+    // 使用 Jest 的 Fake Timer 模拟 setTimeout
+    jest.advanceTimersByTime(2000);
+
+    expect(localStorage.getItem('tooltipShown')).toBe('true');
+    expect(wrapper.vm.tooltipShown).toBe(true);
   });
 });

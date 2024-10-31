@@ -71,7 +71,8 @@ npm test
 - Yifan Zhang (yifanzhang@student.unimelb.edu.au)
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.
+
 
 ## Links
 - Website: http://54.252.5.239/

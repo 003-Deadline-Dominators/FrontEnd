@@ -1,7 +1,11 @@
 # CodeCraft Frontend
 
+<img src="CodeCraft.png" alt="CodeCraft" style="zoom:25%;" />
+
+Welcome to CodeCraft, your go-to platform for mastering coding through engaging Parson’s Problems! CodeCraft provides a simple and efficient way to practice and enhance your data-processing coding skills by reordering code snippets that are related to data-analysing challenges. Perfectly designed for Unimelb COMP20008 students and coordinators, Code Craft helps you build a strong foundation in coding while tracking your progress every step and every different aspect. Press ‘Start’ to dive into practicing and craft your path to coding success now!
+
 ## Description
-CodeCraft's frontend is built with Vue.js 3, providing an interactive web interface for learning and practicing coding concepts through hands-on problem-solving. The frontend delivers a rich user interface with features like drag-and-drop code snippets, real-time feedback, and an intuitive learning experience.
+CodeCraft's frontend is built with Vue.js 3, providing an interactive web interface for learning and practicing coding concepts through hands-on problem-solving. The frontend delivers a rich user interface with features like drag-and-drop code snippets, real-tim e feedback, and an intuitive learning experience.
 
 ## Required Software
 - Node.js and npm (for managing dependencies)
@@ -75,5 +79,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 
 ## Links
-- Website: http://54.252.5.239/
-- Confluence: https://student-team-zjyi1h63.atlassian.net/wiki/spaces/0D/overview (Requires permission)
+- [Website](http://54.252.5.239/)
+- [Confluence](https://student-team-zjyi1h63.atlassian.net/wiki/spaces/0D/overview) (Requires permission)

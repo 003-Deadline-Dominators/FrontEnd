@@ -174,7 +174,7 @@ export default {
 .input-field {
   position: absolute;
   right: 60px;
-  margin-top: 6px;
+  margin-top: 4px;
   width: 200px;
   font-size: 16px;
   cursor: pointer;

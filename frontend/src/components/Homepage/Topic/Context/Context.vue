@@ -13,7 +13,7 @@
 
 <script>
 import logo from '@/assets/logo.svg';
-import icon from '@/assets/icon.svg';
+import icon from '@/assets/user.svg';
 import axios from "axios";
 import Nava from "@/components/nav.vue";
 

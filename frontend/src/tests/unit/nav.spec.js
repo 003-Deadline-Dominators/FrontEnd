@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, flushPromises } from '@vue/test-utils';
 import Nav from '@/components/nav.vue';
 import { createStore } from 'vuex';
 import { createRouter, createMemoryHistory } from 'vue-router';
@@ -36,7 +36,7 @@ const mockRouter = createRouter({
   history: createMemoryHistory(),
   routes: [
     { path: '/', name: 'home' },
-    { path: '/Homepage/Topic', name: 'Topic' },
+    { path: '/topic', name: 'topic' },
     { path: '/dashboard', name: 'dashboard' },
   ],
 });
@@ -76,8 +76,8 @@ describe('Nav.vue', () => {
   it('navigates to /Homepage/Topic when "Module" button is clicked', async () => {
     const moduleButton = wrapper.find('button#start');
     await moduleButton.trigger('click');
-    await mockRouter.isReady(); // 等待路由准备就绪
-    expect(mockRouter.currentRoute.value.path).toBe('/Homepage/Topic');
+    await flushPromises(); // 确保异步操作完成
+    expect(mockRouter.currentRoute.value.path).toBe('/topic');
   });
 
   it('shows input field when currentIcon is clicked', async () => {

@@ -105,7 +105,7 @@ export default {
   padding: 18px;
   border-radius: 5px;
   font-size: 18px;
-  font-weight: lighter;
+  font-weight: normal;
   color: black;
   width: 444px;
 }

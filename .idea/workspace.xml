@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="604a4a9b-ad3f-42ff-88df-6d7e7771fdcd" name="Changes" comment="draft version pagenation for element table, with fully implemented functionality of logout in nav component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/DragDrop.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Question/ProblemSection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Question/ProblemSection.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/nav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/nav.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +56,7 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Node.js.main.js.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;howard-deploy&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/61415/Downloads/neat download/FrontEnd/frontend/src/assets/Topic/Context/Question&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -215,6 +210,9 @@
       <workItem from="1729916674238" duration="7725000" />
       <workItem from="1729947910299" duration="783000" />
       <workItem from="1730004329969" duration="3346000" />
+      <workItem from="1730379604775" duration="599000" />
+      <workItem from="1730417132637" duration="1571000" />
+      <workItem from="1730518339389" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="draft version of Q&amp;A interface">
       <option name="closed" value="true" />

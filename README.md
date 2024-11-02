@@ -77,6 +77,66 @@ The documentation includes:
    ```
    The application will be available at `localhost:8081`
 
+## Application Layer
+
+The frontend codebase follows a standard Vue.js project structure, organized into the following directories:
+
+### `src/assets/`
+- Contains static resources used throughout the application
+- Includes images, icons, and global CSS styles
+- Houses the CodeCraft logo and UI design assets
+- Contains custom fonts and theme-related files
+
+### `src/components/`
+Core Vue components organized by feature:
+- `Nav.vue`: Navigation bar component with admin authentication
+- `Dashboard.vue`: Admin dashboard with user statistics and data visualization
+- `APP.vue`: Main question interface with drag-and-drop functionality
+- `CodeEditor.vue`: IDE-style code editor with syntax highlighting
+- `Topic.vue`: Topic selection interface
+- `Context.vue`: Context-based learning interface
+- Other utility and shared components
+
+### `src/router/`
+- Vue Router configuration and route definitions
+- Handles navigation between different views
+- Implements route guards for admin authentication
+- Manages URL parameters for topics and questions
+
+### `src/store/`
+Vuex store modules for state management:
+- User authentication state
+- Global application settings
+
+### `src/tests/`
+Comprehensive test suite organized by component:
+- Unit tests for all major components
+- Integration tests for critical user flows
+- Test utilities and mock data
+- Configuration files for Jest and Vue Test Utils
+
+### Directory Structure
+```
+src/
+├── assets/
+│   ├── images/
+│   └── styles/
+├── components/
+│   ├── dashboard/
+│   ├── homePage/
+│   └── question/
+├── router/
+│   └── index.js
+├── store/
+│   └── index.js
+└── tests/
+    ├── unit/
+```
+
+Each directory follows Vue.js best practices and contains appropriate documentation and type definitions where necessary. The structure is designed to be scalable and maintainable, with clear separation of concerns between different parts of the application.
+
+Note: While this follows a standard Vue.js project structure, our implementation focuses specifically on educational features and administrative capabilities required for the CodeCraft platform.
+
 ### Deployment Steps
 1. Generate static files for production:
    ```bash

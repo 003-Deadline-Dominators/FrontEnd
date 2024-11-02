@@ -39,7 +39,7 @@ Visit our live platform: [CodeCraft Website](http://54.252.5.239/)
   - Enhanced visual feedback
 
 ## Documentation
-- For detailed documentation, please look into our confluence record(https://student-team-zjyi1h63.atlassian.net/wiki/spaces/0D/overview) 
+- For detailed documentation, please look into our confluence record(docs) 
 
 ## System Requirements
 ### Tools and Versions

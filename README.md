@@ -39,7 +39,17 @@ Visit our live platform: [CodeCraft Website](http://54.252.5.239/)
   - Enhanced visual feedback
 
 ## Documentation
-- For detailed documentation, please look into our confluence record(docs) 
+
+### Project Documentation
+- [Detailed Documentation PDF](docs/Confluence%20Space%20-Team%20003%20Deadline%20Dominators.pdf)
+
+The documentation includes:
+- User Stories and Requirements
+- System Architecture Details
+- Test Cases and Results
+- Project Timeline and Sprints
+- Team Meeting Minutes
+- Technical Specifications
 
 ## System Requirements
 ### Tools and Versions

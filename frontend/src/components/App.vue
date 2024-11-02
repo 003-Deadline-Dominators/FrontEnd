@@ -38,13 +38,13 @@
 
 <script>
 import Nava from './nav.vue'
-import Header from './Question/Header.vue';
-import ProblemSection from './Question/ProblemSection.vue';
-import feedBack from './Question/feedback.vue';
+import Header from './question/Header.vue';
+import ProblemSection from './question/ProblemSection.vue';
+import feedBack from './question/feedback.vue';
 import Overlay from '@/assets/Topic/Context/Question/overlay.svg';
-import loading from './/Question/loading.vue';
-import DragDrop from './Question/DragDrop.vue';
-import CodeEditor from './Question/CodeEditor.vue';
+import loading from './question/loading.vue';
+import DragDrop from './question/DragDrop.vue';
+import CodeEditor from './question/CodeEditor.vue';
 import axios from 'axios';
 import {ElAlert} from 'element-plus'
 

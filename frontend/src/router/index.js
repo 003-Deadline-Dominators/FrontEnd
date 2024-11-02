@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../components/Homepage/intro.vue';
-import Topic from '../components/Homepage/Topic/Topic.vue';
-import Context from '../components/Homepage/Topic/Context/Context.vue';
+import Home from '../components/homepage/intro.vue';
+import Topic from '../components/homepage/Topic/Topic.vue';
+import Context from '../components/homepage/Topic/Context/Context.vue';
 import Dashboard from "@/components/dashboard/dashboard.vue";
 import App from '../components/App.vue';
 import store from '@/store'; // Import your store to access Vuex state

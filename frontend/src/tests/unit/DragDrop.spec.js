@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import DragDrop from '@/components/Question/DragDrop.vue';
+import DragDrop from '@/components/question/DragDrop.vue';
 import axios from 'axios';
 
 jest.mock('axios');

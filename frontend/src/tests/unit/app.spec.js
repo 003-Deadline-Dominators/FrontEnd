@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
 import App from '@/components/App.vue';
-import Header from '@/components/Question/Header.vue';
-import ProblemSection from '@/components/Question/ProblemSection.vue';
-import DragDrop from '@/components/Question/DragDrop.vue';
+import Header from '@/components/question/Header.vue';
+import ProblemSection from '@/components/question/ProblemSection.vue';
+import DragDrop from '@/components/question/DragDrop.vue';
 import Nava from '@/components/nav.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
